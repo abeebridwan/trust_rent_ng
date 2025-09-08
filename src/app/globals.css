@@ -1,4 +1,6 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* Default theme (Light mode) */
 :root {
@@ -113,12 +115,9 @@
     --muted-foreground: 220 15% 60%;
   }
 
-  * {
-    @apply border-border;
-  }
-
+  /* Body & Typography */
   body {
-    background: var(--background);
+    background-color: var(--background);
     color: var(--foreground);
     @apply font-sans;
   }
@@ -127,18 +126,24 @@
     @apply font-bold;
   }
 
+  /* Optional: global border for elements */
+  * {
+    border-color: hsl(var(--border));
+  }
+
   /* Custom scrollbar */
   ::-webkit-scrollbar {
     width: 8px;
   }
   ::-webkit-scrollbar-track {
-    @apply bg-background;
+    background-color: hsl(var(--background));
   }
   ::-webkit-scrollbar-thumb {
-    @apply bg-border rounded-full;
+    background-color: hsl(var(--border));
+    border-radius: 9999px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-muted;
+    background-color: hsl(var(--muted));
   }
 }
 

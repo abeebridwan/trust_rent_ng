@@ -4,6 +4,8 @@ import { Heart, MapPin, Star } from "lucide-react";
 import property1 from "@/assets/property-1.jpg";
 import property2 from "@/assets/property-2.jpg";
 import property3 from "@/assets/property-3.jpg";
+import Image from 'next/image';
+
 
 const FeaturedListings = () => {
   const properties = [
@@ -56,9 +58,11 @@ const FeaturedListings = () => {
           {properties.map((property) => (
             <Card key={property.id} className="bg-card border-0 shadow-lg overflow-hidden group hover:shadow-xl transition-shadow">
               <div className="relative">
-                <img 
-                  src={property.image} 
+                <Image 
+                  src={property.image.src || property.image} 
                   alt={property.title}
+                  width={400}
+                  height={192}
                   className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                 />
                 <Button
