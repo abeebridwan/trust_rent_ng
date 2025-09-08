@@ -1,26 +1,159 @@
 @import "tailwindcss";
 
+/* Default theme (Light mode) */
 :root {
   --background: #ffffff;
   --foreground: #171717;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Dark mode (manual via .dark class) */
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
 }
 
-@media (prefers-color-scheme: dark) {
+/* Vetarent Design System */
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Brand Colors */
+    --vetarent-blue: 220 100% 35%;
+    --vetarent-blue-dark: 220 100% 25%;
+    --vetarent-blue-light: 220 100% 95%;
+    --vetarent-orange: 25 100% 55%;
+    --vetarent-orange-light: 25 100% 95%;
+
+    /* Background & Surfaces */
+    --background-secondary: 220 20% 97%;
+    --background-accent: 220 100% 95%;
+
+    /* Cards */
+    --card: 0 0% 100%;
+    --card-foreground: 220 25% 10%;
+
+    /* Form Elements */
+    --input: 220 20% 95%;
+    --input-foreground: 220 25% 10%;
+    --border: 220 20% 90%;
+    --ring: 220 100% 35%;
+
+    /* Primary Actions */
+    --primary: 220 100% 35%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 220 100% 25%;
+
+    /* Secondary Actions */
+    --secondary: 220 20% 95%;
+    --secondary-foreground: 220 25% 10%;
+    --secondary-hover: 220 20% 90%;
+
+    /* Accent */
+    --accent: 25 100% 55%;
+    --accent-foreground: 0 0% 100%;
+    --accent-hover: 25 100% 45%;
+
+    /* Text */
+    --muted: 220 15% 60%;
+    --muted-foreground: 220 15% 40%;
+
+    /* Status */
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 120 60% 50%;
+    --success-foreground: 0 0% 100%;
+
+    /* Design System */
+    --radius: 0.75rem;
+    --radius-sm: 0.5rem;
+    --radius-lg: 1rem;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(
+      135deg,
+      hsl(var(--vetarent-blue)),
+      hsl(var(--vetarent-blue-dark))
+    );
+    --gradient-accent: linear-gradient(
+      135deg,
+      hsl(var(--vetarent-orange)),
+      hsl(var(--accent-hover))
+    );
+    --gradient-subtle: linear-gradient(
+      180deg,
+      hsl(var(--background)),
+      hsl(var(--background-secondary))
+    );
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 hsl(var(--vetarent-blue) / 0.05);
+    --shadow-md: 0 4px 6px -1px hsl(var(--vetarent-blue) / 0.1);
+    --shadow-lg: 0 10px 15px -3px hsl(var(--vetarent-blue) / 0.1);
+    --shadow-xl: 0 20px 25px -5px hsl(var(--vetarent-blue) / 0.25);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: all 0.15s ease-out;
+  }
+
+  .dark {
+    --background: 220 25% 10%;
+    --background-secondary: 220 25% 8%;
+    --background-accent: 220 25% 15%;
+    --foreground: 0 0% 95%;
+
+    --card: 220 25% 12%;
+    --card-foreground: 0 0% 95%;
+
+    --input: 220 25% 15%;
+    --border: 220 25% 20%;
+
+    --primary: 220 100% 60%;
+    --primary-hover: 220 100% 50%;
+
+    --muted: 220 15% 40%;
+    --muted-foreground: 220 15% 60%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    @apply font-sans;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-background;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-border rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Components layer */
+@layer components {
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+  .gradient-accent {
+    background: var(--gradient-accent);
+  }
+  .shadow-elegant {
+    box-shadow: var(--shadow-lg);
+  }
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
 }
