@@ -33,7 +33,7 @@ const Header = () => {
           <Image 
             src={Logo1Mobile} 
             alt="Vetarent Logo" 
-            width={117.5} 
+            width={111.37} 
             height={37} 
             className="block md:hidden" 
           />
