@@ -40,7 +40,7 @@ const Header = () => {
         </div>
         
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-8 text-lg font-semibold">
+        <nav className="hidden lg:flex items-center space-x-[50px] text-lg font-semibold">
           <a href="#" className="text-foreground hover:text-primary whitespace-nowrap">
             Home
           </a>
@@ -62,7 +62,7 @@ const Header = () => {
         <Button 
           variant="ghost" 
           size="sm" 
-          className="md:hidden"
+          className="lg:hidden"
           onClick={toggleMenu}
           aria-label="Toggle mobile menu"
         >
@@ -78,39 +78,39 @@ const Header = () => {
       
       {/* Mobile Navigation Menu */}
       {isMenuOpen && (
-        <div className="md:hidden bg-background border-t border-border">
+        <div className="lg:hidden bg-background border-t border-border">
           <nav className="container mx-auto px-4 py-4 flex flex-col space-y-4">
             <a 
               href="#" 
-              className="text-foreground hover:text-primary text-lg font-semibold py-2"
+              className="text-foreground hover:text-primary text-lg font-normal py-2"
               onClick={closeMenu}
             >
               Home
             </a>
             <a 
               href="#" 
-              className="text-foreground hover:text-primary text-lg font-semibold py-2"
+              className="text-foreground hover:text-primary text-lg font-normal py-2"
               onClick={closeMenu}
             >
               For Landlords
             </a>
             <a 
               href="#" 
-              className="text-foreground hover:text-primary text-lg font-semibold py-2"
+              className="text-foreground hover:text-primary text-lg font-normal py-2"
               onClick={closeMenu}
             >
               For Tenants
             </a>
             <a 
               href="#" 
-              className="text-foreground hover:text-primary text-lg font-semibold py-2"
+              className="text-foreground hover:text-primary text-lg font-normal py-2"
               onClick={closeMenu}
             >
               About Us
             </a>
             <a 
               href="#" 
-              className="text-foreground hover:text-primary text-lg font-semibold py-2"
+              className="text-foreground hover:text-primary text-lg font-normal py-2"
               onClick={closeMenu}
             >
               Contact Us
