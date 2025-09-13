@@ -20,14 +20,14 @@ const Header = () => {
   return (
     <header className="w-full bg-background relative z-50 shadow-[0_2px_12px_rgba(0,0,0,0.25)]">
       <div className="container h-[80px] mx-auto px-4 py-4 flex items-center justify-between">
-        <div className="flex items-center">
+        <div className="flex items-center overflow-hidden">
           {/* Desktop Logo */}
           <Image 
             src={Logo1} 
             alt="Vetarent Logo" 
             width={214.48} 
             height={71} 
-            className="hidden md:block" 
+            className="hidden md:block -ml-[1.125rem]" 
           />
           {/* Mobile Logo */}
           <Image 
