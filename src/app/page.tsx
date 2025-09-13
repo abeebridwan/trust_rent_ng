@@ -112,12 +112,14 @@ import WhyChooseSection from "@/components/WhyChooseSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import FAQSection from "@/components/FAQSection";
 import Footer from "@/components/Footer";
+import CTASection from "@/components/CTASection";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
       <HeroSection />
+      <CTASection />
       <StatsSection />
       <ValueProposition />
       <FeaturedListings />

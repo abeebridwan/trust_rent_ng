@@ -85,32 +85,13 @@ const HeroSection = () => {
 
               {/* Search Button */}
               <Button
-              className="w-full h-14 bg-gradient-to-b from-[#2e2cbf] to-[#2e2cbf] text-white font-semibold text-base rounded-none shadow-[inset_0_2px_6px_rgba(255,255,255,0.8),0_8px_24px_rgba(0,0,0,0.25)]"
+              className="w-full h-14 bg-gradient-to-b from-[#2e2cbf] to-[#2e2cbf] text-white font-semibold text-base rounded-none shadow-[inset_0_2px_6px_rgba(255,255,255,0.8),0_8px_24px_rgba(0,0,0,0.25)] hover:from-vetarent-orange hover:to-vetarent-orange/90"
             >
               Search
             </Button>
 
             </div>
             
-            {/* CTA Section */}
-            {/* <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-              <div className="space-y-3">
-                <p className="text-gray-600 font-medium">
-                  Are you a property owner?
-                </p>
-                <Button className="bg-vetarent-orange hover:bg-vetarent-orange/90 text-white font-semibold px-8 py-3 rounded-xl text-base">
-                  Become a Verified Landlord
-                </Button>
-              </div>
-              <div className="text-center md:text-right">
-                <p className="text-gray-600 font-medium mb-2">
-                  Already have an account?
-                </p>
-                <span className="text-vetarent-blue font-semibold cursor-pointer hover:underline text-base">
-                  Sign In
-                </span>
-              </div>
-            </div> */}
           </div>
 
           {/* Right Content - Network Visualization */}
