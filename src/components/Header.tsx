@@ -40,20 +40,20 @@ const Header = () => {
         </div>
         
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-8 text-lg font-semibold ">
-          <a href="#" className="text-foreground hover:text-primary">
+        <nav className="hidden md:flex items-center space-x-8 text-lg font-semibold">
+          <a href="#" className="text-foreground hover:text-primary whitespace-nowrap">
             Home
           </a>
-          <a href="#" className="text-foreground hover:text-primary">
+          <a href="#" className="text-foreground hover:text-primary whitespace-nowrap">
             For Landlords
           </a>
-          <a href="#" className="text-foreground hover:text-primary">
+          <a href="#" className="text-foreground hover:text-primary whitespace-nowrap">
             For Tenants
           </a>
-          <a href="#" className="text-foreground hover:text-primary">
+          <a href="#" className="text-foreground hover:text-primary whitespace-nowrap">
             About Us
           </a>
-          <a href="#" className="text-foreground hover:text-primary">
+          <a href="#" className="text-foreground hover:text-primary whitespace-nowrap">
             Contact Us
           </a>
         </nav>
