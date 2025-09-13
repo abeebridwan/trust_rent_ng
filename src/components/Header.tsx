@@ -1,40 +1,123 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import Image from "next/image";
+import Logo1 from "@/assets/Logo/Logo-1.png";
+import Logo1Mobile from "@/assets/Logo/Logo-1-mobile.png";
 
 const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
   return (
-    <header className="w-full bg-background border-b border-border">
-      <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+    <header className="w-full bg-background relative z-50 shadow-[0_2px_12px_rgba(0,0,0,0.25)]">
+      <div className="container h-[80px] mx-auto px-4 py-4 flex items-center justify-between">
         <div className="flex items-center">
-          <svg width="140" height="32" viewBox="0 0 140 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <text x="0" y="24" className="fill-vetarent-blue font-bold text-2xl font-sans">vetarent</text>
-          </svg>
+          {/* Desktop Logo */}
+          <Image 
+            src={Logo1} 
+            alt="Vetarent Logo" 
+            width={214.48} 
+            height={71} 
+            className="hidden md:block" 
+          />
+          {/* Mobile Logo */}
+          <Image 
+            src={Logo1Mobile} 
+            alt="Vetarent Logo" 
+            width={117.5} 
+            height={37} 
+            className="block md:hidden" 
+          />
         </div>
         
-        <nav className="hidden md:flex items-center space-x-8">
-          <a href="#" className="text-foreground hover:text-primary font-medium">
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center space-x-8 text-lg font-semibold ">
+          <a href="#" className="text-foreground hover:text-primary">
             Home
           </a>
-          <a href="#" className="text-foreground hover:text-primary font-medium">
+          <a href="#" className="text-foreground hover:text-primary">
             For Landlords
           </a>
-          <a href="#" className="text-foreground hover:text-primary font-medium">
+          <a href="#" className="text-foreground hover:text-primary">
             For Tenants
           </a>
-          <a href="#" className="text-foreground hover:text-primary font-medium">
+          <a href="#" className="text-foreground hover:text-primary">
             About Us
           </a>
-          <a href="#" className="text-foreground hover:text-primary font-medium">
+          <a href="#" className="text-foreground hover:text-primary">
             Contact Us
           </a>
         </nav>
         
         {/* Mobile menu button */}
-        <Button variant="ghost" size="sm" className="md:hidden">
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+        <Button 
+          variant="ghost" 
+          size="sm" 
+          className="md:hidden"
+          onClick={toggleMenu}
+          aria-label="Toggle mobile menu"
+        >
+          <svg className="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            {isMenuOpen ? (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            ) : (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            )}
           </svg>
         </Button>
       </div>
+      
+      {/* Mobile Navigation Menu */}
+      {isMenuOpen && (
+        <div className="md:hidden bg-background border-t border-border">
+          <nav className="container mx-auto px-4 py-4 flex flex-col space-y-4">
+            <a 
+              href="#" 
+              className="text-foreground hover:text-primary text-lg font-semibold py-2"
+              onClick={closeMenu}
+            >
+              Home
+            </a>
+            <a 
+              href="#" 
+              className="text-foreground hover:text-primary text-lg font-semibold py-2"
+              onClick={closeMenu}
+            >
+              For Landlords
+            </a>
+            <a 
+              href="#" 
+              className="text-foreground hover:text-primary text-lg font-semibold py-2"
+              onClick={closeMenu}
+            >
+              For Tenants
+            </a>
+            <a 
+              href="#" 
+              className="text-foreground hover:text-primary text-lg font-semibold py-2"
+              onClick={closeMenu}
+            >
+              About Us
+            </a>
+            <a 
+              href="#" 
+              className="text-foreground hover:text-primary text-lg font-semibold py-2"
+              onClick={closeMenu}
+            >
+              Contact Us
+            </a>
+          </nav>
+        </div>
+      )}
     </header>
   );
 };
