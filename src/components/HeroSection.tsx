@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react";
+import { useStore } from "@/lib/store";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -9,8 +9,7 @@ import network from "@/assets/Images/network.png";
 import Image from "next/image";
 
 const HeroSection = () => {
-  const [propertyType, setPropertyType] = useState("");
-  const [priceRange, setPriceRange] = useState("");
+  const { propertyType, priceRange, setPropertyType, setPriceRange } = useStore();
 
   return (
     <section className="relative bg-background-accent py-8 md:py-16 lg:py-24">

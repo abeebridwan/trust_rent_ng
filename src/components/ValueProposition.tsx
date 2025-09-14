@@ -1,12 +1,13 @@
 const ValueProposition = () => {
   return (
-    <section className="bg-background py-16">
+    <section className="bg-background py-12 md:py-16">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+          <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-[2.5rem] font-bold text-foreground mb-4 whitespace-nowrap">
             Verified Rentals. <span className="text-vetarent-blue">For Everyone.</span>
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+
+          <p className="text-muted-foreground/70 text-sm md:text-lg max-w-2xl font-semibold mx-auto">
             Whether you're a landlord or a tenant, Vetarent ensures safety, 
             trust, and transparency at every step.
           </p>

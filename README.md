@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Vetarent Project
 
-## Getting Started
+This document provides a comprehensive overview of the Vetarent project, its structure, and how to contribute. It is intended to be a living document that is updated as the project evolves.
 
-First, run the development server:
+## Project Description
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Vetarent is Nigeria's only rental platform that verifies both landlords and tenants before any rental occurs. The platform aims to build trust and confidence in the rental market by eliminating fraud.
+
+## Technologies Used
+
+*   **Framework:** [Next.js](https://nextjs.org/) (v15)
+*   **Language:** [TypeScript](https://www.typescriptlang.org/)
+*   **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+*   **UI Components:** [shadcn/ui](https://ui.shadcn.com/)
+*   **State Management:** [Zustand](https://github.com/pmndrs/zustand)
+*   **Data Fetching:** [TanStack Query](https://tanstack.com/query/latest)
+*   **Form Handling:** [React Hook Form](https://react-hook-form.com/) & [Zod](https://zod.dev/)
+*   **Linting:** [ESLint](https://eslint.org/)
+
+## Project Structure
+
+```
+/home/olumide/Desktop/trust_rent_ng/
+├───.gitignore
+├───next.config.ts
+├───package.json
+├───README.md
+├───public/                 # Static assets (images, fonts, etc.)
+└───src/
+    ├───app/                # Next.js app directory (pages and layouts)
+    ├───assets/               # Project-specific assets
+    ├───components/           # Reusable React components
+    │   ├───ui/               # shadcn/ui components
+    │   └───...               # Custom components
+    ├───lib/                  # Utility functions and libraries
+    │   ├───store.ts          # Zustand state management store
+    │   └───utils.ts          # General utility functions
+    └───providers/            # React context providers
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Key Directories
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+*   `src/app`: Contains the core application logic, including pages and layouts.
+*   `src/components`: Houses all reusable UI components. Components from `shadcn/ui` are in `src/components/ui`.
+*   `src/lib`: Contains shared utility functions and the Zustand store (`store.ts`).
+*   `src/assets`: Contains all static assets like images and icons.
+*   `src/providers`: Contains the application's context providers. Currently, this includes providers for tooltips and toast notifications (`Toaster` and `Sonner`).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## State Management (Zustand)
 
-## Learn More
+The project uses Zustand for global state management. The store is defined in `src/lib/store.ts`.
 
-To learn more about Next.js, take a look at the following resources:
+**Example Usage:**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```typescript
+import { useStore } from '@/lib/store';
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+const MyComponent = () => {
+  const { propertyType, setPropertyType } = useStore();
 
-## Deploy on Vercel
+  // ...
+};
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+To add new state:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1.  Update the `StoreState` interface in `src/lib/store.ts`.
+2.  Add the new state and actions to the `create` function.
+
+## Available Scripts
+
+In the project directory, you can run:
+
+*   `npm run dev`: Runs the app in development mode.
+*   `npm run build`: Builds the app for production.
+*   `npm run start`: Starts a production server.
+*   `npm run lint`: Lints the codebase using ESLint.
+
+## Future Development
+
+*This section should be updated with information about new features, components, or changes to the project structure.*
