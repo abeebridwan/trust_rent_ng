@@ -28,7 +28,7 @@ const FAQSection = () => {
           <div className="text-left mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-8">
               Frequently Asked <br />
-              Question (FAQ's)
+              Question (FAQ&apos;s)
             </h2>
           </div>
 

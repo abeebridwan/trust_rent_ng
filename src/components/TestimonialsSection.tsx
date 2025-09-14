@@ -69,7 +69,7 @@ const TestimonialsSection = () => {
               </div>
               
               <p className="text-white text-lg leading-relaxed">
-                "{testimonial.text}"
+                &quot;{testimonial.text}&quot;
               </p>
               
               <div className="flex items-center space-x-3">

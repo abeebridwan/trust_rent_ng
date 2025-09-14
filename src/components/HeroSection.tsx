@@ -4,7 +4,7 @@ import { useStore } from "@/lib/store";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { MapPin, Search } from "lucide-react";
+import { MapPin } from "lucide-react";
 import network from "@/assets/Images/network.png";
 import Image from "next/image";
 

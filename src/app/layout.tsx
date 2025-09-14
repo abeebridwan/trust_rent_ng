@@ -1,5 +1,5 @@
 import "./globals.css";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Poppins } from "next/font/google";
 import { Providers } from "@/providers/providers";
 
@@ -13,6 +13,7 @@ export const metadata: Metadata = {
   description:
     "Nigeria's most trusted rental platform. Verified landlords, verified properties, verified tenants. Rent with confidence and avoid fraud.",
   authors: [{ name: "Vetarent Technologies" }],
+  manifest: "/manifest.json",
   openGraph: {
     title: "Vetarent - Verified Rentals Platform",
     description:
@@ -23,13 +24,17 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     site: "@vetarent_ng",
-    images: ["https://lovable.dev/opengraph-image-p98pqg.png"],
+    images: ["https://lovable.dev/opengraph-image-p98pqg.png"], // Replace with your image URL
   },
   icons: {
     icon: "/favicon.ico", // in public/
     shortcut: "/favicon.ico",
     apple: "/apple-touch-icon.png",
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#003bb2",
 };
 
 export default function RootLayout({

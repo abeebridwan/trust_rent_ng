@@ -16,6 +16,7 @@ Vetarent is Nigeria's only rental platform that verifies both landlords and tena
 *   **Data Fetching:** [TanStack Query](https://tanstack.com/query/latest)
 *   **Form Handling:** [React Hook Form](https://react-hook-form.com/) & [Zod](https://zod.dev/)
 *   **Linting:** [ESLint](https://eslint.org/)
+*   **PWA:** [@serwist/next](https://serwist.pages.dev/docs/next/getting-started)
 
 ## Project Structure
 
@@ -76,6 +77,14 @@ In the project directory, you can run:
 *   `npm run start`: Starts a production server.
 *   `npm run lint`: Lints the codebase using ESLint.
 
+## Progressive Web App (PWA)
+
+The application is a Progressive Web App (PWA), configured using `@serwist/next`. This enables offline capabilities and allows users to install the app on their devices.
+
+The PWA configuration is located in `next.config.mjs`. The service worker is located at `src/app/sw.ts` and the web app manifest is in `src/app/manifest.json`.
+
 ## Future Development
 
 *This section should be updated with information about new features, components, or changes to the project structure.*
+
+- Implemented Progressive Web App (PWA) functionality using `@serwist/next`.

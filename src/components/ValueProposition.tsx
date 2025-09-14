@@ -8,7 +8,7 @@ const ValueProposition = () => {
           </h2>
 
           <p className="text-muted-foreground/70 text-sm md:text-lg max-w-2xl font-semibold mx-auto">
-            Whether you're a landlord or a tenant, Vetarent ensures safety, 
+            Whether you&apos;re a landlord or a tenant, Vetarent ensures safety, 
             trust, and transparency at every step.
           </p>
         </div>

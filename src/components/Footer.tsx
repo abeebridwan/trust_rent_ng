@@ -9,7 +9,7 @@ const Footer = () => {
               veta<span className="text-vetarent-orange">rent</span>
             </h3>
             <p className="text-white/80 leading-relaxed">
-              Vetarent is Nigeria's most trusted platform built for RAs. You can stay confident listing and renting properties on our platform.
+              Vetarent is Nigeria&apos;s most trusted platform built for RAs. You can stay confident listing and renting properties on our platform.
             </p>
           </div>
 
