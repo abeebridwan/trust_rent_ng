@@ -1,8 +1,30 @@
+import Image from "next/image";
+import Image1Desktop from "@/assets/Images/Image-1.png";
+import Image1Mobile from "@/assets/Images/Image-1-mobile.png";
+import Image2Desktop from "@/assets/Images/Image.png";
+import Image2Mobile from "@/assets/Images/Image-2-mobile.png";
+import Tick from "@/assets/Icons/Tick.png";
+import { CircleCheck } from 'lucide-react';
+import TickWhite from "@/assets/Icons/tick-white.png";
+
+const featuresTenants = [
+  "Verified listings Only",
+  "ID-Verified Landlords",
+  "Smart & Secure",
+];
+
+
+const featuresLandLords = [
+  "Easy Listing Process",
+  "Verified Tenants",
+  "Scam-Free Protection",
+];
+
 const ValueProposition = () => {
   return (
     <section className="bg-background py-12 md:py-16">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
+      <div className="container mx-auto p-0 md:px-4">
+        <div className="text-center mb-12 px-4 md:px-0">
           <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-[2.5rem] font-bold text-foreground mb-4 whitespace-nowrap">
             Verified Rentals. <span className="text-vetarent-blue">For Everyone.</span>
           </h2>
@@ -13,60 +35,79 @@ const ValueProposition = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8">
+        <div className="grid lg:grid-cols-2 md:gap-8 bg-background-accent p-4 md:p-12">
           {/* For Tenants */}
-          <div className="bg-card rounded-2xl p-8 space-y-6">
-            <div className="flex items-center space-x-4">
-              <div className="w-16 h-16 bg-vetarent-blue-light rounded-xl flex items-center justify-center">
-                <svg className="w-8 h-8 text-vetarent-blue" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z"/>
-                </svg>
-              </div>
-              <h3 className="text-2xl font-bold text-foreground">For Tenants</h3>
-            </div>
+          <div className="gap-4 md:gap-4 p-4 md:p-8 pr-0 space-y-6 bg-background-accent flex items-center justify-between">
             
-            <div className="space-y-4">
-              <div className="flex items-start space-x-3">
-                <div className="w-2 h-2 bg-vetarent-blue rounded-full mt-2"></div>
-                <span className="text-foreground">Verified listings Only</span>
-              </div>
-              <div className="flex items-start space-x-3">
-                <div className="w-2 h-2 bg-vetarent-blue rounded-full mt-2"></div>
-                <span className="text-foreground">Co-verified Landlords</span>
-              </div>
-              <div className="flex items-start space-x-3">
-                <div className="w-2 h-2 bg-vetarent-blue rounded-full mt-2"></div>
-                <span className="text-foreground">Buyer & Secure</span>
-              </div>
+            <div className="space-y-8 md:space-y-4 md:mt-4">
+                <h3 className="text-2xl font-bold text-foreground whitespace-nowrap">For Tenants</h3>
+                <div className="space-y-6 md:space-y-3">
+                  {featuresTenants.map((text, i) => (
+                    <div key={i} className="flex items-center space-x-1">
+                      <Image 
+                        src={Tick} 
+                        alt="Tick Icon" 
+                        width={14} 
+                        height={14} 
+                      />
+                      <span className="text-foreground whitespace-nowrap text-sm md:text-lg">{text}</span>
+                    </div>
+                  ))}
+                </div>
+            </div>
+
+            <div className="min-w-[173.03px] h-[125.24px] md:w-[310px] md:h-[210px] relative">
+              {/* Mobile image */}
+              <Image 
+                src={Image1Mobile} 
+                alt="House Image for Tenants" 
+                className="md:hidden"
+              />
+              {/* Desktop image */}
+              <Image 
+                src={Image1Desktop} 
+                alt="House Image for Tenants" 
+                className="hidden md:block"
+              />
             </div>
           </div>
 
           {/* For Landlords */}
-          <div className="bg-primary rounded-2xl p-8 space-y-6 text-white">
-            <div className="flex items-center space-x-4">
-              <div className="w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center">
-                <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4V7z"/>
-                  <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" fill="none"/>
-                </svg>
+          <div className="gap-4 md:gap-4 bg-vetarent-blue rounded-none p-8 pt-4 pr-4 md:p-8 pl-0 md:pl-4 space-y-6 text-white flex items-center justify-between">
+             <div className="pl-2 md:pl-0 w-auto h-[148.89px] md:w-[256.55px] md:h-[210px] relative">
+                {/* Mobile image */}
+                <Image
+                  src={Image2Mobile} 
+                  alt="Search and Find Image for Landlords - Mobile"
+                  className="md:hidden mt-4 md:mt-0"
+                />
+
+                {/* Desktop image */}
+                <Image
+                  src={Image2Desktop} 
+                  alt="Search and Find Image for Landlords - Desktop"
+                  className="hidden md:block"
+                  
+                />
               </div>
-              <h3 className="text-2xl font-bold">For Landlords</h3>
+            
+            <div className="space-y-8 md:space-y-4 md:mt-4">
+              <h3 className="text-2xl font-bold whitespace-nowrap">For Landlords</h3>
+              <div className="space-y-4 md:space-y-3">
+                  {featuresLandLords.map((text, i) => (
+                    <div key={i} className="flex items-center space-x-1">
+                      <Image 
+                        src={TickWhite} 
+                        alt="Tick white Icon" 
+                        width={14} 
+                        height={14} 
+                      />
+                      <span className="text-foreground text-sm md:text-lg">{text}</span>
+                    </div>
+                  ))}
+                </div>
             </div>
             
-            <div className="space-y-4">
-              <div className="flex items-start space-x-3">
-                <div className="w-2 h-2 bg-white rounded-full mt-2"></div>
-                <span>Easy Listing Process</span>
-              </div>
-              <div className="flex items-start space-x-3">
-                <div className="w-2 h-2 bg-white rounded-full mt-2"></div>
-                <span>Verified Tenants</span>
-              </div>
-              <div className="flex items-start space-x-3">
-                <div className="w-2 h-2 bg-white rounded-full mt-2"></div>
-                <span>Secure Rent Verification</span>
-              </div>
-            </div>
           </div>
         </div>
       </div>
