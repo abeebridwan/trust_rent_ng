@@ -4,7 +4,6 @@ import Image1Mobile from "@/assets/Images/Image-1-mobile.png";
 import Image2Desktop from "@/assets/Images/Image.png";
 import Image2Mobile from "@/assets/Images/Image-2-mobile.png";
 import Tick from "@/assets/Icons/Tick.png";
-import { CircleCheck } from 'lucide-react';
 import TickWhite from "@/assets/Icons/tick-white.png";
 
 const featuresTenants = [

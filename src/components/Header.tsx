@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import Image from "next/image";
 import Logo1 from "@/assets/Logo/Logo-1.png";
-import Logo1Mobile from "@/assets/Logo/Logo-1-mobile.png";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -31,7 +30,7 @@ const Header = () => {
           />
           {/* Mobile Logo */}
           <Image 
-            src={Logo1Mobile} 
+            src={Logo1} 
             alt="Vetarent Logo" 
             width={111.37} 
             height={37} 

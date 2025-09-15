@@ -5,12 +5,12 @@
 /* Default theme (Light mode) */
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #000000;
 }
 
 /* Dark mode (manual via .dark class) */
 .dark {
-  --background: #0a0a0a;
+  --background: #000000;
   --foreground: #ededed;
 }
 
@@ -18,11 +18,11 @@
 @layer base {
   :root {
     /* Brand Colors */
-    --vetarent-blue: 220 100% 35%;
-    --vetarent-blue-dark: 220 100% 25%;
-    --vetarent-blue-light: 220 100% 95%;
-    --vetarent-orange: 25 100% 55%;
-    --vetarent-orange-light: 25 100% 95%;
+    --vetarent-blue: 220 86% 35%;        /* #0D47A1 */
+    --vetarent-blue-dark: 220 86% 25%;   /* #082F70 */
+    --vetarent-blue-light: 220 86% 95%;  /* #F0F4FE */
+    --vetarent-orange: 34 100% 50%;       /* #FF8F00 */
+    --vetarent-orange-light: 34 100% 95%; /* #FFF7E6 */
 
     /* Background & Surfaces */
     --background-secondary: 220 20% 97%;
@@ -161,4 +161,14 @@
   .transition-smooth {
     transition: var(--transition-smooth);
   }
+}
+
+
+/* Add this to your global CSS or component styles */
+.select-trigger[data-state="closed"] [data-radix-select-value]:not([data-placeholder]) {
+  color: #111827 !important; /* gray-900 for selected value */
+}
+
+.select-trigger[data-state="closed"] [data-radix-select-value][data-placeholder] {
+  color: #9ca3af !important; /* gray-400 for placeholder */
 }
