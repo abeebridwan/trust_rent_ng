@@ -3,10 +3,16 @@
 import { useStore } from "@/lib/store";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { MapPin } from "lucide-react";
 import network from "@/assets/Images/network.png";
 import Image from "next/image";
+import { 
+  CustomSelect, 
+  CustomSelectValue, 
+  CustomSelectTrigger, 
+  CustomSelectContent, 
+  CustomSelectItem 
+} from "@/components/CustomSelect";
 
 const HeroSection = () => {
   const { propertyType, priceRange, setPropertyType, setPriceRange } = useStore();
@@ -51,37 +57,41 @@ const HeroSection = () => {
                 </div>
                 <Input
                   placeholder="Enter Location"
-                  className="pl-12 h-14 bg-gray-50 border-gray-200 text-gray-700 font-medium rounded-none placeholder:text-gray-400 focus:bg-white focus:border-vetarent-blue"
+                  className="pl-12 h-14 bg-foreground border-gray-200 text-sm text-gray-700 font-semibold rounded-none placeholder:text-gray-400 focus:bg-white focus:border-vetarent-blue/50"
                 />
               </div>
 
-              {/* Property Type and Range Row */}
-              <div className="grid md:grid-cols-2 gap-4">
-                <Select value={propertyType} onValueChange={setPropertyType}>
-                  <SelectTrigger className="rounded-none h-14 bg-gray-50 border-gray-200 font-medium text-gray-400 focus:bg-white focus:border-vetarent-blue">
-                    <SelectValue placeholder="Select Type" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-white border-gray-200 shadow-xl rounded-none font-medium">
-                    <SelectItem value="flat">Flat</SelectItem>
-                    <SelectItem value="apartment">Apartment</SelectItem>
-                    <SelectItem value="tenement">Tenement Houses</SelectItem>
-                    <SelectItem value="duplex">Duplex</SelectItem>
-                    <SelectItem value="bungalow">Bungalow</SelectItem>
-                  </SelectContent>
-                </Select>
+                {/* Property Type and Range Row */}
+                <div className="grid md:grid-cols-2 gap-4">
+                  <CustomSelect value={propertyType} onValueChange={setPropertyType}>
+                    <CustomSelectTrigger className="font-medium text-gray-400 focus:border-blue-500">
+                      <CustomSelectValue placeholder="Select Type" />
+                    </CustomSelectTrigger>
+                    <CustomSelectContent className="bg-white border-gray-200 shadow-xl font-medium">
+                      <CustomSelectItem value="flat">Flat</CustomSelectItem>
+                      <CustomSelectItem value="apartment">Apartment</CustomSelectItem>
+                      <CustomSelectItem value="tenement">Tenement Houses</CustomSelectItem>
+                      <CustomSelectItem value="duplex">Duplex</CustomSelectItem>
+                      <CustomSelectItem value="bungalow">Bungalow</CustomSelectItem>
+                    </CustomSelectContent>
+                  </CustomSelect>
 
-                <Select value={priceRange} onValueChange={setPriceRange}>
-                  <SelectTrigger className="rounded-none h-14 bg-gray-50 border-gray-200 font-medium text-gray-400 focus:bg-white focus:border-vetarent-blue">
-                    <SelectValue placeholder="Range" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-white border-gray-200 shadow-xl rounded-none font-medium">
-                    <SelectItem value="0-500k">₦0 - ₦500k</SelectItem>
-                    <SelectItem value="500k-1m">₦500k - ₦1M</SelectItem>
-                    <SelectItem value="1m-2m">₦1M - ₦2M</SelectItem>
-                    <SelectItem value="2m+">₦2M+</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
+                  <CustomSelect value={priceRange} onValueChange={setPriceRange}>
+                    <CustomSelectTrigger className="font-medium text-gray-400 focus:border-blue-500">
+                      <CustomSelectValue placeholder="Range" />
+                    </CustomSelectTrigger>
+                    <CustomSelectContent className="bg-white border-gray-200 shadow-xl font-medium">
+                      <CustomSelectItem value="0-50m">₦0 - ₦50M</CustomSelectItem>
+                      <CustomSelectItem value="50m-100m">₦50M - ₦100M</CustomSelectItem>
+                      <CustomSelectItem value="100m-200m">₦100M - ₦200M</CustomSelectItem>
+                      <CustomSelectItem value="200m-500m">₦200M - ₦500M</CustomSelectItem>
+                      <CustomSelectItem value="500m-1b">₦500M - ₦1b</CustomSelectItem>
+                      <CustomSelectItem value="1b-5b">₦1b - ₦5b</CustomSelectItem>
+                      <CustomSelectItem value="5b-10b">₦5b - ₦10b</CustomSelectItem>
+                      <CustomSelectItem value="10b+">₦10b+</CustomSelectItem>
+                    </CustomSelectContent>
+                  </CustomSelect>
+                </div>
 
               {/* Search Button */}
               <Button
