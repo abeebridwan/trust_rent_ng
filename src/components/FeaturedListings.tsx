@@ -114,54 +114,54 @@ const FeaturedListings = () => {
 
   const PropertyCard = ({ property }: { property: Property }) => (
     <div className="w-full">
-      <div className="rounded-none bg-card overflow-hidden group">
-        <div className="relative">
-          <Image 
-            src={property.image} 
-            alt={property.title}
-            width={416}
-            height={258}
-            className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-          />
-          <div
-            className="absolute top-3 right-3 z-20 pointer-events-auto group inline-flex items-center justify-center rounded-full p-2 bg-white/90 hover:bg-vetarent-orange transition-colors duration-150 ease-in-out cursor-pointer"
-          >
-            <Heart className="w-6 h-6 text-vetarent-blue group-hover:text-white transition-colors duration-150" />
+     <div className="rounded-none bg-card overflow-hidden group">
+      <div className="relative">
+        <Image 
+          src={property.image} 
+          alt={property.title}
+          width={416}
+          height={258}
+          className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+        />
+        <div
+          className="absolute top-3 right-3 z-20 pointer-events-auto group/heart inline-flex items-center justify-center rounded-full p-2 bg-white/90 hover:bg-vetarent-orange transition-colors duration-150 ease-in-out cursor-pointer"
+        >
+          <Heart className="w-6 h-6 text-vetarent-blue group-hover/heart:text-white transition-colors duration-150" />
+        </div>
+      </div>
+      
+      <div className="p-2 space-y-4 border-2 border-muted-foreground/10 border-t-0 border-b-0">
+        <div className="">
+          <div className="flex items-center space-x-2">
+            <h3 className="font-semibold text-2xl text-foreground">
+              {property.title}
+            </h3>
+            {property.verified && (
+              <Image 
+                src={verifiedBadge} 
+                alt="Verified Badge" 
+                width={21} 
+                height={21}
+                className="mb-2"
+              />
+            )}
+          </div>
+          <div className="flex items-center text-muted-foreground">
+            <MapPin className="w-4 h-4 mr-1 text-gray-400" />
+            <span className="text-base font-medium">{property.location}</span>
           </div>
         </div>
-        
-        <div className="p-2 space-y-4 border-2 border-muted-foreground/10 border-t-0 border-b-0">
-          <div className="">
-            <div className="flex items-center space-x-2">
-              <h3 className="font-semibold text-2xl text-foreground">
-                {property.title}
-              </h3>
-              {property.verified && (
-                <Image 
-                  src={verifiedBadge} 
-                  alt="Verified Badge" 
-                  width={21} 
-                  height={21}
-                  className="mb-2"
-                />
-              )}
-            </div>
-            <div className="flex items-center text-muted-foreground">
-              <MapPin className="w-4 h-4 mr-1 text-gray-400" />
-              <span className="text-base font-medium">{property.location}</span>
-            </div>
-          </div>
 
-          <div className="flex items-center justify-between">
-            <div className="flex items-baseline space-x-1">
-              <span className="text-3xl font-normal text-vetarent-blue">
-                {property.Currency}
-              </span>
-              <span className="text-3xl font-semibold text-vetarent-blue">
-                {property.price}
-              </span>
-              <span className="text-vetarent-blue text-xl font-semibold">
-                {property.period}
+        <div className="flex items-center justify-between">
+          <div className="flex items-baseline space-x-1">
+            <span className="text-3xl font-normal text-vetarent-blue">
+              {property.Currency}
+            </span>
+            <span className="text-3xl font-semibold text-vetarent-blue">
+              {property.price}
+            </span>
+            <span className="text-vetarent-blue text-xl font-semibold">
+             {property.period}
               </span>
             </div>
           </div>
@@ -211,6 +211,7 @@ const FeaturedListings = () => {
                 aria-label="Previous property"
               >
                 <ArrowLeft className="w-6 h-6 text-vetarent-orange" />
+                <span className="sr-only">Previous property</span>
               </button>
               
               <button 
@@ -219,6 +220,7 @@ const FeaturedListings = () => {
                 aria-label="Next property"
               >
                 <ArrowRight className="w-6 h-6 text-white" />
+                <span className="sr-only">Next property</span>
               </button>
             </div>
           </div>
@@ -235,12 +237,13 @@ const FeaturedListings = () => {
             
             {/* Desktop Navigation Arrows */}
             <div className="flex justify-center items-center space-x-3 mt-6">
-              <button 
+             <button 
                 onClick={prevProperty}
                 className="w-12 h-12 rounded-full bg-foreground border-2 border-vetarent-orange hover:bg-muted-foreground/20 flex items-center justify-center transition-colors duration-200"
                 aria-label="Previous properties"
               >
                 <ArrowLeft className="w-6 h-6 text-vetarent-orange" />
+                <span className="sr-only">Previous properties</span>
               </button>
               
               <button 
@@ -249,6 +252,7 @@ const FeaturedListings = () => {
                 aria-label="Next properties"
               >
                 <ArrowRight className="w-6 h-6 text-white" />
+                <span className="sr-only">Next properties</span>
               </button>
             </div>
           </div>
