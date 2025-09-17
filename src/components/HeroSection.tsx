@@ -62,36 +62,49 @@ const HeroSection = () => {
               </div>
 
                 {/* Property Type and Range Row */}
-                <div className="grid md:grid-cols-2 gap-4">
-                  <CustomSelect value={propertyType} onValueChange={setPropertyType}>
-                    <CustomSelectTrigger className="font-medium text-gray-400 focus:border-blue-500">
-                      <CustomSelectValue placeholder="Select Type" />
-                    </CustomSelectTrigger>
-                    <CustomSelectContent className="bg-white border-gray-200 shadow-xl font-medium">
-                      <CustomSelectItem value="flat">Flat</CustomSelectItem>
-                      <CustomSelectItem value="apartment">Apartment</CustomSelectItem>
-                      <CustomSelectItem value="tenement">Tenement Houses</CustomSelectItem>
-                      <CustomSelectItem value="duplex">Duplex</CustomSelectItem>
-                      <CustomSelectItem value="bungalow">Bungalow</CustomSelectItem>
-                    </CustomSelectContent>
-                  </CustomSelect>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    {/* Property Type */}
+                    <div>
+                      <label className="sr-only" htmlFor="propertyType">
+                        Property Type
+                      </label>
+                      <CustomSelect value={propertyType} onValueChange={setPropertyType}>
+                        <CustomSelectTrigger id="propertyType" className="font-medium text-gray-400 focus:border-blue-500">
+                          <CustomSelectValue placeholder="Select Type" />
+                        </CustomSelectTrigger>
+                        <CustomSelectContent className="bg-white border-gray-200 shadow-xl font-medium">
+                          <CustomSelectItem value="flat">Flat</CustomSelectItem>
+                          <CustomSelectItem value="apartment">Apartment</CustomSelectItem>
+                          <CustomSelectItem value="tenement">Tenement Houses</CustomSelectItem>
+                          <CustomSelectItem value="duplex">Duplex</CustomSelectItem>
+                          <CustomSelectItem value="bungalow">Bungalow</CustomSelectItem>
+                        </CustomSelectContent>
+                      </CustomSelect>
+                    </div>
 
-                  <CustomSelect value={priceRange} onValueChange={setPriceRange}>
-                    <CustomSelectTrigger className="font-medium text-gray-400 focus:border-blue-500">
-                      <CustomSelectValue placeholder="Range" />
-                    </CustomSelectTrigger>
-                    <CustomSelectContent className="bg-white border-gray-200 shadow-xl font-medium">
-                      <CustomSelectItem value="0-50m">₦0 - ₦50M</CustomSelectItem>
-                      <CustomSelectItem value="50m-100m">₦50M - ₦100M</CustomSelectItem>
-                      <CustomSelectItem value="100m-200m">₦100M - ₦200M</CustomSelectItem>
-                      <CustomSelectItem value="200m-500m">₦200M - ₦500M</CustomSelectItem>
-                      <CustomSelectItem value="500m-1b">₦500M - ₦1b</CustomSelectItem>
-                      <CustomSelectItem value="1b-5b">₦1b - ₦5b</CustomSelectItem>
-                      <CustomSelectItem value="5b-10b">₦5b - ₦10b</CustomSelectItem>
-                      <CustomSelectItem value="10b+">₦10b+</CustomSelectItem>
-                    </CustomSelectContent>
-                  </CustomSelect>
-                </div>
+                    {/* Price Range */}
+                    <div>
+                      <label className="sr-only" htmlFor="priceRange">
+                        Price Range
+                      </label>
+                      <CustomSelect value={priceRange} onValueChange={setPriceRange}>
+                        <CustomSelectTrigger id="priceRange" className="font-medium text-gray-400 focus:border-blue-500">
+                          <CustomSelectValue placeholder="Range" />
+                        </CustomSelectTrigger>
+                        <CustomSelectContent className="bg-white border-gray-200 shadow-xl font-medium">
+                          <CustomSelectItem value="0-50m">₦0 - ₦50M</CustomSelectItem>
+                          <CustomSelectItem value="50m-100m">₦50M - ₦100M</CustomSelectItem>
+                          <CustomSelectItem value="100m-200m">₦100M - ₦200M</CustomSelectItem>
+                          <CustomSelectItem value="200m-500m">₦200M - ₦500M</CustomSelectItem>
+                          <CustomSelectItem value="500m-1b">₦500M - ₦1b</CustomSelectItem>
+                          <CustomSelectItem value="1b-5b">₦1b - ₦5b</CustomSelectItem>
+                          <CustomSelectItem value="5b-10b">₦5b - ₦10b</CustomSelectItem>
+                          <CustomSelectItem value="10b+">₦10b+</CustomSelectItem>
+                        </CustomSelectContent>
+                      </CustomSelect>
+                    </div>
+                  </div>
+
 
               {/* Search Button */}
             <Button

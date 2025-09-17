@@ -12,7 +12,6 @@ const featuresTenants = [
   "Smart & Secure",
 ];
 
-
 const featuresLandLords = [
   "Easy Listing Process",
   "Verified Tenants",
@@ -21,10 +20,10 @@ const featuresLandLords = [
 
 const ValueProposition = () => {
   return (
-    <section className="bg-background py-12 md:py-16">
+    <section className="bg-background py-12 md:py-16 overflow-x-scroll">
       <div className="container mx-auto p-0 md:px-4">
         <div className="text-center mb-12 px-4 md:px-0">
-          <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-[2.5rem] font-bold text-foreground mb-4 whitespace-nowrap">
+          <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-[2.5rem] font-bold text-foreground mb-4 sm:whitespace-nowrap">
             Verified Rentals. <span className="text-vetarent-blue">For Everyone.</span>
           </h2>
 
@@ -39,7 +38,7 @@ const ValueProposition = () => {
           <div className="gap-4 md:gap-4 p-4 md:p-8 pr-0 space-y-6 bg-background-accent flex items-center justify-between">
             
             <div className="space-y-8 md:space-y-4 md:mt-4">
-                <h3 className="text-2xl font-bold text-foreground whitespace-nowrap">For Tenants</h3>
+                <h3 className="text-xl md:text-2xl font-bold text-foreground whitespace-nowrap">For Tenants</h3>
                 <div className="space-y-6 md:space-y-3">
                   {featuresTenants.map((text, i) => (
                     <div key={i} className="flex items-center space-x-1">
@@ -49,13 +48,13 @@ const ValueProposition = () => {
                         width={14} 
                         height={14} 
                       />
-                      <span className="text-foreground whitespace-nowrap text-sm md:text-lg">{text}</span>
+                      <span className="text-foreground sm:whitespace-nowrap text-xs sm:text-sm md:text-lg">{text}</span>
                     </div>
                   ))}
                 </div>
             </div>
 
-            <div className="min-w-[173.03px] h-[125.24px] md:w-[310px] md:h-[210px] relative">
+            <div className="min-w-[140px] h-[101px] sm:min-w-[173.03px] sm:h-[125.24px] md:w-[310px] md:h-[210px] relative">
               {/* Mobile image */}
               <Image 
                 src={Image1Mobile} 
@@ -73,7 +72,7 @@ const ValueProposition = () => {
 
           {/* For Landlords */}
           <div className="gap-4 md:gap-4 bg-vetarent-blue rounded-none p-8 pt-4 pr-4 md:p-8 pl-0 md:pl-4 space-y-6 text-white flex items-center justify-between">
-             <div className="pl-2 md:pl-0 w-auto h-[148.89px] md:w-[256.55px] md:h-[210px] relative">
+             <div className="pl-2 md:pl-0 w-[120px] h-[119px] sm:w-auto sm:h-[148.89px] md:w-[256.55px] md:h-[210px] relative">
                 {/* Mobile image */}
                 <Image
                   src={Image2Mobile} 
@@ -86,12 +85,11 @@ const ValueProposition = () => {
                   src={Image2Desktop} 
                   alt="Search and Find Image for Landlords - Desktop"
                   className="hidden md:block"
-                  
                 />
               </div>
             
             <div className="space-y-8 md:space-y-4 md:mt-4">
-              <h3 className="text-2xl font-bold whitespace-nowrap">For Landlords</h3>
+              <h3 className="text-xl md:text-2xl font-bold whitespace-nowrap">For Landlords</h3>
               <div className="space-y-4 md:space-y-3">
                   {featuresLandLords.map((text, i) => (
                     <div key={i} className="flex items-center space-x-1">
@@ -101,7 +99,7 @@ const ValueProposition = () => {
                         width={14} 
                         height={14} 
                       />
-                      <span className="text-foreground text-sm md:text-lg">{text}</span>
+                      <span className="text-foreground text-xs sm:text-sm md:text-lg sm:whitespace-nowrap">{text}</span>
                     </div>
                   ))}
                 </div>
