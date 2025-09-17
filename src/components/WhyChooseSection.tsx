@@ -1,57 +1,76 @@
+import House from "@/assets/Icons/House.png";
+import Scam from "@/assets/Icons/Scam.png";
+import Verified from "@/assets/Icons/Verified.png";
+import Image from "next/image";
+
 const WhyChooseSection = () => {
   const features = [
     {
-      icon: (
-        <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-        </svg>
-      ),
+     icon: <Image 
+            src={House} 
+            alt="House Logo" 
+            width={67} 
+            height={67}
+            className="w-[47.55px] h-[47.55px] md:w-[67px] md:h-[67px]"
+          />,
       title: "Easy Property Search",
-      description: "Search, save, and apply for rentals anytime, anywhere."
+      description: "Search, save, and apply for rentals anytime, anywhere.",
+      bg: "bg-background-accent"
+      
     },
     {
-      icon: (
-        <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z"/>
-        </svg>
-      ),
+      icon: <Image 
+            src={Verified} 
+            alt="Verified Logo" 
+            width={67} 
+            height={67} 
+            className="w-[47.55px] h-[47.55px] md:w-[67px] md:h-[67px]"
+          />,
       title: "Verified Landlords Only",
-      description: "Every landlord is identity verified, so you know who you're dealing with every time."
+      description: "Every landlord is identity-verified, so you deal with real, serious people.",
+      bg: "bg-vetarent-blue"
     },
     {
-      icon: (
-        <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M12 1L3 5V11C3 16.55 6.84 20.74 12 22C17.16 20.74 21 16.55 21 11V5L12 1M12 7C13.11 7 14 7.89 14 9S13.11 11 12 11 10 10.11 10 9 10.89 7 12 7Z"/>
-        </svg>
-      ),
+      icon: <Image 
+            src={Scam} 
+            alt="Scam Logo" 
+            width={67} 
+            height={67} 
+            className="w-[47.55px] h-[47.55px] md:w-[67px] md:h-[67px]"
+          />,
       title: "Built to Prevent Scams",
-      description: "Our multi-layer verification process protects both you and your property."
+      description: "Our double-verification process protects both you and your property.",
+      bg: "bg-background-accent"
     }
   ];
 
   return (
-    <section className="bg-background py-16">
+    <section className="bg-background pt-0 pb-4 md:pb-16 md:pt-0">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+        <div className="text-center  md:mb-8">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-[20px]">
             Why Choose <span className="text-vetarent-blue">Vetarent?</span>
           </h2>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-[12px]">
           {features.map((feature, index) => (
-            <div key={index} className="text-center space-y-4">
-              <div className="w-16 h-16 bg-vetarent-blue-light rounded-2xl flex items-center justify-center mx-auto">
-                <div className="text-vetarent-blue">
-                  {feature.icon}
-                </div>
+            <div key={index} className={`space-y-4 ${feature.bg} p-6 md:py-12`}>
+              <div className="w-full flex items-center justify-start">
+                {feature.icon}
               </div>
-              
-              <h3 className="text-xl font-bold text-foreground">
+
+              <h3 className={`text-lg sm:text-xl md:text-2xl font-bold ${
+                  index === 1 ? "text-white" : "text-foreground"
+                }`}>
                 {feature.title}
               </h3>
-              
-              <p className="text-muted-foreground max-w-sm mx-auto">
+
+              <p
+                className={`text-sm sm:text-base md:text-lg font-medium ${
+                  index === 1 ? "text-white" : "text-foreground"
+                }`}
+              >
                 {feature.description}
               </p>
             </div>

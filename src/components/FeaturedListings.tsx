@@ -133,7 +133,7 @@ const FeaturedListings = () => {
       <div className="p-2 space-y-4 border-2 border-muted-foreground/10 border-t-0 border-b-0">
         <div className="">
           <div className="flex items-center space-x-2">
-            <h3 className="font-semibold text-2xl text-foreground">
+            <h3 className="font-semibold text-base sm:text-2xl text-foreground">
               {property.title}
             </h3>
             {property.verified && (
@@ -142,25 +142,25 @@ const FeaturedListings = () => {
                 alt="Verified Badge" 
                 width={21} 
                 height={21}
-                className="mb-2"
+                className="mb-1 md:mb-2 w-[18px] h-[18px] md:w-[21px] md:h-[21px]"
               />
             )}
           </div>
           <div className="flex items-center text-muted-foreground">
             <MapPin className="w-4 h-4 mr-1 text-gray-400" />
-            <span className="text-base font-medium">{property.location}</span>
+            <span className="text-xs sm:text-base font-medium">{property.location}</span>
           </div>
         </div>
 
         <div className="flex items-center justify-between">
           <div className="flex items-baseline space-x-1">
-            <span className="text-3xl font-normal text-vetarent-blue">
+            <span className="text-lg sm:text-2xl md:text-3xl font-normal text-vetarent-blue">
               {property.Currency}
             </span>
-            <span className="text-3xl font-semibold text-vetarent-blue">
+            <span className="text-lg sm:text-2xl md:text-3xl font-semibold text-vetarent-blue">
               {property.price}
             </span>
-            <span className="text-vetarent-blue text-xl font-semibold">
+            <span className="text-vetarent-blue text-base sm:text-lg md:text-xl font-semibold">
              {property.period}
               </span>
             </div>
@@ -174,7 +174,7 @@ const FeaturedListings = () => {
           <AvatarFallback className="text-xs">TO</AvatarFallback>
         </Avatar>
         <div className="flex items-center space-x-1">
-          <span className="text-sm font-medium text-foreground">Tolu Ogunleye</span>
+          <span className="text-xs md:text-sm font-semibold text-foreground">Tolu Ogunleye</span>
           <Image 
             src={verifiedBadge} 
             alt="Verified Badge" 
@@ -187,10 +187,10 @@ const FeaturedListings = () => {
   );
 
   return (
-    <section className="bg-background py-16 pt-0" suppressHydrationWarning>
+    <section className="bg-background py-[37px] pt-0" suppressHydrationWarning>
       <div className="container mx-auto px-4">
         <div className="text-center mb-8 md:mb-12">
-          <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-[2.5rem] font-bold text-vetarent-blue mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.5rem] font-bold text-vetarent-blue mb-4">
             Featured Listing
           </h2>
           <p className="text-muted-foreground/70 text-sm md:text-lg max-w-2xl font-semibold mx-auto">
@@ -207,7 +207,7 @@ const FeaturedListings = () => {
             <div className="flex justify-center items-center space-x-3 mt-6">
               <button 
                 onClick={prevProperty}
-                className="w-12 h-12 rounded-full bg-foreground border-2 border-vetarent-orange hover:bg-muted-foreground/20 flex items-center justify-center transition-colors duration-200"
+                className="w-10 h-10 rounded-full bg-foreground border-2 border-vetarent-orange hover:bg-muted-foreground/20 flex items-center justify-center transition-colors duration-200"
                 aria-label="Previous property"
               >
                 <ArrowLeft className="w-6 h-6 text-vetarent-orange" />
@@ -216,7 +216,7 @@ const FeaturedListings = () => {
               
               <button 
                 onClick={nextProperty}
-                className="w-12 h-12 rounded-full bg-vetarent-orange hover:bg-vetarent-orange/60 flex items-center justify-center transition-colors duration-200"
+                className="w-10 h-10 rounded-full bg-vetarent-orange hover:bg-vetarent-orange/60 flex items-center justify-center transition-colors duration-200"
                 aria-label="Next property"
               >
                 <ArrowRight className="w-6 h-6 text-white" />

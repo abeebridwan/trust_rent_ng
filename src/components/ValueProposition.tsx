@@ -20,10 +20,10 @@ const featuresLandLords = [
 
 const ValueProposition = () => {
   return (
-    <section className="bg-background py-12 md:py-16 overflow-x-scroll">
+    <section className="bg-background py-8 md:py-16 overflow-x-scroll">
       <div className="container mx-auto p-0 md:px-4">
-        <div className="text-center mb-12 px-4 md:px-0">
-          <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-[2.5rem] font-bold text-foreground mb-4 sm:whitespace-nowrap">
+        <div className="text-center mb-4 md:mb-12 px-4 md:px-0">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.5rem] font-bold text-foreground mb-4 sm:whitespace-nowrap">
             Verified Rentals. <span className="text-vetarent-blue">For Everyone.</span>
           </h2>
 
@@ -48,13 +48,13 @@ const ValueProposition = () => {
                         width={14} 
                         height={14} 
                       />
-                      <span className="text-foreground sm:whitespace-nowrap text-xs sm:text-sm md:text-lg">{text}</span>
+                      <span className="text-foreground sm:whitespace-nowrap text-sm md:text-lg">{text}</span>
                     </div>
                   ))}
                 </div>
             </div>
 
-            <div className="min-w-[140px] h-[101px] sm:min-w-[173.03px] sm:h-[125.24px] md:w-[310px] md:h-[210px] relative">
+            <div className="relative">
               {/* Mobile image */}
               <Image 
                 src={Image1Mobile} 
@@ -72,7 +72,7 @@ const ValueProposition = () => {
 
           {/* For Landlords */}
           <div className="gap-4 md:gap-4 bg-vetarent-blue rounded-none p-8 pt-4 pr-4 md:p-8 pl-0 md:pl-4 space-y-6 text-white flex items-center justify-between">
-             <div className="pl-2 md:pl-0 w-[120px] h-[119px] sm:w-auto sm:h-[148.89px] md:w-[256.55px] md:h-[210px] relative">
+             <div className="pl-2 md:pl-0 relative">
                 {/* Mobile image */}
                 <Image
                   src={Image2Mobile} 
@@ -99,7 +99,7 @@ const ValueProposition = () => {
                         width={14} 
                         height={14} 
                       />
-                      <span className="text-foreground text-xs sm:text-sm md:text-lg sm:whitespace-nowrap">{text}</span>
+                      <span className="text-foreground text-sm md:text-lg sm:whitespace-nowrap">{text}</span>
                     </div>
                   ))}
                 </div>
