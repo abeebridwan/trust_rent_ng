@@ -121,7 +121,7 @@ export default function Home() {
       <HeroSection />
       <CTASection />
       <StatsSection />
-      {/* <ValueProposition /> */}
+      <ValueProposition />
       <FeaturedListings />
       <WhyChooseSection />
       <TestimonialsSection />
