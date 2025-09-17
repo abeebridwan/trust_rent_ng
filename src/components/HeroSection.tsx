@@ -24,7 +24,7 @@ const HeroSection = () => {
           {/* Left Content */}
           <div className="space-y-8">
             <div className="space-y-6">
-              <div className="hidden md:block text-[2.5rem] flex-wrap ">
+              <div className="hidden md:block overflow-hidden text-[2.5rem] flex-wrap ">
                   <h1 className="text-foreground font-normal whitespace-nowrap">
                     The only rental platform that{" "}
                   </h1>

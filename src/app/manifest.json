@@ -4,7 +4,7 @@
   "description": "Nigeria's most trusted rental platform. Verified landlords, verified properties, verified tenants. Rent with confidence and avoid fraud.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
+  "background_color": "#0D47A1",
   "theme_color": "#003bb2",
   "orientation": "portrait",
   "icons": [

@@ -113,15 +113,15 @@ const FeaturedListings = () => {
   };
 
   const PropertyCard = ({ property }: { property: Property }) => (
-    <div className="w-full">
-     <div className="rounded-none bg-card overflow-hidden group">
+    <div className="w-full group/whole">
+     <div className="rounded-none bg-card overflow-hidden">
       <div className="relative">
         <Image 
           src={property.image} 
           alt={property.title}
           width={416}
           height={258}
-          className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+          className="w-full h-48 object-cover group-hover/whole:scale-105 transition-transform duration-300"
         />
         <div
           className="absolute top-3 right-3 z-20 pointer-events-auto group/heart inline-flex items-center justify-center rounded-full p-2 bg-white/90 hover:bg-vetarent-orange transition-colors duration-150 ease-in-out cursor-pointer"

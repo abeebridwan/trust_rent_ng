@@ -9,11 +9,11 @@ const CTASection = () => {
               Become a Verified Landlord
           </Button>
           </div>
-          <div className="text-center md:text-right flex">
-            <p className="font-medium mb-2">
+          <div className="text-center md:text-right flex flex-wrap">
+            <p className="font-medium mb-2 text-sm md:text-xl">
               Already have an account?
             </p>
-            <span className="text-vetarent-orange hover:text-vetarent-blue font-semibold cursor-pointer hover:underline text-base ml-2">
+            <span className="text-vetarent-orange hover:text-vetarent-blue font-semibold cursor-pointer hover:underline text-sm md:text-xl ml-2">
               Login
             </span>
           </div>

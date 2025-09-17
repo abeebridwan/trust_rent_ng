@@ -9,6 +9,11 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NODE_ENV === "production"
+      ? "https://vetarent.com"
+      : "http://localhost:3000"
+  ),
   title: "Vetarent - Verified Rentals Platform",
   description:
     "Nigeria's most trusted rental platform. Verified landlords, verified properties, verified tenants. Rent with confidence and avoid fraud.",

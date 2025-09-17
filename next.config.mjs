@@ -9,7 +9,7 @@ const nextConfig = {
 export default async (phase) => {
   let config = { ...nextConfig };
 
-  if (phase === PHASE_DEVELOPMENT_SERVER || phase === PHASE_PRODUCTION_BUILD) {
+  if (phase === PHASE_PRODUCTION_BUILD) {
     const withSerwist = withSerwistInit({
       swSrc: "src/app/sw.ts",
       swDest: "public/sw.js",
