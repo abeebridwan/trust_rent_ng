@@ -19,16 +19,16 @@ export const metadata: Metadata = {
     description:
       "Nigeria's most trusted rental platform. Verified landlords, verified properties, verified tenants. Rent with confidence and avoid fraud.",
     type: "website",
-    images: ["https://lovable.dev/opengraph-image-p98pqg.png"],
+    images: ["/images/og-image.png"],
   },
   twitter: {
     card: "summary_large_image",
-    site: "@vetarent_ng",
-    images: ["https://lovable.dev/opengraph-image-p98pqg.png"], // Replace with your image URL
+    site: "@vetarentng",
+    images: ["/images/og-image.png"], 
   },
   icons: {
-    icon: "/favicon.ico", // in public/
-    shortcut: "/favicon.ico",
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
     apple: "/apple-touch-icon.png",
   },
 };

@@ -53,7 +53,7 @@ const HeroSection = () => {
               {/* Location Input */}
               <div className="relative">
                 <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400">
-                  <MapPin className="w-5 h-5 text-vetarent-blue" />
+                  <MapPin className="w-5 h-5 text-vetarent-blue/60" />
                 </div>
                 <Input
                   placeholder="Enter Location"
@@ -94,24 +94,27 @@ const HeroSection = () => {
                 </div>
 
               {/* Search Button */}
-              <Button
-              className="w-full h-14 bg-gradient-to-b from-[#2e2cbf] to-[#2e2cbf] text-white font-semibold text-base rounded-none shadow-[inset_0_2px_6px_rgba(255,255,255,0.8),0_8px_24px_rgba(0,0,0,0.25)] hover:from-vetarent-orange hover:to-vetarent-orange/90"
-            >
-              Search
-            </Button>
+            <Button
+            className="w-full h-14 bg-[#0D47A1] text-white font-semibold text-base rounded-none shadow-[inset_4px_8px_8px_rgba(255,255,255,0.25),inset_-4px_-8px_8px_rgba(0,0,0,0.25)] hover:bg-[#1565C0] transition-all duration-200"
+          >
+            Search
+          </Button>
 
             </div>
             
           </div>
-
           {/* Right Content - Network Visualization */}
           <div className="relative xl:-mt-12 mx-auto">
               <Image 
                 src={network} 
-                alt="Vetarent Logo" 
+                alt="Network visualization showing connected nodes and data flow" 
                 width={583.01} 
                 height={478.29} 
                 className="" 
+                priority={true}
+                placeholder="blur"
+                blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTgzIiBoZWlnaHQ9IjQ3OCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojZjBmMGYwO3N0b3Atb3BhY2l0eTowLjEiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojZTBlMGUwO3N0b3Atb3BhY2l0eTowLjA1Ii8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogIDwvZGVmcz4KICA8cmVjdCB3aWR0aD0iNTgzIiBoZWlnaHQ9IjQ3OCIgZmlsbD0idXJsKCNiZykiLz4KICA8Y2lyY2xlIGN4PSIxNDAiIGN5PSIxMjAiIHI9IjgiIGZpbGw9IiNkZGRkZGQiIG9wYWNpdHk9IjAuMyIvPgogIDxjaXJjbGUgY3g9IjI5MCIgY3k9IjIwMCIgcj0iMTIiIGZpbGw9IiNkZGRkZGQiIG9wYWNpdHk9IjAuNCIvPgogIDxjaXJjbGUgY3g9IjQ0MCIgY3k9IjE2MCIgcj0iMTAiIGZpbGw9IiNkZGRkZGQiIG9wYWNpdHk9IjAuMzUiLz4KICA8bGluZSB4MT0iMTQwIiB5MT0iMTIwIiB4Mj0iMjkwIiB5Mj0iMjAwIiBzdHJva2U9IiNkZGRkZGQiIHN0cm9rZS13aWR0aD0iMiIgb3BhY2l0eT0iMC4yIi8+CiAgPGxpbmUgeDE9IjI5MCIgeTE9IjIwMCIgeDI9IjQ0MCIgeTI9IjE2MCIgc3Ryb2tlPSIjZGRkZGRkIiBzdHJva2Utd2lkdGg9IjIiIG9wYWNpdHk9IjAuMiIvPgo8L3N2Zz4="
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 583px"
               />
           </div>
         </div>

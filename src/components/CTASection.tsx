@@ -4,9 +4,10 @@ const CTASection = () => {
   return (
       <div className="w-full bg-background relative flex flex-col items-center justify-center py-8 pb-4 space-y-5">
           <div className="space-y-3 w-full flex items-center justify-center">
-            <Button className="w-[90%] md:w-1/3 h-12 bg-gradient-to-b from-[#2e2cbf] to-[#2e2cbf] text-white font-semibold text-base rounded-none shadow-[inset_0_2px_6px_rgba(255,255,255,0.8),0_8px_24px_rgba(0,0,0,0.25)] hover:from-vetarent-orange hover:to-vetarent-orange/90">
+          <Button
+            className="w-[90%] h-14 md:w-1/3 bg-[#0D47A1] text-white font-semibold text-base rounded-none shadow-[inset_4px_8px_8px_rgba(255,255,255,0.25),inset_-4px_-8px_8px_rgba(0,0,0,0.25)] hover:bg-[#1565C0] transition-all duration-200">
               Become a Verified Landlord
-            </Button>
+          </Button>
           </div>
           <div className="text-center md:text-right flex">
             <p className="font-medium mb-2">

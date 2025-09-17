@@ -31,13 +31,13 @@
   ],
   "screenshots": [
     {
-      "src": "/Logo/property-2.jpg",
+      "src": "/screenshots/screenshot-800-512.png",
       "sizes": "800x512",
-      "type": "image/jpg",
+      "type": "image/png",
       "form_factor": "wide"
     },
     {
-      "src": "/Logo/LargeTile.scale-125.png", 
+      "src": "/screenshots/screenshot-388-388.png", 
       "sizes": "388x388", 
       "type": "image/png",
       "form_factor": "narrow" 
