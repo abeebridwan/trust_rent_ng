@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import Image from "next/image";
 import Logo1 from "@/assets/Logo/Logo-1.png";
+import Link from "next/link";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -40,21 +41,21 @@ const Header = () => {
         
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center space-x-[50px] text-lg font-semibold">
-          <a href="/" className="text-foreground hover:text-primary whitespace-nowrap">
+          <Link href="/" className="text-foreground hover:text-primary whitespace-nowrap">
             Home
-          </a>
-          <a href="#" className="text-foreground hover:text-primary whitespace-nowrap">
+          </Link>
+          <Link href="#" className="text-foreground hover:text-primary whitespace-nowrap">
             For Landlords
-          </a>
-          <a href="#" className="text-foreground hover:text-primary whitespace-nowrap">
+          </Link>
+          <Link href="#" className="text-foreground hover:text-primary whitespace-nowrap">
             For Tenants
-          </a>
-          <a href="/about-us" className="text-foreground hover:text-primary whitespace-nowrap">
+          </Link>
+          <Link href="/about-us" className="text-foreground hover:text-primary whitespace-nowrap">
             About Us
-          </a>
-          <a href="/contact-us" className="text-foreground hover:text-primary whitespace-nowrap">
+          </Link>
+          <Link href="/contact-us" className="text-foreground hover:text-primary whitespace-nowrap">
             Contact Us
-          </a>
+          </Link>
         </nav>
         
         {/* Mobile menu button */}
@@ -79,41 +80,41 @@ const Header = () => {
       {isMenuOpen && (
         <div className="lg:hidden bg-background border-t border-border">
           <nav className="container mx-auto px-4 py-4 flex flex-col space-y-4">
-            <a 
+            <Link 
               href="/" 
               className="text-foreground hover:text-primary text-lg font-normal py-2"
               onClick={closeMenu}
             >
               Home
-            </a>
-            <a 
+            </Link>
+            <Link 
               href="#" 
               className="text-foreground hover:text-primary text-lg font-normal py-2"
               onClick={closeMenu}
             >
               For Landlords
-            </a>
-            <a 
+            </Link>
+            <Link 
               href="#" 
               className="text-foreground hover:text-primary text-lg font-normal py-2"
               onClick={closeMenu}
             >
               For Tenants
-            </a>
-            <a 
+            </Link>
+            <Link 
               href="/about-us" 
               className="text-foreground hover:text-primary text-lg font-normal py-2"
               onClick={closeMenu}
             >
               About Us
-            </a>
-            <a 
+            </Link>
+            <Link 
               href="/contact-us" 
               className="text-foreground hover:text-primary text-lg font-normal py-2"
               onClick={closeMenu}
             >
               Contact Us
-            </a>
+            </Link>
           </nav>
         </div>
       )}

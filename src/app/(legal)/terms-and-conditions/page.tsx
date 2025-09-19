@@ -4,7 +4,7 @@ export default function TermsAndConditionsPage() {
       <h1>Terms and Conditions</h1>
       <p><strong>Last updated: September 19, 2025</strong></p>
       
-      <p>Please read these Terms and Conditions ("Terms", "Terms and Conditions") carefully before using the Vetarent website (the "Service") operated by Vetarent Technologies ("us", "we", or "our").</p>
+      <p>Please read these Terms and Conditions (&quot;Terms&quot;, &quot;Terms and Conditions&quot;) carefully before using the Vetarent website (the &quot;Service&quot;) operated by Vetarent Technologies (&quot;us&quot;, &quot;we&quot;, or &quot;our&quot;).</p>
 
       <h2>1. Agreement to Terms</h2>
       <p>By accessing or using our Service, you agree to be bound by these Terms. If you disagree with any part of the terms, then you may not access the Service.</p>

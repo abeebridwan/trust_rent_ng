@@ -4,7 +4,7 @@ export default function PrivacyPolicyPage() {
       <h1>Privacy Policy</h1>
       <p><strong>Last updated: September 19, 2025</strong></p>
       
-      <p>Vetarent Technologies ("us", "we", or "our") operates the Vetarent website (the "Service"). This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our Service.</p>
+      <p>Vetarent Technologies (&quot;us&quot;, &quot;we&quot;, or &quot;our&quot;) operates the Vetarent website (the &quot;Service&quot;). This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our Service.</p>
 
       <h2>1. Information Collection and Use</h2>
       <p>We collect several different types of information for various purposes to provide and improve our Service to you. This may include, but is not limited to, your name, email address, phone number, and identification documents for verification purposes.</p>

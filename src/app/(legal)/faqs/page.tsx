@@ -13,7 +13,7 @@ export default function FAQsPage() {
         <AccordionItem value="item-1">
           <AccordionTrigger>What is Vetarent?</AccordionTrigger>
           <AccordionContent>
-            Vetarent is Nigeria's most trusted rental platform, connecting verified landlords, properties, and tenants to eliminate rental fraud.
+            Vetarent is Nigeria&apos;s most trusted rental platform, connecting verified landlords, properties, and tenants to eliminate rental fraud.
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-2">

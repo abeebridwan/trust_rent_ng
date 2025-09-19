@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Logo2 from "@/assets/Logo/Logo-2.png";
 import Image from "next/image";
-import { ChevronUp, ChevronDown, Mail, Phone, MapPin } from "lucide-react";
+import { ChevronUp, ChevronDown } from "lucide-react";
 
 const Footer = () => {
   const [openSections, setOpenSections] = useState<string[]>([]);

@@ -2,7 +2,7 @@ export default function ContactUsPage() {
   return (
     <div className="prose dark:prose-invert">
       <h1>Contact Us</h1>
-      <p>Have questions or need support? We're here to help.</p>
+      <p>Have questions or need support? We&apos;re here to help.</p>
       
       <h2>Email</h2>
       <p>For general inquiries, please email us at <a href="mailto:support@vetarent.com">support@vetarent.com</a>.</p>

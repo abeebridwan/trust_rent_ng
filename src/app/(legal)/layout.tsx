@@ -19,7 +19,7 @@ export default function LegalLayout({
           <div className="w-[90%] sm:w-[80%] text-center mx-auto bg-transparent text-center space-y-4 sm:space-y-8">
             <h3 className="font-semibold text-2xl sm:text-[2.5rem]">About Us</h3>
             <p className="font-semibold text-sm sm:text-lg leading-loose sm:leading-[40px]">
-              Founded in 2025, Vetarent tackles Nigeria's biggest rental challenges — fraud, fake listings, and unreliable agents 
+              Founded in 2025, Vetarent tackles Nigeria&apos;s biggest rental challenges — fraud, fake listings, and unreliable agents 
               — by combining technology and verification to ensure safe, trusted connections between landlords and tenants
             </p>
           </div>
@@ -33,7 +33,7 @@ export default function LegalLayout({
       case '/faqs':
         return (
           <div className="w-full mx-auto bg-transparent">
-            <h3 className="font-semibold text-2xl xs:text-[2.5rem]">FAQ's</h3>
+            <h3 className="font-semibold text-2xl xs:text-[2.5rem]">FAQ&apos;s</h3>
           </div>
         );
       case '/privacy-policy':
@@ -72,7 +72,6 @@ export default function LegalLayout({
               </div>
             </div>
           </div>
-        
         </div>
         
         <div className="relative w-full h-[459px] md:hidden overflow-hidden"> 
@@ -94,13 +93,10 @@ export default function LegalLayout({
         
         </div>
         
-        {/* Overlay Content - Fixed positioning */}
         
         {/* Page Content */}
-        <div className="relative z-20 bg-white">
-          <div className="px-4 mx-auto py-8">
-            {children}
-          </div>
+        <div className="relative px-4">
+          {children}
         </div>
       </div>
     </main>

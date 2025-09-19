@@ -20,17 +20,23 @@ const featuresLandLords = [
 
 const Mission = () => {
   return (
-    <section className="bg-background py-8 md:py-16 overflow-x-scroll">
-      <div className="mx-auto p-0 md:px-4">
-        <div className="text-center mb-4 md:mb-12 px-4 md:px-0">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.5rem] font-bold text-foreground mb-4 sm:whitespace-nowrap">
-            Verified Rentals. <span className="text-vetarent-blue">For Everyone.</span>
-          </h2>
-
-          <p className="text-muted-foreground/70 text-sm md:text-lg max-w-2xl font-semibold mx-auto">
-            Whether you&apos;re a landlord or a tenant, Vetarent ensures safety, 
-            trust, and transparency at every step.
+    <section className="py-4 md:py-8 overflow-x-scroll">
+      <div className="mx-auto">
+        <div className="text-center space-y-4 md:space-y-8 text-center flex flex-col justify-center items-center">
+          <p className="text-muted-foreground/70 text-lg md:text-2xl max-w-2xl font-semibold mx-auto">
+            OUR MISSION
           </p>
+
+          <h2 className="text-vetarent-blue text-2xl sm:text-3xl md:text-4xl lg:text-[2.5rem] font-semibold text-foreground sm:whitespace-nowrap">
+            Renting, Made Simple & Secure
+          </h2>
+          
+          <div className="w-full  max-w-[70%]">
+            <p className="text-black font-medium text-lg leading-loose">
+              Our mission is clear to make renting in Nigeria simple, transparent, and scam-free. By verifying every landlord, tenant, 
+              and property before it goes live, we ensure that only real people and real homes are on Vetarent.
+            </p>
+          </div>
         </div>
 
         <div className="grid lg:grid-cols-2 md:gap-8 bg-background-accent p-4 md:p-12">
