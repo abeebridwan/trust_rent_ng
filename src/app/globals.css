@@ -162,8 +162,14 @@
   .transition-smooth {
     transition: var(--transition-smooth);
   }
-}
 
+  /* Fixed container with no padding - using !important to override Tailwind's default */
+  .container-nopad {
+    @apply container;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
 
 /* Add this to your global CSS or component styles */
 .select-trigger[data-state="closed"] [data-radix-select-value]:not([data-placeholder]) {
