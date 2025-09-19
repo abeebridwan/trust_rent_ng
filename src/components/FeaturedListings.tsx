@@ -89,6 +89,7 @@ const FeaturedListings = () => {
   ];
 
   const maxDesktopItems = 3;
+  const maxTabletItems = 2;
 
   const nextProperty = () => {
     setCurrentIndex((prevIndex) => {
@@ -102,7 +103,7 @@ const FeaturedListings = () => {
     });
   };
 
-  // Get current properties to display
+  // Get current properties to display for desktop (3 items)
   const getCurrentProperties = () => {
     const result = [];
     for (let i = 0; i < maxDesktopItems; i++) {
@@ -112,10 +113,20 @@ const FeaturedListings = () => {
     return result;
   };
 
+  // Get current properties to display for tablet (2 items)
+  const getCurrentTabletProperties = () => {
+    const result = [];
+    for (let i = 0; i < maxTabletItems; i++) {
+      const index = (currentIndex + i) % properties.length;
+      result.push(properties[index]);
+    }
+    return result;
+  };
+
   const PropertyCard = ({ property }: { property: Property }) => (
-    <div className="w-full group/whole">
-     <div className="rounded-none bg-card overflow-hidden">
-      <div className="relative">
+    <div className="w-full group/whole h-full">
+     <div className="rounded-none bg-card overflow-hidden flex flex-col">
+      <div className="relative flex-shrink-0">
         <Image 
           src={property.image} 
           alt={property.title}
@@ -130,10 +141,10 @@ const FeaturedListings = () => {
         </div>
       </div>
       
-      <div className="p-2 space-y-4 border-2 border-muted-foreground/10 border-t-0 border-b-0">
+      <div className="p-2 space-y-4 border-2 border-muted-foreground/10 border-t-0 border-b-0 flex-grow flex flex-col justify-between">
         <div className="">
-          <div className="flex items-center space-x-2">
-            <h3 className="font-semibold text-base sm:text-2xl text-foreground">
+          <div className="flex items-center space-x-2 min-h-[2rem] md:min-h-[2.5rem]">
+            <h3 className="font-semibold text-base sm:text-2xl text-foreground line-clamp-1">
               {property.title}
             </h3>
             {property.verified && (
@@ -142,13 +153,13 @@ const FeaturedListings = () => {
                 alt="Verified Badge" 
                 width={21} 
                 height={21}
-                className="mb-1 md:mb-2 w-[18px] h-[18px] md:w-[21px] md:h-[21px]"
+                className="mb-1 md:mb-2 w-[18px] h-[18px] md:w-[21px] md:h-[21px] flex-shrink-0"
               />
             )}
           </div>
-          <div className="flex items-center text-muted-foreground">
-            <MapPin className="w-4 h-4 mr-1 text-gray-400" />
-            <span className="text-xs sm:text-base font-medium">{property.location}</span>
+          <div className="flex items-center text-muted-foreground min-h-[1.5rem]">
+            <MapPin className="w-4 h-4 mr-1 text-gray-400 flex-shrink-0" />
+            <span className="text-xs sm:text-base font-medium line-clamp-1">{property.location}</span>
           </div>
         </div>
 
@@ -168,7 +179,7 @@ const FeaturedListings = () => {
         </div>
       </div>
 
-      <div className="flex items-center space-x-3 pt-2 bg-card border-2 border-muted-foreground/10 p-2">
+      <div className="flex items-center space-x-3 pt-2 bg-card border-2 border-muted-foreground/10 p-2 flex-shrink-0">
         <Avatar className="w-8 h-8">
           <AvatarImage src={property.avatar} alt="Tolu Ogunleye" />
           <AvatarFallback className="text-xs">TO</AvatarFallback>
@@ -187,7 +198,7 @@ const FeaturedListings = () => {
   );
 
   return (
-    <section className="bg-background py-[37px] pt-0" suppressHydrationWarning>
+    <section className="bg-background py-[37px] pt-0 sm:mb-4 md:mb-8" suppressHydrationWarning>
       <div className="container mx-auto px-4">
         <div className="text-center mb-8 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.5rem] font-bold text-vetarent-blue mb-4">
@@ -229,10 +240,22 @@ const FeaturedListings = () => {
         {/* Desktop Grid with Arrows */}
         <div className="hidden md:block">
           <div className="relative">
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {getCurrentProperties().map((property) => (
-                <PropertyCard key={`${property.id}-${currentIndex}`} property={property} />
-              ))}
+            {/* Tablet view - 2 items */}
+            <div className="block lg:hidden">
+              <div className="grid grid-cols-2 gap-4 items-stretch">
+                {getCurrentTabletProperties().map((property) => (
+                  <PropertyCard key={`${property.id}-${currentIndex}`} property={property} />
+                ))}
+              </div>
+            </div>
+            
+            {/* Desktop view - 3 items */}
+            <div className="hidden lg:block">
+              <div className="grid grid-cols-3 gap-4 items-stretch">
+                {getCurrentProperties().map((property) => (
+                  <PropertyCard key={`${property.id}-${currentIndex}`} property={property} />
+                ))}
+              </div>
             </div>
             
             {/* Desktop Navigation Arrows */}
