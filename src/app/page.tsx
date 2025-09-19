@@ -103,16 +103,16 @@
 }
  */
 
-import Header from "@/components/Header";
-import HeroSection from "@/components/HeroSection";
-import StatsSection from "@/components/StatsSection";
-import ValueProposition from "@/components/ValueProposition";
-import FeaturedListings from "@/components/FeaturedListings";
-import WhyChooseSection from "@/components/WhyChooseSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
-import FAQSection from "@/components/FAQSection";
-import Footer from "@/components/Footer";
-import CTASection from "@/components/CTASection";
+import Header from "@/components/homepage/Header";
+import HeroSection from "@/components/homepage/HeroSection";
+import StatsSection from "@/components/homepage/StatsSection";
+import ValueProposition from "@/components/homepage/ValueProposition";
+import FeaturedListings from "@/components/homepage/FeaturedListings";
+import WhyChooseSection from "@/components/homepage/WhyChooseSection";
+import TestimonialsSection from "@/components/homepage/TestimonialsSection";
+import FAQSection from "@/components/homepage/FAQSection";
+import Footer from "@/components/homepage/Footer";
+import CTASection from "@/components/homepage/CTASection";
 
 export default function Home() {
   return (

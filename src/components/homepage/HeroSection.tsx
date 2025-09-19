@@ -12,7 +12,7 @@ import {
   CustomSelectTrigger, 
   CustomSelectContent, 
   CustomSelectItem 
-} from "@/components/CustomSelect";
+} from "@/components/homepage/CustomSelect";
 
 const HeroSection = () => {
   const { propertyType, priceRange, setPropertyType, setPriceRange } = useStore();
