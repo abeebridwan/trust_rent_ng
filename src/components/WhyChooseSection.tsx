@@ -45,7 +45,7 @@ const WhyChooseSection = () => {
   ];
 
   return (
-    <section className="bg-background pt-0 pb-4 md:pb-16 md:pt-0">
+    <section className="bg-white pt-0 pb-4 md:pb-16 md:pt-0 relative z-50">
       <div className="container mx-auto px-4">
         <div className="text-center  md:mb-8">
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-[20px]">

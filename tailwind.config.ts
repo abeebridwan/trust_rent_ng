@@ -18,6 +18,11 @@ const config: Config = {
       },
     },
     extend: {
+      screens: {
+        xxxs: "345px", // 👈 custom smaller breakpoint
+        xxs: "365px", // 👈 custom smaller breakpoint
+        xs: "498px", // 👈 custom smaller breakpoint
+      },
       fontFamily: {
         sans: ['Poppins', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },

@@ -116,7 +116,7 @@ import CTASection from "@/components/CTASection";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background !min-w-[365px] overflow-x-auto">
       <Header />
       <HeroSection />
       <CTASection />
