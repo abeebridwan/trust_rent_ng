@@ -227,14 +227,14 @@ const Testimonials = () => {
       
       <div className="container mx-auto px-4">   
          {/* Left blur shadow */}
-      <div className="bg-vetarent-blue shadow-[15px_0_100px_150px_rgba(13,71,161,1)] absolute top-0 left-0 h-[912px] w-[1px] pointer-events-none z-10"
+      <div className="bg-vetarent-blue shadow-[15px_0_100px_150px_rgba(13,71,161,1)] absolute top-0 left-0 h-full w-[1px] pointer-events-none z-10"
         style={{
           backdropFilter: "blur(109.4px)",
         }}
       ></div>
 
       {/* Right blur shadow */}
-       <div className="bg-vetarent-blue shadow-[15px_0_100px_150px_rgba(13,71,161,1)] absolute top-0 right-0 h-[912px] w-[1px] pointer-events-none z-10"
+       <div className="bg-vetarent-blue shadow-[15px_0_100px_150px_rgba(13,71,161,1)] absolute top-0 right-0 h-full w-[1px] pointer-events-none z-10"
         style={{
           backdropFilter: "blur(109.4px)",
         }}
