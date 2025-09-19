@@ -47,7 +47,7 @@ const Footer = () => {
                 <a href="#" className="text-white text-base font-medium hover:text-white/80 transition-colors py-3 w-fit">
                   For Tenants
                 </a>
-                <a href="#" className="text-white text-base font-medium hover:text-white/80 transition-colors py-3 w-fit">
+                <a href="/about-us" className="text-white text-base font-medium hover:text-white/80 transition-colors py-3 w-fit">
                   About Us
                 </a>
               </div>
@@ -57,16 +57,16 @@ const Footer = () => {
             <div className="space-y-6">
               <h4 className="text-2xl font-bold">Help & Support</h4>
               <div className="flex flex-col">
-                <a href="#" className="text-white text-base font-medium hover:text-white/80 transition-colors py-3 w-fit">
+                <a href="/faqs" className="text-white text-base font-medium hover:text-white/80 transition-colors py-3 w-fit">
                   FAQ
                 </a>
-                <a href="#" className="text-white text-base font-medium hover:text-white/80 transition-colors py-3 w-fit">
+                <a href="/contact-us" className="text-white text-base font-medium hover:text-white/80 transition-colors py-3 w-fit">
                   Contact Support
                 </a>
-                <a href="#" className="text-white text-base font-medium hover:text-white/80 transition-colors py-3 w-fit">
+                <a href="/terms-and-conditions" className="text-white text-base font-medium hover:text-white/80 transition-colors py-3 w-fit">
                   Terms & Condition
                 </a>
-                <a href="#" className="text-white text-base font-medium hover:text-white/80 transition-colors py-3 w-fit">
+                <a href="/privacy-policy" className="text-white text-base font-medium hover:text-white/80 transition-colors py-3 w-fit">
                   Privacy Policy
                 </a>
               </div>
@@ -135,7 +135,7 @@ const Footer = () => {
                 <a href="#" className="block text-white text-base font-medium py-2 w-fit">
                   For Tenants
                 </a>
-                <a href="#" className="block text-white text-base font-medium py-2 w-fit">
+                <a href="/about-us" className="block text-white text-base font-medium py-2 w-fit">
                   About Us
                 </a>
               </div>
@@ -157,16 +157,16 @@ const Footer = () => {
             </button>
             {isOpen('help') && (
               <div className="ml-4 pb-4 space-y-3">
-                <a href="#" className="block text-white text-base font-medium py-2 w-fit">
+                <a href="/faqs" className="block text-white text-base font-medium py-2 w-fit">
                   FAQ
                 </a>
-                <a href="#" className="block text-white text-base font-medium py-2 w-fit">
+                <a href="/contact-us" className="block text-white text-base font-medium py-2 w-fit">
                   Contact Support
                 </a>
-                <a href="#" className="block text-white text-base font-medium py-2 w-fit">
+                <a href="/terms-and-conditions" className="block text-white text-base font-medium py-2 w-fit">
                   Terms & Condition
                 </a>
-                <a href="#" className="block text-white text-base font-medium py-2 w-fit">
+                <a href="/privacy-policy" className="block text-white text-base font-medium py-2 w-fit">
                   Privacy Policy
                 </a>
               </div>

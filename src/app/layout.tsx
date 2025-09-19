@@ -2,6 +2,8 @@ import "./globals.css";
 import type { Metadata, Viewport } from "next";
 import { Poppins } from "next/font/google";
 import { Providers } from "@/providers/providers";
+import Header from "@/components/homepage/Header";
+import Footer from "@/components/homepage/Footer";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -51,8 +53,12 @@ export default function RootLayout({
     <html lang="en" className={poppins.className}>
       <body>
         <Providers>
-          {children}
-        </Providers>
+          <div className="min-h-screen bg-background !min-w-[365px] overflow-x-auto">
+            <Header />
+            {children}
+            <Footer />
+          </div>
+          </Providers>
       </body>  
     </html>
   );
