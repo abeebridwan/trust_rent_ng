@@ -1,4 +1,3 @@
-
 export default function PrivacyPolicyPage() {
   return (
     <div className="prose dark:prose-invert">

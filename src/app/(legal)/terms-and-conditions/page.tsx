@@ -1,4 +1,3 @@
-
 export default function TermsAndConditionsPage() {
   return (
     <div className="prose dark:prose-invert">
