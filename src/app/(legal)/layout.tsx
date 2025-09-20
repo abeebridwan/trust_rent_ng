@@ -83,7 +83,7 @@ export default function LegalLayout({
             priority
           />
 
-          <div className="absolute inset-x-0 bottom-8 z-10 px-4">
+          <div className="absolute inset-x-0 bottom-4 sm:bottom-8 z-10 px-4">
             <div className="mx-auto">
               <div className="text-white">
                 {getContent()}
@@ -95,7 +95,7 @@ export default function LegalLayout({
         
         
         {/* Page Content */}
-        <div className="relative px-4">
+        <div className="relative">
           {children}
         </div>
       </div>
