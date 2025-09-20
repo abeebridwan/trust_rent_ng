@@ -32,7 +32,7 @@ export default function FAQsPage() {
       <div className="mx-auto px-4 w-full max-w-4xl">
         <Accordion type="single" collapsible className="w-full space-y-4">
            {faqs.map((faq, index) => (
-          <AccordionItem value={`item-${index}`} className="border border-border rounded-none px-6 bg-card">
+          <AccordionItem  key={`item-${index}`} value={`item-${index}`} className="border border-border rounded-none px-6 bg-card">
             <AccordionTrigger className="text-left font-semibold md:font-bold text-foreground text-[14px] md:text-lg hover:no-underline py-4 md:py-8">
               {faq.question}
             </AccordionTrigger>
