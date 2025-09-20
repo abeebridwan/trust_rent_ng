@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Accordion,
   AccordionContent,
@@ -6,35 +8,41 @@ import {
 } from "@/components/ui/accordion";
 
 export default function FAQsPage() {
+  const faqs = [
+    {
+      question: "What makes Vetarent different from other rental platforms?",
+      answer: "Vetarent is Nigeria's only rental platform that verifies both landlords and tenants before allowing them to list or rent. This drastically reduces fraud and builds trust."
+    },
+    {
+      question: "How do I get verified as a landlord?",
+      answer: "Getting verified as a landlord involves submitting your identity documents, property ownership documents, and going through our KYC process. Our team reviews all submissions and typically completes verification within 24-48 hours."
+    },
+    {
+      question: "Does it cost money to list my property?",
+      answer: "Basic property listing is free. We charge a small commission only when you successfully rent out your property through our platform, ensuring you only pay when you get results."
+    },
+    {
+      question: "How do I communicate with Vetarent?",
+      answer: "You can reach us through multiple channels: our in-app chat support, email at support@vetarent.com, or phone support. Our customer service team is available to help you with any questions or issues."
+    }
+  ];
+
   return (
-    <div>
-      <h1 className="text-3xl font-bold mb-4">Frequently Asked Questions</h1>
-      <Accordion type="single" collapsible className="w-full">
-        <AccordionItem value="item-1">
-          <AccordionTrigger>What is Vetarent?</AccordionTrigger>
-          <AccordionContent>
-            Vetarent is Nigeria&apos;s most trusted rental platform, connecting verified landlords, properties, and tenants to eliminate rental fraud.
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem value="item-2">
-          <AccordionTrigger>How do you verify properties?</AccordionTrigger>
-          <AccordionContent>
-            Our team conducts physical inspections and verifies property documents to ensure every listing is authentic and accurately represented.
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem value="item-3">
-          <AccordionTrigger>Is there a fee for tenants?</AccordionTrigger>
-          <AccordionContent>
-            Creating an account and browsing listings is free. A small service fee is applied when you successfully rent a property through our platform.
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem value="item-4">
-          <AccordionTrigger>How do I list my property?</AccordionTrigger>
-          <AccordionContent>
-            Landlords can sign up and submit their property for verification. Once our team verifies the details, your property will be listed on our platform.
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>
-    </div>
+    <section className="py-8 md:py-12">
+      <div className="mx-auto px-4 w-full max-w-4xl">
+        <Accordion type="single" collapsible className="w-full space-y-4">
+           {faqs.map((faq, index) => (
+          <AccordionItem value={`item-${index}`} className="border border-border rounded-none px-6 bg-card">
+            <AccordionTrigger className="text-left font-semibold md:font-bold text-foreground text-[14px] md:text-lg hover:no-underline py-4 md:py-8">
+              {faq.question}
+            </AccordionTrigger>
+            <AccordionContent className="text-muted-foreground md:text-black font-medium pb-6 text-xs md:text-base leading-relaxed" >
+              {faq.answer}
+            </AccordionContent>
+          </AccordionItem>
+          ))}
+        </Accordion>
+      </div>
+    </section>
   );
 }
