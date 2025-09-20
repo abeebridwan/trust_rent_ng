@@ -6,7 +6,7 @@ import Mission3 from "@/assets/Images/mission-3.png";
 
 const Mission = () => {
   return (
-    <section className="py-4 md:py-8 overflow-x-scroll">
+    <section className="py-4 md:py-8">
       <div className="mx-auto">
         <div className="text-center space-y-4 md:space-y-8 text-center flex flex-col justify-center items-center px-4">
           <p className="text-muted-foreground/70 text-base sm:text-lg md:text-2xl max-w-2xl font-semibold mx-auto">

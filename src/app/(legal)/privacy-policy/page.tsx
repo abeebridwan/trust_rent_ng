@@ -1,22 +1,112 @@
+import Link from "next/link";
+import { Mail } from "lucide-react"
+import { Phone } from "lucide-react"
+
 export default function PrivacyPolicyPage() {
   return (
-    <div className="prose dark:prose-invert">
-      <h1>Privacy Policy</h1>
-      <p><strong>Last updated: September 19, 2025</strong></p>
-      
-      <p>Vetarent Technologies (&quot;us&quot;, &quot;we&quot;, or &quot;our&quot;) operates the Vetarent website (the &quot;Service&quot;). This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our Service.</p>
+    <section className="py-12 md:py-16 px-4">
+      <div className="space-y-8">
+        <h1 className="font-semibold text-base md:text-2xl">Effective Date: Aug 15, 2025</h1>
+        <p className="font-semibold text-base md:text-lg">Welcome to Vetarent. Please read these Terms & Conditions carefully before using our platform. By accessing or using our website/app, you agree to be bound by these terms.</p>
+        
+        <div>
+          <h2 className="font-semibold text-base md:text-lg">1. Information Collection and Use</h2>
+          <p className="text-sm md:text-lg">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
+        </div> 
 
-      <h2>1. Information Collection and Use</h2>
-      <p>We collect several different types of information for various purposes to provide and improve our Service to you. This may include, but is not limited to, your name, email address, phone number, and identification documents for verification purposes.</p>
+        <div>
+          <h2 className="font-semibold text-base md:text-lg">2. User Accounts</h2>
+          <p className="text-sm md:text-lg">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
+          <ul className="text-sm md:text-lg list-disc list-inside ml-4">
+            <li>Lorem ipsum dolor sit amet.</li>
+            <li>Lorem ipsum dolor sit amet.</li>
+            <li>Lorem ipsum dolor sit amet.</li>
+          </ul>
+        </div>
 
-      <h2>2. Data Security</h2>
-      <p>The security of your data is important to us. We use commercially acceptable means to protect your Personal Data, but remember that no method of transmission over the Internet or method of electronic storage is 100% secure.</p>
+        <div>
+          <h2 className="font-semibold text-base md:text-lg">3. Property Listings</h2>
+          <p className="text-sm md:text-lg">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
+        </div> 
 
-      <h2>3. Your Rights</h2>
-      <p>You have the right to access, update, or delete the information we have on you. You can do this by accessing your account settings or by contacting us directly.</p>
+        <div>
+          <h2 className="font-semibold text-base md:text-lg">4. Information Collection and Use</h2>
+          <p className="text-sm md:text-lg">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
+        </div> 
 
-      <h2>4. Changes to This Privacy Policy</h2>
-      <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page.</p>
-    </div>
+        <div>
+          <h2 className="font-semibold text-base md:text-lg">5. Governing Law</h2>
+          <p className="text-sm md:text-lg">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
+        </div> 
+
+
+        <div>
+          <h2 className="font-semibold text-base md:text-lg">6. Payments & Fees</h2>
+          <p className="text-sm md:text-lg">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
+        </div> 
+
+        <div>
+          <h2 className="font-semibold text-base md:text-lg">6. Lease Agreements</h2>
+          <p className="text-sm md:text-lg">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
+        </div> 
+
+        <div>
+          <h2 className="font-semibold text-base md:text-lg">7. Safety & Trust</h2>
+          <p className="text-sm md:text-lg">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
+        </div> 
+
+        <div>
+          <h2 className="font-semibold text-base md:text-lg">8. Termination of Accounts</h2>
+          <p className="text-sm md:text-lg">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
+        </div> 
+
+        <div>
+          <h2 className="font-semibold text-base md:text-lg">9. Limitation of Liability</h2>
+          <p className="text-sm md:text-lg">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
+        </div> 
+
+
+        <div>
+          <h2 className="font-semibold text-base md:text-lg">10. Contact Us</h2>
+          <p className="text-sm md:text-lg">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            If you have any questions about these Terms & Conditions, please contact us:</p>
+        </div> 
+
+        <div>
+          <Link 
+            href="mailto:support@vetarent.ng" 
+            className="flex items-center text-base font-semibold md:py-2 w-fit text-base md:text-xl"
+          >
+            <Mail className="h-4 md:h-6 h-4 md:w-6 text-gray-700"/>
+            <span className="ml-2">
+              Email: support@vetarent.ng
+            </span>
+          </Link>
+        </div>
+
+        <div>
+          <Link 
+            href="+91-XXXXXXXXXX" 
+            className="flex items-center text-base font-semibold md:py-2 w-fit text-base md:text-xl"
+          >
+            <Phone className="h-4 md:h-6 h-4 md:w-6 text-gray-700"/>
+            <span className="ml-2">
+              Phone: +91-XXXXXXXXXX
+            </span>
+          </Link>
+        </div>
+
+      </div>
+    </section>
   );
 }
