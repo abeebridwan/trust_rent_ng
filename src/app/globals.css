@@ -23,7 +23,8 @@
     --vetarent-blue-light: 220 86% 95%;  /* #F0F4FE */
     --vetarent-orange: 34 100% 50%;       /* #FF8F00 */
     --vetarent-orange-light: 34 100% 95%; /* #FFF7E6 */
-
+    --vetarent-green: #2E7D32;
+  
     /* Background & Surfaces */
     --background-secondary: 220 20% 97%;
     --background-accent: 220 100% 95%;

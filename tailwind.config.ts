@@ -37,6 +37,9 @@ const config: Config = {
           DEFAULT: "hsl(var(--vetarent-orange))",
           light: "hsl(var(--vetarent-orange-light))",
         },
+        "vetarent-green": {
+          DEFAULT: "hsl(var(--vetarent-green))",
+        },
         
         /* Design System */
         border: "hsl(var(--border))",
