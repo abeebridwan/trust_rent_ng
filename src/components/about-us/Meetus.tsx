@@ -66,9 +66,6 @@ const MeetOurTeam = () => {
                   {member.position}
                 </p>
               </div>
-
-              
-
             </div>
           ))}
         </div>
