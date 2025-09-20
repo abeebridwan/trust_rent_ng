@@ -10,7 +10,6 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from '@/components/ui/form';
 import { Button } from "@/components/ui/button";
@@ -85,7 +84,7 @@ export default function ContactUsPage() {
                   <input
                     {...field}
                     placeholder="Name"
-                    className="w-full px-4 py-3 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent text-gray-700 placeholder-gray-400"
+                    className="w-full px-4 py-3 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent text-gray-700 placeholder-gray-400 placeholder:font-medium"
                   />
                 </FormControl>
                 <FormMessage />
@@ -103,7 +102,7 @@ export default function ContactUsPage() {
                     {...field}
                     type="email"
                     placeholder="E-mail"
-                    className="w-full px-4 py-3 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent text-gray-700 placeholder-gray-400"
+                    className="w-full px-4 py-3 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent text-gray-700 placeholder-gray-400 placeholder:font-medium"
                   />
                 </FormControl>
                 <FormMessage />
@@ -121,7 +120,7 @@ export default function ContactUsPage() {
                     {...field}
                     type="tel"
                     placeholder="Phone No."
-                    className="w-full px-4 py-3 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent text-gray-700 placeholder-gray-400"
+                    className="w-full px-4 py-3 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent text-gray-700 placeholder-gray-400 placeholder:font-medium"
                   />
                 </FormControl>
                 <FormMessage />
@@ -138,7 +137,7 @@ export default function ContactUsPage() {
                   <input
                     {...field}
                     placeholder="Subject"
-                    className="w-full px-4 py-3 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent text-gray-700 placeholder-gray-400"
+                    className="w-full px-4 py-3 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent text-gray-700 placeholder-gray-400 placeholder:font-medium"
                   />
                 </FormControl>
                 <FormMessage />
@@ -156,7 +155,7 @@ export default function ContactUsPage() {
                     {...field}
                     placeholder="Please type a message"
                     rows={5}
-                    className="w-full px-4 py-3 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent text-gray-700 placeholder-gray-400 resize-vertical"
+                    className="w-full px-4 py-3 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent text-gray-700 placeholder-gray-400 resize-vertical placeholder:font-medium"
                   />
                 </FormControl>
                 <FormMessage />
