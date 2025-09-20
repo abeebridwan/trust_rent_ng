@@ -22,21 +22,25 @@ const Header = () => {
       <div className="container h-[80px] mx-auto px-4 py-4 flex items-center justify-between">
         <div className="flex items-center overflow-hidden">
           {/* Desktop Logo */}
-          <Image 
-            src={Logo1} 
-            alt="Vetarent Logo" 
-            width={214.48} 
-            height={71} 
-            className="hidden md:block -ml-[1.125rem]" 
-          />
+          <Link href="/">
+            <Image 
+              src={Logo1} 
+              alt="Vetarent Logo" 
+              width={214.48} 
+              height={71} 
+              className="hidden md:block -ml-[1.125rem]" 
+            />
+          </Link>
           {/* Mobile Logo */}
-          <Image 
-            src={Logo1} 
-            alt="Vetarent Logo" 
-            width={111.37} 
-            height={37} 
-            className="block md:hidden" 
-          />
+          <Link href="/">
+            <Image 
+              src={Logo1} 
+              alt="Vetarent Logo" 
+              width={111.37} 
+              height={37} 
+              className="block md:hidden" 
+            />
+          </Link>
         </div>
         
         {/* Desktop Navigation */}

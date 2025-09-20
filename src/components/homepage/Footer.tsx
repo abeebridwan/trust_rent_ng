@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Logo2 from "@/assets/Logo/Logo-2.png";
 import Image from "next/image";
+import Link from "next/link";
 import { ChevronUp, ChevronDown } from "lucide-react";
 
 const Footer = () => {
@@ -25,6 +26,7 @@ const Footer = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
             {/* Company Info */}
             <div className="">
+              <Link href="/">
                 <Image 
                   src={Logo2} 
                   alt="Vetarent Logo" 
@@ -32,6 +34,7 @@ const Footer = () => {
                   height={71} 
                   className="-ml-[1.125rem] -mt-[3rem]" 
                 />
+              </Link>
               <p className="text-white text-base font-medium">
                 Vetarent is Nigeria&apos;s first rental platform built on trust. We verify every landlord, tenant, and property — so you can rent confidently and avoid fraud.
               </p>
@@ -41,15 +44,15 @@ const Footer = () => {
             <div className="space-y-6">
               <h4 className="text-2xl font-bold">Explore Vetarent</h4>
               <div className="flex flex-col">
-                <a href="#" className="text-white text-base font-medium hover:text-white/80 transition-colors py-3 w-fit">
+                <Link href="#" className="text-white text-base font-medium hover:text-white/80 transition-colors py-3 w-fit">
                   For Landlords
-                </a>
-                <a href="#" className="text-white text-base font-medium hover:text-white/80 transition-colors py-3 w-fit">
+                </Link>
+                <Link href="#" className="text-white text-base font-medium hover:text-white/80 transition-colors py-3 w-fit">
                   For Tenants
-                </a>
-                <a href="/about-us" className="text-white text-base font-medium hover:text-white/80 transition-colors py-3 w-fit">
+                </Link>
+                <Link href="/about-us" className="text-white text-base font-medium hover:text-white/80 transition-colors py-3 w-fit">
                   About Us
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -57,18 +60,18 @@ const Footer = () => {
             <div className="space-y-6">
               <h4 className="text-2xl font-bold">Help & Support</h4>
               <div className="flex flex-col">
-                <a href="/faqs" className="text-white text-base font-medium hover:text-white/80 transition-colors py-3 w-fit">
+                <Link href="/faqs" className="text-white text-base font-medium hover:text-white/80 transition-colors py-3 w-fit">
                   FAQ
-                </a>
-                <a href="/contact-us" className="text-white text-base font-medium hover:text-white/80 transition-colors py-3 w-fit">
+                </Link>
+                <Link href="/contact-us" className="text-white text-base font-medium hover:text-white/80 transition-colors py-3 w-fit">
                   Contact Support
-                </a>
-                <a href="/terms-and-conditions" className="text-white text-base font-medium hover:text-white/80 transition-colors py-3 w-fit">
+                </Link>
+                <Link href="/terms-and-conditions" className="text-white text-base font-medium hover:text-white/80 transition-colors py-3 w-fit">
                   Terms & Condition
-                </a>
-                <a href="/privacy-policy" className="text-white text-base font-medium hover:text-white/80 transition-colors py-3 w-fit">
+                </Link>
+                <Link href="/privacy-policy" className="text-white text-base font-medium hover:text-white/80 transition-colors py-3 w-fit">
                   Privacy Policy
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -76,18 +79,18 @@ const Footer = () => {
             <div className="space-y-6">
               <h4 className="text-2xl font-bold">Contact Us</h4>
               <div className="flex flex-col">
-                <a 
+                <Link 
                   href="mailto:support@vetarent.ng" 
                   className="text-white text-base font-medium transition-colors py-3 w-fit"
                 >
                   support@vetarent.ng
-                </a>
-                <a 
+                </Link>
+                <Link 
                   href="tel:+2347012345678" 
                   className="text-white text-base font-medium transition-colors py-3 w-fit"
                 >
                   +234 701 234 5678
-                </a>
+                </Link>
                 <div className="text-white text-base font-medium py-3">
                   Vetarent Technologies Ltd.<br />
                   3rd Floor, Ikoyi Plaza,<br />
@@ -102,13 +105,15 @@ const Footer = () => {
         <div className="block md:hidden space-y-0">
           {/* Company Info - Always visible */}
           <div className="mb-4">
-            <Image 
-              src={Logo2} 
-              alt="Vetarent Logo" 
-              width={131.37} 
-              height={37} 
-              className="-ml-[0.6rem] -mt-[3rem] px-4" 
-            />
+            <Link href="/">
+              <Image 
+                src={Logo2} 
+                alt="Vetarent Logo" 
+                width={131.37} 
+                height={37} 
+                className="-ml-[0.6rem] -mt-[3rem] px-4" 
+              />
+            </Link>
             <p className="text-white text-sm font-medium leading-relaxed px-4">
               Vetarent is Nigeria&apos;s first rental platform built on trust. We verify every landlord, tenant, and property — so you can rent confidently and avoid fraud.
             </p>
@@ -129,15 +134,15 @@ const Footer = () => {
             </button>
             {isOpen('explore') && (
               <div className="ml-4 pb-4 space-y-3">
-                <a href="#" className="block text-white text-base font-medium py-2 w-fit">
+                <Link href="#" className="block text-white text-base font-medium py-2 w-fit">
                   For Landlords
-                </a>
-                <a href="#" className="block text-white text-base font-medium py-2 w-fit">
+                </Link>
+                <Link href="#" className="block text-white text-base font-medium py-2 w-fit">
                   For Tenants
-                </a>
-                <a href="/about-us" className="block text-white text-base font-medium py-2 w-fit">
+                </Link>
+                <Link href="/about-us" className="block text-white text-base font-medium py-2 w-fit">
                   About Us
-                </a>
+                </Link>
               </div>
             )}
           </div>
@@ -157,18 +162,18 @@ const Footer = () => {
             </button>
             {isOpen('help') && (
               <div className="ml-4 pb-4 space-y-3">
-                <a href="/faqs" className="block text-white text-base font-medium py-2 w-fit">
+                <Link href="/faqs" className="block text-white text-base font-medium py-2 w-fit">
                   FAQ
-                </a>
-                <a href="/contact-us" className="block text-white text-base font-medium py-2 w-fit">
+                </Link>
+                <Link href="/contact-us" className="block text-white text-base font-medium py-2 w-fit">
                   Contact Support
-                </a>
-                <a href="/terms-and-conditions" className="block text-white text-base font-medium py-2 w-fit">
+                </Link>
+                <Link href="/terms-and-conditions" className="block text-white text-base font-medium py-2 w-fit">
                   Terms & Condition
-                </a>
-                <a href="/privacy-policy" className="block text-white text-base font-medium py-2 w-fit">
+                </Link>
+                <Link href="/privacy-policy" className="block text-white text-base font-medium py-2 w-fit">
                   Privacy Policy
-                </a>
+                </Link>
               </div>
             )}
           </div>
@@ -188,7 +193,7 @@ const Footer = () => {
             </button>
             {isOpen('contact') && (
               <div className="ml-4 pb-4 space-y-3">
-                <a 
+                <Link 
                   href="mailto:support@vetarent.ng" 
                   className="flex items-center text-white text-base font-medium py-2 w-fit"
                 >
@@ -210,8 +215,8 @@ const Footer = () => {
                   <span className="ml-2">
                     support@vetarent.ng
                   </span>
-                </a>
-                <a 
+                </Link>
+                <Link 
                   href="tel:+2347012345678" 
                   className="flex items-center text-white text-base font-medium py-2 w-fit"
                 >
@@ -232,7 +237,7 @@ const Footer = () => {
                   <span className="ml-2">
                     +234 701 234 5678
                   </span>
-                </a>
+                </Link>
                 <div className="flex items-start text-white text-base font-medium py-2 ">
                  <svg width="17" height="21" viewBox="0 0 17 21" fill="none" xmlns="http://www.w3.org/2000/svg" xlinkHref="http://www.w3.org/1999/xlink">
                   <mask id="mask0_618_85247" style={{ maskType: "alpha" }} maskUnits="userSpaceOnUse" x="0" y="0" width="17" height="21">
