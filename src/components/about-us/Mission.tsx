@@ -1,6 +1,4 @@
 import Image from "next/image";
-import Image2Desktop from "@/assets/Images/Image.png";
-import Image2Mobile from "@/assets/Images/Image-2-mobile.png";
 import Mission1 from "@/assets/Images/mission-1.png";
 import Mission2 from "@/assets/Images/mission-2.png";
 import Mission3 from "@/assets/Images/mission-3.png";

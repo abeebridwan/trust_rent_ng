@@ -1,3 +1,4 @@
+import MeetOurTeam from "@/components/about-us/Meetus";
 import Mission from "@/components/about-us/Mission";
 import WhyChooseSection from "@/components/homepage/WhyChooseSection";
 
@@ -6,6 +7,7 @@ export default function AboutUsPage() {
     <>
       <Mission />
       <WhyChooseSection />
+      <MeetOurTeam />
     </>
   );
 }
