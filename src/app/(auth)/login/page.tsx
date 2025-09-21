@@ -48,7 +48,7 @@ export default function LoginPage() {
         </div>
         <CardTitle className="text-lg sm:text-2xl font-semibold !-mt-1 tracking-widest">LOGIN</CardTitle>
       </CardHeader>
-      <CardContent className="w-full p-4 sm:p-6">
+      <CardContent className="w-full p-4 sm:px-6 sm:pt-0 sm:pb-6">
         <div className="grid gap-4">
           <div className="grid gap-2">
             <Input
