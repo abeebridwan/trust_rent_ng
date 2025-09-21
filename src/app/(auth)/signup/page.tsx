@@ -193,7 +193,7 @@ export default function SignupPage() {
             type="submit"
             className="w-full h-12 bg-[#0D47A1] mt-4 sm:mt-4 text-white font-semibold text-sm sm:text-base rounded-none shadow-[inset_4px_8px_8px_rgba(255,255,255,0.25),inset_-4px_-8px_8px_rgba(0,0,0,0.25)] hover:bg-[#1565C0] transition-all duration-200"
           >
-            Signup
+            Sign Up
           </Button>
 
           <div className="flex items-center gap-2 mt-2">
