@@ -248,7 +248,7 @@ export default function ForgotPasswordPage() {
                                     onChange={(e) => handleOtpChange(index, e.target.value)}
                                     onKeyDown={(e) => handleKeyDown(index, e)}
                                     onPaste={index === 0 ? handlePaste : undefined}
-                                    className="h-8 w-8 w-full sm:h-12 sm:w-12 rounded-none text-center border-[1px] border-gray-300"
+                                    className="h-12 w-8 w-full sm:h-12 sm:w-12 rounded-none text-center border-[1px] border-gray-300"
                                   />              ))}
             </div>
             <Button
