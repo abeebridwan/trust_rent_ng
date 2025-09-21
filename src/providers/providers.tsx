@@ -8,7 +8,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <TooltipProvider>
       <Toaster />
-      <Sonner />
+      <Sonner position="top-center" />
       {children}
     </TooltipProvider>
   );

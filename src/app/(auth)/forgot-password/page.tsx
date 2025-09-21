@@ -16,6 +16,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useState, useRef } from "react";
 import { Eye, EyeOff } from "lucide-react";
+import { toast } from "@/components/ui/sonner";
 
 const formSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -55,9 +56,10 @@ export default function ForgotPasswordPage() {
       if (isSuccess) {
         console.log("successful");
         setIsEmailSubmitted(true);
+        toast.success("Password reset link sent!");
       } else {
         console.log("failed");
-        alert("Failed to send password reset link. Please try again.");
+        toast.error("Failed to send password reset link. Please try again.");
       }
       setIsLoading(false);
     }, 2000);
@@ -83,8 +85,10 @@ export default function ForgotPasswordPage() {
       if (isSuccess) {
         console.log("successful");
         setIsOtpVerified(true);
+        toast.success("OTP verified successfully!");
       } else {
         console.log("failed");
+        toast.error("Invalid OTP. Please try again.");
       } 
       setIsLoading(false);
     }, 2000);
@@ -97,12 +101,12 @@ export default function ForgotPasswordPage() {
       const isSuccess = Math.random() > 0.5;
       if (isSuccess) {
         console.log("successful");
-        alert("OTP resent successfully!");
+        toast.success("OTP resent successfully!");
       } else {
         console.log("failed");
-        alert("Failed to resend OTP. Please try again.");
+        toast.error("Failed to resend OTP. Please try again.");
       }
-      setIsLoading(false);
+      setIsResending(false);
     }, 2000);
   };
 
@@ -113,10 +117,10 @@ export default function ForgotPasswordPage() {
       const isSuccess = Math.random() > 0.5;
       if (isSuccess) {
         console.log("successful");
-        alert("Password reset successfully!");
+        toast.success("Password reset successfully!");
       } else {
         console.log("failed");
-        alert("Failed to reset password. Please try again.");
+        toast.error("Failed to reset password. Please try again.");
       }
       setIsLoading(false);
     }, 2000);
