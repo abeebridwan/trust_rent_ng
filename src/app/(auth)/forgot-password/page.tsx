@@ -56,10 +56,10 @@ export default function ForgotPasswordPage() {
       if (isSuccess) {
         console.log("successful");
         setIsEmailSubmitted(true);
-        toast.success("Password reset link sent!");
+        toast.success("Password reset otp code sent!");
       } else {
         console.log("failed");
-        toast.error("Failed to send password reset link. Please try again.");
+        toast.error("Failed to send password otp code. Please try again.");
       }
       setIsLoading(false);
     }, 2000);
@@ -85,7 +85,7 @@ export default function ForgotPasswordPage() {
       if (isSuccess) {
         console.log("successful");
         setIsOtpVerified(true);
-        toast.success("OTP verified successfully!");
+        toast.success("The code have been resent successfully. Please check your e-mail");
       } else {
         console.log("failed");
         toast.error("Invalid OTP. Please try again.");
