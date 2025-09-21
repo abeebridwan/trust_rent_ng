@@ -17,6 +17,7 @@ import * as z from "zod";
 import { useState, useRef } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { toast } from "@/components/ui/sonner";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -47,6 +48,8 @@ export default function ForgotPasswordPage() {
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({ resolver: zodResolver(formSchema) });
   const { register: registerPassword, handleSubmit: handlePasswordSubmit, formState: { errors: passwordErrors } } = useForm<PasswordFormData>({ resolver: zodResolver(passwordSchema) });
 
+  const router = useRouter();
+
   const onSubmit = (data: FormData) => {
     setIsLoading(true);
     console.log(data);
@@ -67,12 +70,48 @@ export default function ForgotPasswordPage() {
 
   const handleOtpChange = (index: number, value: string) => {
     const newOtp = [...otp];
+
+    // Only allow single digit input
+    if (value.length > 1) {
+      return;
+    }
+
     newOtp[index] = value;
     setOtp(newOtp);
 
-    // Move to next input
+    // Move to next input if a digit is entered and it's not the last input
     if (value && index < 5) {
       inputRefs.current[index + 1]?.focus();
+    }
+  };
+
+  const handleKeyDown = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Backspace" && !otp[index] && index > 0) {
+      // If backspace is pressed on an empty input, move focus to previous and clear it
+      e.preventDefault();
+      const newOtp = [...otp];
+      newOtp[index - 1] = "";
+      setOtp(newOtp);
+      inputRefs.current[index - 1]?.focus();
+    } else if (e.key === "Backspace" && otp[index]) {
+      // If backspace is pressed on a non-empty input, clear current input
+      e.preventDefault();
+      const newOtp = [...otp];
+      newOtp[index] = "";
+      setOtp(newOtp);
+    }
+  };
+
+  const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const pastedData = e.clipboardData.getData("text/plain").trim();
+
+    if (pastedData.length === 6 && /^[0-9]+$/.test(pastedData)) {
+      const newOtp = pastedData.split("");
+      setOtp(newOtp);
+      inputRefs.current[5]?.focus(); // Move focus to the last input
+    } else {
+      toast.error("Please enter a valid 6-digit OTP.");
     }
   };
 
@@ -118,6 +157,7 @@ export default function ForgotPasswordPage() {
       if (isSuccess) {
         console.log("successful");
         toast.success("Password reset successfully!");
+        router.push("/login");
       } else {
         console.log("failed");
         toast.error("Failed to reset password. Please try again.");
@@ -197,18 +237,19 @@ export default function ForgotPasswordPage() {
             </label>
             <div className="flex justify-center gap-2 w-full">
               {otp.map((digit, index) => (
-                <Input
-                  key={index}
-                  ref={(el) => {
-                    inputRefs.current[index] = el;
-                  }}
-                  type="text"
-                  maxLength={1}
-                  value={digit}
-                  onChange={(e) => handleOtpChange(index, e.target.value)}
-                  className="h-8 w-8 w-full sm:h-12 sm:w-12 rounded-none text-center border-[1px] border-gray-300"
-                />
-              ))}
+                                  <Input
+                                    key={index}
+                                    ref={(el) => {
+                                      inputRefs.current[index] = el;
+                                    }}
+                                    type="text"
+                                    maxLength={1}
+                                    value={digit}
+                                    onChange={(e) => handleOtpChange(index, e.target.value)}
+                                    onKeyDown={(e) => handleKeyDown(index, e)}
+                                    onPaste={index === 0 ? handlePaste : undefined}
+                                    className="h-8 w-8 w-full sm:h-12 sm:w-12 rounded-none text-center border-[1px] border-gray-300"
+                                  />              ))}
             </div>
             <Button
               type="button"
