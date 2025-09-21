@@ -123,7 +123,7 @@ export default function LoginPage() {
         <hr className="my-4 text-gray-200 mt-4 sm:mt-6" />
         <div className="mt-4 sm:mt-6 text-center text-sm sm:text-lg font-medium">
           Don&apos;t have an account?{" "}
-          <Link href="/signup" className="hover:underline text-vetarent-blue text-sm sm:text-lg font-semibold">
+          <Link href="/signup" className="hover:underline hover:text-vetarent-orange text-vetarent-blue text-sm sm:text-lg font-semibold">
             Signup
           </Link>
         </div>
