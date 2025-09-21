@@ -15,10 +15,15 @@ import Logo1 from "@/assets/Logo/Logo-1.png";
 import GoogleLogo from "@/assets/Icons/Google.png";
 import AppleLogo from "@/assets/Icons/Apple.png";
 import { Eye, EyeOff } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import {
+  Avatar,
+  AvatarImage,
+  AvatarFallback,
+} from "@/components/ui/avatar";
 
 import { Checkbox } from "@/components/ui/checkbox";
 
@@ -43,6 +48,19 @@ type FormData = z.infer<typeof formSchema>;
 export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      setSelectedImage(URL.createObjectURL(file));
+    }
+  };
+
+  const handleAvatarClick = () => {
+    fileInputRef.current?.click();
+  };
 
   const {
     register,
@@ -85,6 +103,25 @@ export default function SignupPage() {
         <CardTitle className="text-lg sm:text-2xl font-semibold !-mt-1 tracking-widest">
           Create Account
         </CardTitle>
+        <div className="flex flex-col items-center gap-2 mt-4">
+          <Avatar
+            className="w-[137px] h-[137px] cursor-pointer"
+            onClick={handleAvatarClick}
+          >
+            <AvatarImage src={selectedImage || "/images/upload-signup.png"} alt="Profile photo" />
+            <AvatarFallback className="text-xs">ADD</AvatarFallback>
+          </Avatar>
+          <input
+            type="file"
+            ref={fileInputRef}
+            onChange={handleImageChange}
+            className="hidden"
+            accept="image/*"
+          />
+          <p className="text-xs sm:text-sm text-gray-400 font-medium">
+            Add your profile photo
+          </p>
+        </div>
       </CardHeader>
       <CardContent className="w-full p-4 sm:px-6 sm:pt-0 sm:pb-6">
         <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4">
@@ -109,7 +146,7 @@ export default function SignupPage() {
               <p className="text-red-500 text-xs">{errors.email.message}</p>
             )}
           </div>
-         <div className="grid gap-2">
+          <div className="grid gap-2">
             <div className="relative">
               <Input
                 {...register("dateOfBirth")}
@@ -172,23 +209,25 @@ export default function SignupPage() {
               </p>
             )}
           </div>
-            <div className="flex items-center space-x-2 -mt-2">
-              <Checkbox {...register("termsAccepted")} className="rounded-[2px] bg-transparent border-gray-300 data-[state=checked]:bg-gray-300 data-[state=checked]:border-gray-300 data-[state=checked]:text-white" />
-              <Label
-                htmlFor="termsAccepted"
-                className="text-xs sm:text-sm text-gray-400 font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-              >
-                <Link 
-                 href="/terms-and-conditions">
-                 I agree with Terms & Condition
-                </Link>
-              </Label>
-              {errors.termsAccepted && (
-                <p className="text-red-500 text-xs">
-                  {errors.termsAccepted.message}
-                </p>
-              )}
-            </div>
+          <div className="flex items-center space-x-2 -mt-2">
+            <Checkbox
+              {...register("termsAccepted")}
+              className="rounded-[2px] bg-transparent border-gray-300 data-[state=checked]:bg-gray-300 data-[state=checked]:border-gray-300 data-[state=checked]:text-white"
+            />
+            <Label
+              htmlFor="termsAccepted"
+              className="text-xs sm:text-sm text-gray-400 font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            >
+              <Link href="/terms-and-conditions">
+                I agree with Terms & Condition
+              </Link>
+            </Label>
+            {errors.termsAccepted && (
+              <p className="text-red-500 text-xs">
+                {errors.termsAccepted.message}
+              </p>
+            )}
+          </div>
           <Button
             type="submit"
             className="w-full h-12 bg-[#0D47A1] mt-4 sm:mt-4 text-white font-semibold text-sm sm:text-base rounded-none shadow-[inset_4px_8px_8px_rgba(255,255,255,0.25),inset_-4px_-8px_8px_rgba(0,0,0,0.25)] hover:bg-[#1565C0] transition-all duration-200"
