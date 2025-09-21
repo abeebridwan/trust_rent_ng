@@ -83,9 +83,11 @@ export default function LoginPage() {
               <div className="flex items-center space-x-2">
                 <Checkbox 
                   className="rounded-[2px] bg-transparent border-gray-300 data-[state=checked]:bg-gray-300 data-[state=checked]:border-gray-300 data-[state=checked]:text-white" 
-                  id="remember" 
+                  id="remember"
+                  tabIndex={0}
                 />
                 <label
+                  tabIndex={0}
                   htmlFor="remember"
                   className="text-xs sm:text-sm text-gray-400 font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 >
