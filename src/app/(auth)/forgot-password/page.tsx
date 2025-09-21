@@ -191,7 +191,7 @@ export default function ForgotPasswordPage() {
             >
               Enter the 6-Digit Code sent to your {userEmail}
             </label>
-            <div className="flex justify-center gap-2">
+            <div className="flex justify-center gap-2 w-full">
               {otp.map((digit, index) => (
                 <Input
                   key={index}
@@ -202,7 +202,7 @@ export default function ForgotPasswordPage() {
                   maxLength={1}
                   value={digit}
                   onChange={(e) => handleOtpChange(index, e.target.value)}
-                  className="h-8 w-8 sm:h-12 sm:w-12 rounded-none text-center border-[1px] border-gray-300"
+                  className="h-8 w-8 w-full sm:h-12 sm:w-12 rounded-none text-center border-[1px] border-gray-300"
                 />
               ))}
             </div>
