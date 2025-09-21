@@ -16,7 +16,7 @@ const CTASection = () => {
             <p className="font-medium mb-2 text-sm md:text-xl">
               Already have an account?
             </p>
-            <Link href="/login">
+            <Link href="/login" className="inline-block -mt-[1.5px]">
               <span className="text-vetarent-orange hover:text-vetarent-blue font-semibold cursor-pointer hover:underline text-sm md:text-xl ml-2">
                 Login
               </span>
