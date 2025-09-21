@@ -91,7 +91,6 @@ export default function SignupPage() {
           <div className="grid gap-2">
             <Input
               {...register("fullName")}
-              id="fullName"
               placeholder="Full Name"
               className="rounded-none w-full px-4 py-6 border-[1px] border-gray-300 focus:outline-none focus:ring-2 focus:ring-vetarent-blue-500 focus:border-vetarent-blue text-gray-700 placeholder:text-gray-400 placeholder:font-medium placeholder:text-sm "
             />
@@ -102,7 +101,6 @@ export default function SignupPage() {
           <div className="grid gap-2">
             <Input
               {...register("email")}
-              id="email"
               type="email"
               placeholder="E-Mail"
               className="rounded-none w-full px-4 py-6 border-[1px] border-gray-300 focus:outline-none focus:ring-2 focus:ring-vetarent-blue-500 focus:border-vetarent-blue text-gray-700 placeholder:text-gray-400 placeholder:font-medium placeholder:text-sm "
@@ -111,14 +109,17 @@ export default function SignupPage() {
               <p className="text-red-500 text-xs">{errors.email.message}</p>
             )}
           </div>
-          <div className="grid gap-2">
-            <Input
-              {...register("dateOfBirth")}
-              id="dateOfBirth"
-              type="date"
-              placeholder="Date of Birth"
-              className="rounded-none w-full px-4 py-6 border-[1px] border-gray-300 focus:outline-none focus:ring-2 focus:ring-vetarent-blue-500 focus:border-vetarent-blue text-gray-700 placeholder:text-gray-400 placeholder:font-medium placeholder:text-sm "
-            />
+         <div className="grid gap-2">
+            <div className="relative">
+              <Input
+                {...register("dateOfBirth")}
+                type="date"
+                className="rounded-none w-full px-4 py-6 border-[1px] border-gray-300 focus:outline-none focus:ring-2 focus:ring-vetarent-blue-500 focus:border-vetarent-blue text-gray-700 placeholder:text-gray-400 placeholder:font-medium placeholder:text-sm"
+              />
+              <label className="block sm:hidden absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm font-medium pointer-events-none peer-focus:hidden">
+                Date of Birth
+              </label>
+            </div>
             {errors.dateOfBirth && (
               <p className="text-red-500 text-xs">
                 {errors.dateOfBirth.message}
@@ -129,7 +130,6 @@ export default function SignupPage() {
             <div className="relative">
               <Input
                 {...register("password")}
-                id="password"
                 type={showPassword ? "text" : "password"}
                 placeholder="Password"
                 className="rounded-none w-full px-4 py-6 pr-12 border-[1px] border-gray-300 focus:outline-none focus:ring-2 focus:ring-vetarent-blue-500 focus:border-vetarent-blue text-gray-700 placeholder:text-gray-400 placeholder:font-medium placeholder:text-sm "
@@ -150,7 +150,6 @@ export default function SignupPage() {
             <div className="relative">
               <Input
                 {...register("confirmPassword")}
-                id="confirmPassword"
                 type={showConfirmPassword ? "text" : "password"}
                 placeholder="Confirm Password"
                 className="rounded-none w-full px-4 py-6 pr-12 border-[1px] border-gray-300 focus:outline-none focus:ring-2 focus:ring-vetarent-blue-500 focus:border-vetarent-blue text-gray-700 placeholder:text-gray-400 placeholder:font-medium placeholder:text-sm "
@@ -174,7 +173,7 @@ export default function SignupPage() {
             )}
           </div>
             <div className="flex items-center space-x-2 -mt-2">
-              <Checkbox {...register("termsAccepted")} id="termsAccepted" className="rounded-[2px] bg-transparent border-gray-300 data-[state=checked]:bg-gray-300 data-[state=checked]:border-gray-300 data-[state=checked]:text-white" />
+              <Checkbox {...register("termsAccepted")} className="rounded-[2px] bg-transparent border-gray-300 data-[state=checked]:bg-gray-300 data-[state=checked]:border-gray-300 data-[state=checked]:text-white" />
               <Label
                 htmlFor="termsAccepted"
                 className="text-xs sm:text-sm text-gray-400 font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"

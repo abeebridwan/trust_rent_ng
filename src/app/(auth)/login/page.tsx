@@ -12,13 +12,37 @@ import { Checkbox } from "@/components/ui/checkbox";
 import Link from "next/link";
 import Image from "next/image";
 import Logo1 from "@/assets/Logo/Logo-1.png";
-import GoogleLogo from "@/assets/Icons/Google.png"; 
-import AppleLogo from "@/assets/Icons/Apple.png"; 
+import GoogleLogo from "@/assets/Icons/Google.png";
+import AppleLogo from "@/assets/Icons/Apple.png";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+
+const formSchema = z.object({
+  email: z.string().email("Invalid email address"),
+  password: z.string().min(6, "Password must be at least 6 characters"),
+  rememberMe: z.boolean().optional(),
+});
+
+type FormData = z.infer<typeof formSchema>;
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({
+    resolver: zodResolver(formSchema),
+  });
+
+  const onSubmit = (data: FormData) => {
+    console.log(data);
+    alert("Login successful! Check the console for the form data.");
+  };
 
   return (
     <Card className="z-10 w-full mx-4 sm:mx-0 max-w-sm sm:max-w-md rounded-none flex flex-col justify-center items-center">
@@ -26,47 +50,48 @@ export default function LoginPage() {
         <div className="flex items-center overflow-hidden">
           {/* Desktop Logo */}
           <Link href="/">
-            <Image 
-              src={Logo1} 
-              alt="Vetarent Logo" 
-              width={150} 
-              height={50} 
-              className="hidden sm:block " 
+            <Image
+              src={Logo1}
+              alt="Vetarent Logo"
+              width={150}
+              height={50}
+              className="hidden sm:block "
             />
           </Link>
           {/* Mobile Logo */}
           <Link href="/">
-            <Image 
-              src={Logo1} 
-              alt="Vetarent Logo" 
-              width={172} 
-              height={57} 
-              className="block sm:hidden" 
+            <Image
+              src={Logo1}
+              alt="Vetarent Logo"
+              width={172}
+              height={57}
+              className="block sm:hidden"
             />
           </Link>
         </div>
-        <CardTitle className="text-lg sm:text-2xl font-semibold !-mt-1 tracking-widest">LOGIN</CardTitle>
+        <CardTitle className="text-lg sm:text-2xl font-semibold !-mt-1 tracking-widest">
+          LOGIN
+        </CardTitle>
       </CardHeader>
       <CardContent className="w-full p-4 sm:px-6 sm:pt-0 sm:pb-6">
-        <div className="grid gap-4">
+        <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4">
           <div className="grid gap-2">
             <Input
-              id="email"
+              {...register("email")}
               type="email"
               placeholder="E-Mail"
-              required
-              defaultValue=""
               className="rounded-none w-full px-4 py-6 border-[1px] border-gray-300 focus:outline-none focus:ring-2 focus:ring-vetarent-blue-500 focus:border-vetarent-blue text-gray-700 placeholder:text-gray-400 placeholder:font-medium placeholder:text-sm "
             />
+            {errors.email && (
+              <p className="text-red-500 text-xs">{errors.email.message}</p>
+            )}
           </div>
           <div className="grid gap-2">
             <div className="relative">
-              <Input 
-                id="password" 
+              <Input
+                {...register("password")}
                 type={showPassword ? "text" : "password"}
                 placeholder="Password"
-                required 
-                defaultValue="" 
                 className="rounded-none w-full px-4 py-6 pr-12 border-[1px] border-gray-300 focus:outline-none focus:ring-2 focus:ring-vetarent-blue-500 focus:border-vetarent-blue text-gray-700 placeholder:text-gray-400 placeholder:font-medium placeholder:text-sm "
               />
               <button
@@ -77,11 +102,15 @@ export default function LoginPage() {
                 {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
               </button>
             </div>
+            {errors.password && (
+              <p className="text-red-500 text-xs">{errors.password.message}</p>
+            )}
 
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-2">
-                <Checkbox 
-                  className="rounded-[2px] bg-transparent border-gray-300 data-[state=checked]:bg-gray-300 data-[state=checked]:border-gray-300 data-[state=checked]:text-white" 
+                <Checkbox
+                  {...register("rememberMe")}
+                  className="rounded-[2px] bg-transparent border-gray-300 data-[state=checked]:bg-gray-300 data-[state=checked]:border-gray-300 data-[state=checked]:text-white"
                   id="remember"
                   tabIndex={0}
                 />
@@ -93,12 +122,16 @@ export default function LoginPage() {
                   Remember Me
                 </label>
               </div>
-              <Link href="/forgot-password" className="inline-block text-xs sm:text-sm font-bold text-vetarent-orange hover:underline">
+              <Link
+                href="/forgot-password"
+                className="inline-block text-xs sm:text-sm font-bold text-vetarent-orange hover:underline"
+              >
                 Forgot Password?
               </Link>
             </div>
           </div>
-            <Button
+          <Button
+            type="submit"
             className="w-full h-12 bg-[#0D47A1] mt-4 sm:mt-4 text-white font-semibold text-sm sm:text-base rounded-none shadow-[inset_4px_8px_8px_rgba(255,255,255,0.25),inset_-4px_-8px_8px_rgba(0,0,0,0.25)] hover:bg-[#1565C0] transition-all duration-200"
           >
             Login
@@ -110,19 +143,28 @@ export default function LoginPage() {
             <hr className="flex-grow border-gray-200" />
           </div>
 
-          <Button variant="outline" className="w-full h-12 text-sm sm:text-base font-semibold flex items-center justify-center gap-2 py-6 rounded-none border-[1px] border-gray-400 hover:border-vetarent-orange">
+          <Button
+            variant="outline"
+            className="w-full h-12 text-sm sm:text-base font-semibold flex items-center justify-center gap-2 py-6 rounded-none border-[1px] border-gray-400 hover:border-vetarent-orange"
+          >
             <Image src={GoogleLogo} alt="Google" width={20} height={20} />
             Login with Google
           </Button>
-          <Button variant="outline" className="w-full h-12 text-sm sm:text-base font-semibold flex items-center justify-center gap-2 py-6 rounded-none border-[1px] border-gray-400 hover:border-vetarent-orange">
+          <Button
+            variant="outline"
+            className="w-full h-12 text-sm sm:text-base font-semibold flex items-center justify-center gap-2 py-6 rounded-none border-[1px] border-gray-400 hover:border-vetarent-orange"
+          >
             <Image src={AppleLogo} alt="Apple" width={20} height={20} />
             Login with Apple
           </Button>
-        </div>
+        </form>
         <hr className="my-4 text-gray-200 mt-4 sm:mt-6" />
         <div className="mt-4 sm:mt-6 text-center text-sm sm:text-lg font-medium">
           Don&apos;t have an account?{" "}
-          <Link href="/signup" className="hover:underline hover:text-vetarent-orange text-vetarent-blue text-sm sm:text-lg font-semibold">
+          <Link
+            href="/signup"
+            className="hover:underline hover:text-vetarent-orange text-vetarent-blue text-sm sm:text-lg font-semibold"
+          >
             Signup
           </Link>
         </div>
