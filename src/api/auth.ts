@@ -7,6 +7,11 @@ interface User {
   termsAccepted: boolean;
 }
 
+interface AdminCredentials {
+  email: string;
+  password: string;
+}
+
 // Simulate a POST request to the backend
 const postUserData = async (userData: User) => {
   console.log('Simulating API call with user data:', userData);
@@ -26,9 +31,9 @@ export const useSaveUserData = () => {
 };
 
 // Simulate a POST request to the backend for admin login
-const loginAdmin = async (credentials: any) => {
+const loginAdmin = async (credentials: AdminCredentials) => {
   console.log('Simulating API call with admin credentials:', credentials);
-  return new Promise((resolve, reject) => {
+  return new Promise<{ success: boolean; isAdmin: boolean }>((resolve, reject) => {
     setTimeout(() => {
       if (credentials.email === 'admin@example.com' && credentials.password === 'password') {
         resolve({ success: true, isAdmin: true });
