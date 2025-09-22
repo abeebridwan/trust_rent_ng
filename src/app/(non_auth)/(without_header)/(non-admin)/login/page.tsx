@@ -16,9 +16,13 @@ import GoogleLogo from "@/assets/Icons/Google.png";
 import AppleLogo from "@/assets/Icons/Apple.png";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+
+import { useLandlordLogin } from "@/api/auth";
+import { useRouter } from "next/navigation";
+import { toast } from "@/components/ui/sonner";
 
 const formSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -30,18 +34,32 @@ type FormData = z.infer<typeof formSchema>;
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
 
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      rememberMe: false,
+    },
   });
 
+  const { mutate: login, isPending } = useLandlordLogin();
+
   const onSubmit = (data: FormData) => {
-    console.log(data);
-    alert("Login successful! Check the console for the form data.");
+    login(data, {
+      onSuccess: () => {
+        toast.success("Logged in successfully!");
+        router.push("/landlord/dashboard");
+      },
+      onError: (error) => {
+        toast.error(error.message);
+      },
+    });
   };
 
   return (
@@ -108,12 +126,18 @@ export default function LoginPage() {
 
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-2">
-                <Checkbox
-                  {...register("rememberMe")}
-                  className="rounded-[2px] bg-transparent border-gray-300 data-[state=checked]:bg-gray-300 data-[state=checked]:border-gray-300 data-[state=checked]:text-white"
-                  id="remember"
-                  tabIndex={0}
-                />
+                <Controller
+                  name="rememberMe"
+                  control={control}
+                  render={({ field }) => (
+                    <Checkbox
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                      className="rounded-[2px] bg-transparent border-gray-300 data-[state=checked]:bg-gray-300 data-[state=checked]:border-gray-300 data-[state=checked]:text-white"
+                      id="remember"
+                      tabIndex={0}
+                    />
+                  )} />
                 <label
                   tabIndex={0}
                   htmlFor="remember"
@@ -132,9 +156,10 @@ export default function LoginPage() {
           </div>
           <Button
             type="submit"
+            disabled={isPending}
             className="w-full h-12 bg-[#0D47A1] mt-4 sm:mt-4 text-white font-semibold text-sm sm:text-base rounded-none shadow-[inset_4px_8px_8px_rgba(255,255,255,0.25),inset_-4px_-8px_8px_rgba(0,0,0,0.25)] hover:bg-[#1565C0] transition-all duration-200"
           >
-            Login
+            {isPending ? "Logging in..." : "Login"}
           </Button>
 
           <div className="flex items-center gap-2 mt-2">

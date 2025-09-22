@@ -6,7 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Logo1 from "@/assets/Logo/Logo-1.png";
 import { useAdminLogin } from "@/api/auth";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { toast } from "@/components/ui/sonner";
@@ -26,8 +26,11 @@ type FormData = z.infer<typeof formSchema>;
 
 export default function AdminLoginPage() {
   const router = useRouter();
-  const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
+  const { register, handleSubmit, control, formState: { errors } } = useForm<FormData>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      rememberMe: false,
+    },
   });
 
   const { mutate: login, isPending } = useAdminLogin();
@@ -115,11 +118,18 @@ export default function AdminLoginPage() {
               </div>
               <div className="flex items-center justify-between">
               <div className="flex items-center space-x-2 -mt-2">
-                <Checkbox
-                  {...register("rememberMe")}
-                  className="rounded-[2px] bg-transparent border-gray-300 data-[state=checked]:bg-gray-300 data-[state=checked]:border-gray-300 data-[state=checked]:text-white"
-                  id="remember"
-                  tabIndex={0}
+                <Controller
+                  name="rememberMe"
+                  control={control}
+                  render={({ field }) => (
+                    <Checkbox
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                      className="rounded-[2px] bg-transparent border-gray-300 data-[state=checked]:bg-gray-300 data-[state=checked]:border-gray-300 data-[state=checked]:text-white"
+                      id="remember"
+                      tabIndex={0}
+                    />
+                  )}
                 />
                 <label
                   tabIndex={0}
