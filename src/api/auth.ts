@@ -1,7 +1,14 @@
 import { useMutation } from '@tanstack/react-query';
 
+interface User {
+  fullName: string;
+  email: string;
+  dateOfBirth: string;
+  termsAccepted: boolean;
+}
+
 // Simulate a POST request to the backend
-const postUserData = async (userData: any) => {
+const postUserData = async (userData: User) => {
   console.log('Simulating API call with user data:', userData);
   return new Promise((resolve, reject) => {
     setTimeout(() => {
