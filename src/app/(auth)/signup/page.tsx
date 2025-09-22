@@ -21,6 +21,8 @@ import TenantUnselected from "@/assets/Icons/Tenant Unselected.png";
 import { Eye, EyeOff } from "lucide-react";
 import { useState, useRef } from "react";
 import { useForm, Controller } from "react-hook-form";
+import { useSaveUserData } from "@/api/auth";
+import { useStore } from "@/lib/store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import {
@@ -65,7 +67,13 @@ export default function SignupPage() {
   const [userEmail, setUserEmail] = useState("");
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const router = useRouter();
-  const [selectedRole, setSelectedRole] = useState<"landlord" | "tenant" | null>(null);
+  const [selectedRole, setSelectedRole] = useState<"landlord" | "tenant" | null>(
+    null
+  );
+  const [isDateFocused, setIsDateFocused] = useState(false);
+  const [isDateSelected, setIsDateSelected] = useState(false);
+  const { user, setUser } = useStore();
+  const { mutate, isPending } = useSaveUserData();
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -91,19 +99,9 @@ export default function SignupPage() {
   });
 
   const onSubmit = (data: FormData) => {
-    setIsLoading(true);
-    console.log(data);
+    setUser(data);
     setUserEmail(data.email);
-    setTimeout(() => {
-      const isSuccess = Math.random() > 0.5;
-      if (isSuccess) {
-        toast.success("Account created successfully! Please verify your email.");
-        setIsSignedUp(true);
-      } else {
-        toast.error("Failed to create account. Please try again.");
-      }
-      setIsLoading(false);
-    }, 2000);
+    setIsSignedUp(true);
   };
 
   const handleOtpChange = (index: number, value: string) => {
@@ -173,6 +171,22 @@ export default function SignupPage() {
       }
       setIsResending(false);
     }, 2000);
+  };
+
+  const handleProceed = () => {
+    mutate(user, {
+      onSuccess: () => {
+        toast.success("Role selected successfully!");
+        if (selectedRole === "landlord") {
+          router.push("/landlord/dashboard");
+        } else if (selectedRole === "tenant") {
+          router.push("/property?search=all");
+        }
+      },
+      onError: (error) => {
+        toast.error(error.message);
+      },
+    });
   };
 
   return (
@@ -259,14 +273,33 @@ export default function SignupPage() {
             </div>
             <div className="grid gap-2">
               <div className="relative">
-                <Input
-                  {...register("dateOfBirth")}
-                  type="date"
-                  className="rounded-none w-full px-4 py-6 border-[1px] border-gray-300 focus:outline-none focus:ring-2 focus:ring-vetarent-blue-500 focus:border-vetarent-blue text-gray-700 placeholder:text-gray-400 placeholder:font-medium placeholder:text-sm"
+                <Controller
+                  name="dateOfBirth"
+                  control={control}
+                  render={({ field }) => (
+                    <>
+                      <Input
+                        {...field}
+                        type="date"
+                        className="peer rounded-none w-full px-4 py-6 border-[1px] border-gray-300 focus:outline-none focus:ring-2 focus:ring-vetarent-blue-500 focus:border-vetarent-blue text-gray-700 placeholder:text-gray-400 placeholder:font-medium placeholder:text-sm"
+                        onFocus={() => setIsDateFocused(true)}
+                        onBlur={() => setIsDateFocused(false)}
+                        onChange={(e) => {
+                          setIsDateSelected(!!e.target.value);
+                          field.onChange(e);
+                        }}
+                      />
+                      <label
+                        className={cn(
+                          "block sm:hidden absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm font-medium pointer-events-none",
+                          (isDateFocused || isDateSelected) && "hidden"
+                        )}
+                      >
+                        Date of Birth
+                      </label>
+                    </>
+                  )}
                 />
-                <label className="block sm:hidden absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm font-medium pointer-events-none peer-focus:hidden">
-                  Date of Birth
-                </label>
               </div>
               {errors.dateOfBirth && (
                 <p className="text-red-500 text-xs">
@@ -430,11 +463,11 @@ export default function SignupPage() {
             </div>
           </div>
         ) : (
-          <div className="text-center">
+          <div className="text-center px-4">
             <div className="flex flex-col sm:flex-row gap-2">
               <div
                 className={cn(
-                  "w-[370px] sm:w-[239px] h-[137px] flex flex-col items-center justify-center cursor-pointer",
+                  "w-full sm:w-[239px] h-[137px] flex flex-col items-center justify-center cursor-pointer",
                   selectedRole === "landlord"
                     ? "border-2 border-vetarent-blue bg-white"
                     : "bg-[#F3F6FA] opacity-100"
@@ -468,17 +501,11 @@ export default function SignupPage() {
               </div>
             </div>
             <Button
-              onClick={() => {
-                if (selectedRole === "landlord") {
-                  router.push("/landlord/dashboard");
-                } else if (selectedRole === "tenant") {
-                  router.push("/property?search=all");
-                }
-              }}
+              onClick={handleProceed}
               className="mt-4 w-full h-12 bg-[#0D47A1] text-white font-semibold text-sm sm:text-base rounded-none shadow-[inset_4px_8px_8px_rgba(255,255,255,0.25),inset_-4px_-8px_8px_rgba(0,0,0,0.25)] hover:bg-[#1565C0] transition-all duration-200"
-              disabled={!selectedRole}
+              disabled={!selectedRole || isPending}
             >
-              Proceed
+              {isPending ? "Proceeding..." : "Proceed"}
             </Button>
           </div>
         )}

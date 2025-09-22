@@ -54,7 +54,7 @@ export default function RootLayout({
           <div className="min-h-screen bg-background !min-w-[365px] overflow-x-auto">
             {children}
           </div>
-          </Providers>
+        </Providers>
       </body>  
     </html>
   );
