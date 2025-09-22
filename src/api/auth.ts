@@ -24,3 +24,21 @@ const postUserData = async (userData: User) => {
 export const useSaveUserData = () => {
   return useMutation({ mutationFn: postUserData });
 };
+
+// Simulate a POST request to the backend for admin login
+const loginAdmin = async (credentials: any) => {
+  console.log('Simulating API call with admin credentials:', credentials);
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (credentials.email === 'admin@example.com' && credentials.password === 'password') {
+        resolve({ success: true, isAdmin: true });
+      } else {
+        reject(new Error('Invalid admin credentials'));
+      }
+    }, 1000);
+  });
+};
+
+export const useAdminLogin = () => {
+  return useMutation({ mutationFn: loginAdmin });
+};
