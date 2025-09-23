@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import Image from "next/image";
 import Logo1 from "@/assets/Logo/Logo-1.png";
-import { useAdminLogin } from "@/api/auth";
+import { useAdminLogin } from "@/app/api/auth";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";

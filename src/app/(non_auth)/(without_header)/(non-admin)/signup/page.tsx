@@ -21,7 +21,7 @@ import TenantUnselected from "@/assets/Icons/Tenant Unselected.png";
 import { Eye, EyeOff } from "lucide-react";
 import { useState, useRef } from "react";
 import { useForm, Controller } from "react-hook-form";
-import { useSaveUserData } from "@/api/auth";
+import { useSaveUserData } from "@/app/api/auth";
 import { useStore } from "@/lib/store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -35,6 +35,7 @@ import { useRouter } from "next/navigation";
 
 import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
+import { supabase } from "@/util/supabase/client";
 
 const formSchema = z
   .object({
@@ -74,7 +75,7 @@ export default function SignupPage() {
   const [isDateSelected, setIsDateSelected] = useState(false);
   const { user, setUser } = useStore();
   const { mutate, isPending } = useSaveUserData();
-
+  
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
@@ -180,7 +181,7 @@ export default function SignupPage() {
         if (selectedRole === "landlord") {
           router.push("/landlord/dashboard");
         } else if (selectedRole === "tenant") {
-          router.push("/property?search=all");
+          router.push("/properties?search=all");
         }
       },
       onError: (error) => {
@@ -188,6 +189,12 @@ export default function SignupPage() {
       },
     });
   };
+
+ const handleGoogleLogin = () => {
+  const next = "/landlord/dashboard"
+  window.location.href = `/api/auth/google/signin?redirectUrl=${encodeURIComponent(next)}`
+}
+
 
   return (
     <Card className={cn(
@@ -392,6 +399,7 @@ export default function SignupPage() {
             </div>
 
             <Button
+              onClick={handleGoogleLogin}
               variant="outline"
               className="w-full h-12 text-sm sm:text-base font-semibold flex items-center justify-center gap-2 py-6 rounded-none border-[1px] border-gray-400 hover:border-vetarent-orange"
             >

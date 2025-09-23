@@ -2,6 +2,7 @@ import "./globals.css";
 import type { Metadata, Viewport } from "next";
 import { Poppins } from "next/font/google";
 import { Providers } from "@/providers/providers";
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -55,7 +56,8 @@ export default function RootLayout({
             {children}
           </div>
         </Providers>
-      </body>  
+      </body>
+      <GoogleAnalytics gaId={process.env.GA_MEASUREMENT_ID!} />
     </html>
   );
 }
