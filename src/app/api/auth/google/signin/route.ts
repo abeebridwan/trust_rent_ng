@@ -1,6 +1,8 @@
 import { createClient } from '@/util/supabase/server'
 import { NextRequest, NextResponse } from 'next/server'
 
+export const runtime = "nodejs";
+
 export async function GET(request: NextRequest) {
   try {
     const supabase = await createClient()
@@ -30,6 +32,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({ error: 'No redirect URL received' }, { status: 400 })
   } catch (err) {
+    console.error(err);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }

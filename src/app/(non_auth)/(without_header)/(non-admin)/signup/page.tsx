@@ -35,7 +35,6 @@ import { useRouter } from "next/navigation";
 
 import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
-import { supabase } from "@/util/supabase/client";
 
 const formSchema = z
   .object({
