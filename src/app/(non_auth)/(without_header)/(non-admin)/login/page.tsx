@@ -62,6 +62,11 @@ export default function LoginPage() {
     });
   };
 
+  const handleGoogleLogin = () => {
+  const next = "/landlord/dashboard"
+  window.location.href = `/api/auth/google/signin?redirectUrl=${encodeURIComponent(next)}`
+}
+
   return (
     <Card className="z-10 w-full mx-4 sm:mx-0 max-w-sm sm:max-w-md rounded-none flex flex-col justify-center items-center">
       <CardHeader className="flex flex-col justify-center items-center">
@@ -169,6 +174,7 @@ export default function LoginPage() {
           </div>
 
           <Button
+            onClick={handleGoogleLogin}
             variant="outline"
             className="w-full h-12 text-sm sm:text-base font-semibold flex items-center justify-center gap-2 py-6 rounded-none border-[1px] border-gray-400 hover:border-vetarent-orange"
           >

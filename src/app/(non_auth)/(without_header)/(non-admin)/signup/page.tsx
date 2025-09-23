@@ -190,10 +190,10 @@ export default function SignupPage() {
     });
   };
 
- const handleGoogleLogin = () => {
-  const next = "/landlord/dashboard"
-  window.location.href = `/api/auth/google/signin?redirectUrl=${encodeURIComponent(next)}`
-}
+  const handleGoogleLogin = () => {
+    const next = "/landlord/dashboard"
+    window.location.href = `/api/auth/google/signin?redirectUrl=${encodeURIComponent(next)}`
+  }
 
 
   return (
