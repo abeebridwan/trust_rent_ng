@@ -255,165 +255,169 @@ export default function SignupPage() {
       </CardHeader>
       <CardContent className="w-full p-4 sm:px-6 sm:pt-0 sm:pb-6">
         {!isSignedUp ? (
-          <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4">
-            <div className="grid gap-2">
-              <Input
-                {...register("fullName")}
-                placeholder="Full Name"
-                className="rounded-none w-full px-4 py-6 border-[1px] border-gray-300 focus:outline-none focus:ring-2 focus:ring-vetarent-blue-500 focus:border-vetarent-blue text-gray-700 placeholder:text-gray-400 placeholder:font-medium placeholder:text-sm "
-              />
-              {errors.fullName && (
-                <p className="text-red-500 text-xs">{errors.fullName.message}</p>
-              )}
-            </div>
-            <div className="grid gap-2">
-              <Input
-                {...register("email")}
-                type="email"
-                placeholder="E-Mail"
-                className="rounded-none w-full px-4 py-6 border-[1px] border-gray-300 focus:outline-none focus:ring-2 focus:ring-vetarent-blue-500 focus:border-vetarent-blue text-gray-700 placeholder:text-gray-400 placeholder:font-medium placeholder:text-sm "
-              />
-              {errors.email && (
-                <p className="text-red-500 text-xs">{errors.email.message}</p>
-              )}
-            </div>
-            <div className="grid gap-2">
-              <div className="relative">
+          <>
+            <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4">
+              <div className="grid gap-2">
+                <Input
+                  {...register("fullName")}
+                  placeholder="Full Name"
+                  className="rounded-none w-full px-4 py-6 border-[1px] border-gray-300 focus:outline-none focus:ring-2 focus:ring-vetarent-blue-500 focus:border-vetarent-blue text-gray-700 placeholder:text-gray-400 placeholder:font-medium placeholder:text-sm "
+                />
+                {errors.fullName && (
+                  <p className="text-red-500 text-xs">{errors.fullName.message}</p>
+                )}
+              </div>
+              <div className="grid gap-2">
+                <Input
+                  {...register("email")}
+                  type="email"
+                  placeholder="E-Mail"
+                  className="rounded-none w-full px-4 py-6 border-[1px] border-gray-300 focus:outline-none focus:ring-2 focus:ring-vetarent-blue-500 focus:border-vetarent-blue text-gray-700 placeholder:text-gray-400 placeholder:font-medium placeholder:text-sm "
+                />
+                {errors.email && (
+                  <p className="text-red-500 text-xs">{errors.email.message}</p>
+                )}
+              </div>
+              <div className="grid gap-2">
+                <div className="relative">
+                  <Controller
+                    name="dateOfBirth"
+                    control={control}
+                    render={({ field }) => (
+                      <>
+                        <Input
+                          {...field}
+                          type="date"
+                          className="peer rounded-none w-full px-4 py-6 border-[1px] border-gray-300 focus:outline-none focus:ring-2 focus:ring-vetarent-blue-500 focus:border-vetarent-blue text-gray-700 placeholder:text-gray-400 placeholder:font-medium placeholder:text-sm"
+                          onFocus={() => setIsDateFocused(true)}
+                          onBlur={() => setIsDateFocused(false)}
+                          onChange={(e) => {
+                            setIsDateSelected(!!e.target.value);
+                            field.onChange(e);
+                          }}
+                        />
+                        <label
+                          className={cn(
+                            "block sm:hidden absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm font-medium pointer-events-none",
+                            (isDateFocused || isDateSelected) && "hidden"
+                          )}
+                        >
+                          Date of Birth
+                        </label>
+                      </>
+                    )}
+                  />
+                </div>
+                {errors.dateOfBirth && (
+                  <p className="text-red-500 text-xs">
+                    {errors.dateOfBirth.message}
+                  </p>
+                )}
+              </div>
+              <div className="grid gap-2">
+                <div className="relative">
+                  <Input
+                    {...register("password")}
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Password"
+                    className="rounded-none w-full px-4 py-6 pr-12 border-[1px] border-gray-300 focus:outline-none focus:ring-2 focus:ring-vetarent-blue-500 focus:border-vetarent-blue text-gray-700 placeholder:text-gray-400 placeholder:font-medium placeholder:text-sm "
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-300 hover:text-gray-600"
+                  >
+                    {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
+                  </button>
+                </div>
+                {errors.password && (
+                  <p className="text-red-500 text-xs">{errors.password.message}</p>
+                )}
+              </div>
+              <div className="grid gap-2">
+                <div className="relative">
+                  <Input
+                    {...register("confirmPassword")}
+                    type={showConfirmPassword ? "text" : "password"}
+                    placeholder="Confirm Password"
+                    className="rounded-none w-full px-4 py-6 pr-12 border-[1px] border-gray-300 focus:outline-none focus:ring-2 focus:ring-vetarent-blue-500 focus:border-vetarent-blue text-gray-700 placeholder:text-gray-400 placeholder:font-medium placeholder:text-sm "
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-300 hover:text-gray-600"
+                  >
+                    {showConfirmPassword ? (
+                      <Eye size={20} />
+                    ) : (
+                      <EyeOff size={20} />
+                    )}
+                  </button>
+                </div>
+                {errors.confirmPassword && (
+                  <p className="text-red-500 text-xs">
+                    {errors.confirmPassword.message}
+                  </p>
+                )}
+              </div>
+              <div className="flex items-center space-x-2 -mt-2">
                 <Controller
-                  name="dateOfBirth"
+                  name="termsAccepted"
                   control={control}
                   render={({ field }) => (
-                    <>
-                      <Input
-                        {...field}
-                        type="date"
-                        className="peer rounded-none w-full px-4 py-6 border-[1px] border-gray-300 focus:outline-none focus:ring-2 focus:ring-vetarent-blue-500 focus:border-vetarent-blue text-gray-700 placeholder:text-gray-400 placeholder:font-medium placeholder:text-sm"
-                        onFocus={() => setIsDateFocused(true)}
-                        onBlur={() => setIsDateFocused(false)}
-                        onChange={(e) => {
-                          setIsDateSelected(!!e.target.value);
-                          field.onChange(e);
-                        }}
-                      />
-                      <label
-                        className={cn(
-                          "block sm:hidden absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm font-medium pointer-events-none",
-                          (isDateFocused || isDateSelected) && "hidden"
-                        )}
-                      >
-                        Date of Birth
-                      </label>
-                    </>
+                    <Checkbox
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                      className="rounded-[2px] bg-transparent border-gray-300 data-[state=checked]:bg-gray-300 data-[state=checked]:border-gray-300 data-[state=checked]:text-white"
+                    />
                   )}
                 />
-              </div>
-              {errors.dateOfBirth && (
-                <p className="text-red-500 text-xs">
-                  {errors.dateOfBirth.message}
-                </p>
-              )}
-            </div>
-            <div className="grid gap-2">
-              <div className="relative">
-                <Input
-                  {...register("password")}
-                  type={showPassword ? "text" : "password"}
-                  placeholder="Password"
-                  className="rounded-none w-full px-4 py-6 pr-12 border-[1px] border-gray-300 focus:outline-none focus:ring-2 focus:ring-vetarent-blue-500 focus:border-vetarent-blue text-gray-700 placeholder:text-gray-400 placeholder:font-medium placeholder:text-sm "
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-300 hover:text-gray-600"
+                <Label
+                  htmlFor="termsAccepted"
+                  className="text-xs sm:text-sm text-gray-400 font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 >
-                  {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
-                </button>
-              </div>
-              {errors.password && (
-                <p className="text-red-500 text-xs">{errors.password.message}</p>
-              )}
-            </div>
-            <div className="grid gap-2">
-              <div className="relative">
-                <Input
-                  {...register("confirmPassword")}
-                  type={showConfirmPassword ? "text" : "password"}
-                  placeholder="Confirm Password"
-                  className="rounded-none w-full px-4 py-6 pr-12 border-[1px] border-gray-300 focus:outline-none focus:ring-2 focus:ring-vetarent-blue-500 focus:border-vetarent-blue text-gray-700 placeholder:text-gray-400 placeholder:font-medium placeholder:text-sm "
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-300 hover:text-gray-600"
-                >
-                  {showConfirmPassword ? (
-                    <Eye size={20} />
-                  ) : (
-                    <EyeOff size={20} />
-                  )}
-                </button>
-              </div>
-              {errors.confirmPassword && (
-                <p className="text-red-500 text-xs">
-                  {errors.confirmPassword.message}
-                </p>
-              )}
-            </div>
-            <div className="flex items-center space-x-2 -mt-2">
-              <Controller
-                name="termsAccepted"
-                control={control}
-                render={({ field }) => (
-                  <Checkbox
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                    className="rounded-[2px] bg-transparent border-gray-300 data-[state=checked]:bg-gray-300 data-[state=checked]:border-gray-300 data-[state=checked]:text-white"
-                  />
+                  <Link href="/terms-and-conditions" className="hover:underline">
+                    I agree with Terms & Condition
+                  </Link>
+                </Label>
+                {errors.termsAccepted && (
+                  <p className="text-red-500 text-xs">{errors.termsAccepted.message}</p>
                 )}
-              />
-              <Label
-                htmlFor="termsAccepted"
-                className="text-xs sm:text-sm text-gray-400 font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              </div>
+              <Button
+                type="submit"
+                disabled={isLoading}
+                className="w-full h-12 bg-[#0D47A1] mt-4 sm:mt-4 text-white font-semibold text-sm sm:text-base rounded-none shadow-[inset_4px_8px_8px_rgba(255,255,255,0.25),inset_-4px_-8px_8px_rgba(0,0,0,0.25)] hover:bg-[#1565C0] transition-all duration-200"
               >
-                <Link href="/terms-and-conditions" className="hover:underline">
-                  I agree with Terms & Condition
-                </Link>
-              </Label>
-              {errors.termsAccepted && (
-                <p className="text-red-500 text-xs">{errors.termsAccepted.message}</p>
-              )}
-            </div>
-            <Button
-              type="submit"
-              disabled={isLoading}
-              className="w-full h-12 bg-[#0D47A1] mt-4 sm:mt-4 text-white font-semibold text-sm sm:text-base rounded-none shadow-[inset_4px_8px_8px_rgba(255,255,255,0.25),inset_-4px_-8px_8px_rgba(0,0,0,0.25)] hover:bg-[#1565C0] transition-all duration-200"
-            >
-              {isLoading ? "Signing up..." : "Sign Up"}
-            </Button>
+                {isLoading ? "Signing up..." : "Sign Up"}
+              </Button>
+            </form>
 
-            <div className="flex items-center gap-2 mt-2">
+            <div className="flex items-center gap-2 mt-8">
               <hr className="flex-grow border-gray-200" />
               <span className="text-gray-500 text-sm sm:text-lg">OR</span>
               <hr className="flex-grow border-gray-200" />
             </div>
 
-            <Button
-              onClick={handleGoogleLogin}
-              variant="outline"
-              className="w-full h-12 text-sm sm:text-base font-semibold flex items-center justify-center gap-2 py-6 rounded-none border-[1px] border-gray-400 hover:border-vetarent-orange"
-            >
-              <Image src={GoogleLogo} alt="Google" width={20} height={20} />
-              Signup with Google
-            </Button>
-            <Button
-              variant="outline"
-              className="w-full h-12 text-sm sm:text-base font-semibold flex items-center justify-center gap-2 py-6 rounded-none border-[1px] border-gray-400 hover:border-vetarent-orange"
-            >
-              <Image src={AppleLogo} alt="Apple" width={20} height={20} />
-              Signup with Apple
-            </Button>
-            <hr className="my-2 mb-0 text-gray-200 sm:mt-4" />
-            <div className="text-center text-sm sm:text-lg font-medium">
+            <div className="grid gap-4 mt-4">
+              <Button
+                onClick={handleGoogleLogin}
+                variant="outline"
+                className="w-full h-12 text-sm sm:text-base font-semibold flex items-center justify-center gap-2 py-6 rounded-none border-[1px] border-gray-400 hover:border-vetarent-orange"
+              >
+                <Image src={GoogleLogo} alt="Google" width={20} height={20} />
+                Signup with Google
+              </Button>
+              <Button
+                variant="outline"
+                className="w-full h-12 text-sm sm:text-base font-semibold flex items-center justify-center gap-2 py-6 rounded-none border-[1px] border-gray-400 hover:border-vetarent-orange"
+              >
+                <Image src={AppleLogo} alt="Apple" width={20} height={20} />
+                Signup with Apple
+              </Button>
+            </div>
+            <hr className="my-2 mb-0 text-gray-200 sm:mt-6" />
+            <div className="text-center text-sm sm:text-lg font-medium mt-4 sm:mt-6">
               Already have an account?{" "}
               <Link
                 href="/login"
@@ -422,7 +426,7 @@ export default function SignupPage() {
                 Login
               </Link>
             </div>
-          </form>
+          </>
         ) : !isOtpVerified ? (
           <div className="grid gap-4 text-center">
             <label

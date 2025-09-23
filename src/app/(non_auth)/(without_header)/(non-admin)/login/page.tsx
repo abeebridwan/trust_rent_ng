@@ -166,13 +166,15 @@ export default function LoginPage() {
           >
             {isPending ? "Logging in..." : "Login"}
           </Button>
+        </form>
 
-          <div className="flex items-center gap-2 mt-2">
+        <div className="flex items-center gap-2 mt-6">
             <hr className="flex-grow border-gray-200" />
             <span className="text-gray-500 text-sm sm:text-lg">OR</span>
             <hr className="flex-grow border-gray-200" />
           </div>
 
+          <div className="grid gap-4 mt-4">
           <Button
             onClick={handleGoogleLogin}
             variant="outline"
@@ -188,7 +190,7 @@ export default function LoginPage() {
             <Image src={AppleLogo} alt="Apple" width={20} height={20} />
             Login with Apple
           </Button>
-        </form>
+        </div>
         <hr className="my-4 text-gray-200 mt-4 sm:mt-6" />
         <div className="mt-4 sm:mt-6 text-center text-sm sm:text-lg font-medium">
           Don&apos;t have an account?{" "}
