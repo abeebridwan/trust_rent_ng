@@ -72,8 +72,21 @@ export default function SignupPage() {
   );
   const [isDateFocused, setIsDateFocused] = useState(false);
   const [isDateSelected, setIsDateSelected] = useState(false);
+  const [signupMethod, setSignupMethod] = useState<'direct' | 'google' | 'apple' | null>(null);
   const { user, setUser } = useStore();
   const { mutate, isPending } = useSaveUserData();
+
+  const handleGoogleSignup = () => {
+    setSignupMethod('google');
+    setIsSignedUp(true);
+    setIsOtpVerified(true);
+  };
+
+  const handleAppleSignup = () => {
+    setSignupMethod('apple');
+    setIsSignedUp(true);
+    setIsOtpVerified(true);
+  };
   
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -101,6 +114,7 @@ export default function SignupPage() {
   const onSubmit = (data: FormData) => {
     setUser(data);
     setUserEmail(data.email);
+    setSignupMethod('direct');
     setIsSignedUp(true);
   };
 
@@ -173,7 +187,7 @@ export default function SignupPage() {
     }, 2000);
   };
 
-  const handleProceed = () => {
+  const handleDirectProceed = () => {
     mutate(user, {
       onSuccess: () => {
         toast.success("Role selected successfully!");
@@ -190,10 +204,28 @@ export default function SignupPage() {
   };
 
   const handleGoogleLogin = () => {
-    const next = "/landlord/dashboard"
-    window.location.href = `/api/auth/google/signin?redirectUrl=${encodeURIComponent(next)}`
-  }
+    if (selectedRole) {
+      window.location.href = `/api/auth/google/signin?role=${encodeURIComponent(selectedRole)}`;
+    }
+  };
 
+  const handleAppleLogin = () => {
+    if (selectedRole) {
+      // Placeholder for Apple login
+      toast.info("Apple login is not yet implemented.");
+      console.log("Apple login with role:", selectedRole);
+    }
+  };
+
+  const handleProceed = () => {
+    if (signupMethod === 'direct') {
+      handleDirectProceed();
+    } else if (signupMethod === 'google') {
+      handleGoogleLogin();
+    } else if (signupMethod === 'apple') {
+      handleAppleLogin();
+    }
+  };
 
   return (
     <Card className={cn(
@@ -401,7 +433,7 @@ export default function SignupPage() {
 
             <div className="grid gap-4 mt-4">
               <Button
-                onClick={handleGoogleLogin}
+                onClick={handleGoogleSignup}
                 variant="outline"
                 className="w-full h-12 text-sm sm:text-base font-semibold flex items-center justify-center gap-2 py-6 rounded-none border-[1px] border-gray-400 hover:border-vetarent-orange"
               >
@@ -409,6 +441,7 @@ export default function SignupPage() {
                 Signup with Google
               </Button>
               <Button
+                onClick={handleAppleSignup}
                 variant="outline"
                 className="w-full h-12 text-sm sm:text-base font-semibold flex items-center justify-center gap-2 py-6 rounded-none border-[1px] border-gray-400 hover:border-vetarent-orange"
               >

@@ -63,9 +63,8 @@ export default function LoginPage() {
   };
 
   const handleGoogleLogin = () => {
-  const next = "/landlord/dashboard"
-  window.location.href = `/api/auth/google/signin?redirectUrl=${encodeURIComponent(next)}`
-}
+  window.location.href = `/api/auth/google/signin`
+  }
 
   return (
     <Card className="z-10 w-full mx-4 sm:mx-0 max-w-sm sm:max-w-md rounded-none flex flex-col justify-center items-center">
