@@ -12,7 +12,7 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NODE_ENV === "production"
-      ? "https://vetarent.com"
+      ? "https://trust-rent-ng.vercel.app"
       : "http://localhost:3000"
   ),
   title: "Vetarent - Verified Rentals Platform",
