@@ -100,7 +100,7 @@ export async function POST(req: Request) {
         throw new Error("Unable to check if user exists via RPC");
       }
 
-      let user = existingUserId;
+      const user = existingUserId;
 
       if (!user.id) {
         // if new user ...proceed then

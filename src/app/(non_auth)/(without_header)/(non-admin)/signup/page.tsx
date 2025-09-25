@@ -74,7 +74,7 @@ export default function SignupPage() {
   const [isDateSelected, setIsDateSelected] = useState(false);
   const [signupMethod, setSignupMethod] = useState<'direct' | 'google' | 'apple' | null>(null);
   const { user, setUser } = useStore();
-  const { mutate, isPending } = useSaveUserData();
+  const { isPending } = useSaveUserData();
 
   const handleGoogleSignup = () => {
     setSignupMethod('google');
