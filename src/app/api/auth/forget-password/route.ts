@@ -87,6 +87,83 @@ export async function POST(req: Request) {
     return NextResponse.json({ success: true })
   }
 
+  if (action === "resend") {
+    const otp = Math.floor(100000 + Math.random() * 900000).toString()
+    const salt = process.env.OTP_SALT!
+    const hashedOtp = hashOtp(otp, salt)
+    const hashedEmail = hashOtp(email, salt)
+
+    // Insert hashed OTP into Supabase
+    try {
+      const {error: deleteError } =await adminSupabase.from("otps").delete().eq("email", hashedEmail).eq("used", false);
+      
+      if (deleteError) {
+        console.error("Supabase delete otp error:", deleteError)
+        return NextResponse.json(
+        { success: false, message:  "otp resend unsuccessful"},
+        { status: 500 })
+      } 
+
+      const { data: user, error: userError } = await adminSupabase
+        .from('profiles')
+        .select('id, provider')
+        .eq('email', email)
+        .single()
+
+        console.log(user)
+
+      if (!user) {
+        console.error("Supabase check error:", userError)
+        return NextResponse.json(
+        { success: false, message:  "user email doesn't exist"},
+        { status: 500 })
+      } 
+
+      if (user.provider !== "Direct") {
+        return NextResponse.json(
+        { success: false, message:  "Different Signup Method used"},
+        { status: 500 })
+      } 
+
+      const { error } = await adminSupabase.from("otps").insert({
+        email: hashedEmail,
+        code: hashedOtp,
+        expires_at: new Date(Date.now() + 5 * 60 * 1000).toISOString(),
+        used: false,
+      })
+
+      if (error) {
+        console.error("Supabase insert error:", error)
+        throw new Error("Unable to generate new OTP at this time")
+      }
+    } catch (dbError) {
+      console.error("Database error:", dbError)
+      return NextResponse.json(
+        { success: false, message: "Unable to generate new OTP. Please try again." },
+        { status: 500 }
+      )
+    }
+
+    // Send OTP email
+    try {
+      await resend.emails.send({
+        from: "merittadmin@meritt.live",
+        to: email,
+        subject: "Your new recovery code",
+        html: `<p>Your OTP is <b>${otp}</b>. It expires in 5 minutes.</p>`,
+      })
+    } catch (emailError) {
+      console.error("Resend email error:", emailError)
+      return NextResponse.json(
+        { success: false, message: "OTP was generated but email could not be sent." },
+        { status: 500 }
+      )
+    }
+
+    return NextResponse.json({ success: true })
+  }
+  
+
   if (action === "verify") {
     const salt = process.env.OTP_SALT!;
     const hashedEmail = hashOtp(email, salt)

@@ -74,7 +74,6 @@ export default function SignupPage() {
   const [isDateSelected, setIsDateSelected] = useState(false);
   const [signupMethod, setSignupMethod] = useState<'direct' | 'google' | 'apple' | null>(null);
   const { user, setUser } = useStore();
-  const { isPending } = useSaveUserData();
 
   const handleGoogleSignup = () => {
     setSignupMethod('google');
@@ -115,6 +114,7 @@ export default function SignupPage() {
     console.log(data, "data submited")
     
       console.log("fetch data")
+      setIsLoading(true)
       const res = await fetch("/api/auth/auth-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -124,13 +124,14 @@ export default function SignupPage() {
       const newdata = await res.json()
       console.log({newdata})
       if(newdata.success){
+        setIsLoading(false)
         setUser(data);
         setUserEmail(data.email);
         setSignupMethod('direct');
         setIsSignedUp(true);
         return
       }
-
+     setIsLoading(false)
       toast.error(newdata.message);
   };
 
@@ -216,8 +217,8 @@ export default function SignupPage() {
   };
   
 
-  const handleResend = () => {
-    setIsResending(true);
+  const handleResend = async () => {
+   /*  setIsResending(true);
     console.log("Resending OTP...");
     setTimeout(() => {
       const isSuccess = Math.random() > 0.5;
@@ -227,7 +228,24 @@ export default function SignupPage() {
         toast.error("Failed to resend OTP. Please try again.");
       }
       setIsResending(false);
-    }, 2000);
+    }, 2000); */
+    console.log("fetch data")
+    setIsResending(true)
+      const res = await fetch("/api/auth/auth-otp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "resend", email: user.email }),
+      })
+
+      const newdata = await res.json()
+      console.log({newdata})
+      if(newdata.success){
+        setIsResending(false)
+        toast.success("OTP resent successfully!");
+        return
+      }
+      setIsResending(false)
+      toast.error(newdata.message);
   };
 
   const handleDirectProceed = async () => {
@@ -253,6 +271,7 @@ export default function SignupPage() {
         }
       }) */
       console.log("last part ", selectedRole)
+      setIsLoading(true);
       const res = await fetch("/api/auth/auth-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -271,11 +290,13 @@ export default function SignupPage() {
         return
       } */
       if(newdata.success){
+        setIsLoading(false);
         router.push(newdata.url)
         return
       }
 
       if(newdata.error){
+        setIsLoading(false);
         window.location.href = "/signup"
       } 
 
@@ -627,9 +648,9 @@ export default function SignupPage() {
             <Button
               onClick={handleProceed}
               className="mt-4 w-full h-12 bg-[#0D47A1] text-white font-semibold text-sm sm:text-base rounded-none shadow-[inset_4px_8px_8px_rgba(255,255,255,0.25),inset_-4px_-8px_8px_rgba(0,0,0,0.25)] hover:bg-[#1565C0] transition-all duration-200"
-              disabled={!selectedRole || isPending}
+              disabled={!selectedRole || isLoading}
             >
-              {isPending ? "Proceeding..." : "Proceed"}
+              {isLoading ? "Proceeding..." : "Proceed"}
             </Button>
           </div>
         )}

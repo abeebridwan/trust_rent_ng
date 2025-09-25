@@ -84,7 +84,7 @@ export default function ForgotPasswordPage() {
       setIsLoading(false);
       return
     }
-     setIsLoading(false);
+    setIsLoading(false);
     toast.error(newdata.message);
 };
 
@@ -175,8 +175,8 @@ export default function ForgotPasswordPage() {
     setIsLoading(false);
   };
 
-  const handleResend = () => {
-    setIsResending(true);
+  const handleResend = async() => {
+    /* setIsResending(true);
     console.log("Resending OTP...");
     setTimeout(() => {
       const isSuccess = Math.random() > 0.5;
@@ -188,7 +188,25 @@ export default function ForgotPasswordPage() {
         toast.error("Failed to resend OTP. Please try again.");
       }
       setIsResending(false);
-    }, 2000);
+    }, 2000); */
+    setIsResending(true)
+    toast.success("Password reset otp code resenting...");
+    console.log("fetch data")
+    const res = await fetch("/api/auth/forget-password", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ action: "resend", email: userEmail }),
+    })
+
+    const newdata = await res.json()
+    console.log({newdata})
+    if(newdata.success){
+      toast.success("OTP resent successfully!");
+      setIsResending(false)
+      return
+    }
+    setIsResending(false);
+    toast.error(newdata.message);
   };
 
   const handleResetPassword = async (data: PasswordFormData) => {

@@ -24,11 +24,11 @@ export async function POST(req: Request) {
     const otp = Math.floor(100000 + Math.random() * 900000).toString()
     const salt = process.env.OTP_SALT!
     const hashedOtp = hashOtp(otp, salt)
-
+    const hashedEmail = hashOtp(email, salt)
     // Insert hashed OTP into Supabase
     try {
       const { error } = await adminSupabase.from("otps").insert({
-        email,
+        email: hashedEmail,
         code: hashedOtp,
         expires_at: new Date(Date.now() + 5 * 60 * 1000).toISOString(),
         used: false,
@@ -52,6 +52,61 @@ export async function POST(req: Request) {
         from: "merittadmin@meritt.live",
         to: email,
         subject: "Your login code",
+        html: `<p>Your OTP is <b>${otp}</b>. It expires in 5 minutes.</p>`,
+      })
+    } catch (emailError) {
+      console.error("Resend email error:", emailError)
+      return NextResponse.json(
+        { success: false, message: "OTP was generated but email could not be sent." },
+        { status: 500 }
+      )
+    }
+
+    return NextResponse.json({ success: true })
+  }
+
+
+  if (action === "resend") {
+    const otp = Math.floor(100000 + Math.random() * 900000).toString()
+    const salt = process.env.OTP_SALT!
+    const hashedOtp = hashOtp(otp, salt)
+    const hashedEmail = hashOtp(email, salt)
+    // Insert hashed OTP into Supabase
+    try {
+      const {error: deleteError } =await adminSupabase.from("otps").delete().eq("email", hashedEmail).eq("used", false);
+      
+      if (deleteError) {
+        console.error("Supabase delete otp error:", deleteError)
+        return NextResponse.json(
+        { success: false, message:  "otp resend unsuccessful"},
+        { status: 500 })
+      } 
+
+      const { error } = await adminSupabase.from("otps").insert({
+        email: hashedEmail,
+        code: hashedOtp,
+        expires_at: new Date(Date.now() + 5 * 60 * 1000).toISOString(),
+        used: false,
+      })
+
+      if (error) {
+        console.error("Supabase insert error:", error)
+        throw new Error("Unable to generate new OTP at this time")
+      }
+    } catch (dbError) {
+      console.error("Database error:", dbError)
+      return NextResponse.json(
+        { success: false, message: "Unable to generate new OTP. Please try again." },
+        { status: 500 }
+      )
+    }
+
+    // Send OTP email
+    try {
+      await resend.emails.send({
+        from: "merittadmin@meritt.live",
+        to: email,
+        subject: "Your new login code",
         html: `<p>Your OTP is <b>${otp}</b>. It expires in 5 minutes.</p>`,
       })
     } catch (emailError) {
@@ -107,7 +162,7 @@ export async function POST(req: Request) {
 
       const user = existingUser;
 
-      if (!user.id) {
+      if (!user) {
         // if new user ...proceed then
         return NextResponse.json({ success: true, proceed: true, exist: false });
       }
