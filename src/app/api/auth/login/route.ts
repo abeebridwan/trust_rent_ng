@@ -40,7 +40,9 @@ export async function POST(request: NextRequest) {
 
       if (profileError) {
         console.error('Profile fetch error:', profileError)
-        // Don't return error here, login was successful
+        return NextResponse.json(
+        { success: false, message:  "Profile does not exist"},
+        { status: 500 })
       }
       
       const next = nextLinkbyRole(data.user.user_metadata.role)

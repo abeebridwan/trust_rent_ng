@@ -50,8 +50,8 @@ export default function ForgotPasswordPage() {
 
   const router = useRouter();
 
-  const onSubmit = (data: FormData) => {
-    setIsLoading(true);
+  const onSubmit = async (data: FormData) => {
+    /* setIsLoading(true);
     console.log(data);
     setUserEmail(data.email);
     setTimeout(() => {
@@ -65,8 +65,28 @@ export default function ForgotPasswordPage() {
         toast.error("Failed to send password otp code. Please try again.");
       }
       setIsLoading(false);
-    }, 2000);
-  };
+    }, 2000); */
+    console.log(data, "data submited")
+    setIsLoading(true)
+    setUserEmail(data.email);    
+    console.log("fetch data")
+    const res = await fetch("/api/auth/forget-password", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ action: "send", email: data.email }),
+    })
+
+    const newdata = await res.json()
+    console.log({newdata})
+    if(newdata.success){
+      setIsEmailSubmitted(true);
+      toast.success("Password reset otp code sent!");
+      setIsLoading(false);
+      return
+    }
+     setIsLoading(false);
+    toast.error(newdata.message);
+};
 
   const handleOtpChange = (index: number, value: string) => {
     const newOtp = [...otp];
@@ -115,8 +135,8 @@ export default function ForgotPasswordPage() {
     }
   };
 
-  const handleVerify = () => {
-    setIsLoading(true);
+  const handleVerify = async () => {
+    /* setIsLoading(true);
     const enteredOtp = otp.join("");
     console.log("Verifying OTP:", enteredOtp);
     setTimeout(() => {
@@ -131,6 +151,28 @@ export default function ForgotPasswordPage() {
       } 
       setIsLoading(false);
     }, 2000);
+ */
+    console.log("handleVerify",)
+    setIsLoading(true)
+    const enteredOtp = otp.join("");
+    console.log("Verifying OTP:", enteredOtp);
+    const res = await fetch("/api/auth/forget-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "verify", code: enteredOtp, email: userEmail }),
+      })
+
+    const newdata = await res.json()
+    console.log({newdata})
+    if(newdata.success && newdata.proceed && !newdata.exist){
+      toast.success("Email verified successfully!");
+      setIsOtpVerified(true);
+      setIsLoading(false);
+      return
+    }
+
+    toast.error("Invalid OTP. Please try again.");
+    setIsLoading(false);
   };
 
   const handleResend = () => {
@@ -149,8 +191,8 @@ export default function ForgotPasswordPage() {
     }, 2000);
   };
 
-  const handleResetPassword = (data: PasswordFormData) => {
-    setIsLoading(true);
+  const handleResetPassword = async (data: PasswordFormData) => {
+    /* setIsLoading(true);
     console.log("Resetting password with data:", data);
     setTimeout(() => {
       const isSuccess = Math.random() > 0.5;
@@ -163,7 +205,36 @@ export default function ForgotPasswordPage() {
         toast.error("Failed to reset password. Please try again.");
       }
       setIsLoading(false);
-    }, 2000);
+    }, 2000); */
+
+    console.log("last part ", data)
+    setIsLoading(true)
+      const res = await fetch("/api/auth/forget-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "reset", email: userEmail, password: data.password }),
+      })
+
+      const newdata = await res.json()
+      
+      console.log({newdata})
+      /* if(newdata.success){
+        setUser(data);
+        setUserEmail(data.email);
+        setSignupMethod('direct');
+        setIsSignedUp(true);
+        return
+      } */
+      if(newdata.success){
+        toast.success('password reset');
+        router.push(newdata.url)
+        setIsLoading(false)
+        return
+      }
+
+      setIsLoading(false)
+      toast.error('unable to reset the password');
+      window.location.href = "/signup"
   };
 
   return (

@@ -64,7 +64,8 @@ try {
           role: currentUser.user_metadata.role,
           email: currentUser.email,
           avatar_url: currentUser.user_metadata.avatar_url || null,
-          date_of_birth: currentUser.user_metadata.avartar_url || "unknown", 
+          date_of_birth: currentUser.user_metadata.avartar_url || "unknown",
+          provider:"Google"
         })
       }
 

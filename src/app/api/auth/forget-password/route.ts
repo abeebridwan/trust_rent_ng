@@ -24,11 +24,33 @@ export async function POST(req: Request) {
     const otp = Math.floor(100000 + Math.random() * 900000).toString()
     const salt = process.env.OTP_SALT!
     const hashedOtp = hashOtp(otp, salt)
+    const hashedEmail = hashOtp(email, salt)
 
     // Insert hashed OTP into Supabase
     try {
+      const { data: user, error: userError } = await adminSupabase
+        .from('profiles')
+        .select('id, provider')
+        .eq('email', email)
+        .single()
+
+        console.log(user)
+
+      if (!user) {
+        console.error("Supabase check error:", userError)
+        return NextResponse.json(
+        { success: false, message:  "user email doesn't exist"},
+        { status: 500 })
+      } 
+
+      if (user.provider !== "Direct") {
+        return NextResponse.json(
+        { success: false, message:  "Different Signup Method used"},
+        { status: 500 })
+      } 
+
       const { error } = await adminSupabase.from("otps").insert({
-        email,
+        email: hashedEmail,
         code: hashedOtp,
         expires_at: new Date(Date.now() + 5 * 60 * 1000).toISOString(),
         used: false,
@@ -51,7 +73,7 @@ export async function POST(req: Request) {
       await resend.emails.send({
         from: "merittadmin@meritt.live",
         to: email,
-        subject: "Your login code",
+        subject: "Your recovery code",
         html: `<p>Your OTP is <b>${otp}</b>. It expires in 5 minutes.</p>`,
       })
     } catch (emailError) {
@@ -66,10 +88,9 @@ export async function POST(req: Request) {
   }
 
   if (action === "verify") {
+    const salt = process.env.OTP_SALT!;
+    const hashedEmail = hashOtp(email, salt)
     try {
-      const salt = process.env.OTP_SALT!;
-      const hashedEmail = hashOtp(email, salt)
-
       const { data: otpRecord, error: otpError } = await adminSupabase
         .from("otps")
         .select("*")
@@ -77,6 +98,7 @@ export async function POST(req: Request) {
         .gte("expires_at", new Date().toISOString())
         .eq("used", false)
         .single();
+        console.log({otpRecord})
 
       if (otpError || !otpRecord) {
         return NextResponse.json({ error: "Invalid or expired code" }, { status: 400 });
@@ -91,28 +113,9 @@ export async function POST(req: Request) {
       } else {
         return NextResponse.json({ error: "Invalid code" }, { status: 400 });
       }
-    
-      const { data: existingUser, error: ExistUserError } = await adminSupabase
-        .from('profiles')
-        .select('*')
-        .eq('email', email)
-        .single()
 
-      console.log({existingUser})
+      return NextResponse.json({ success: true, proceed: true, exist: false });
 
-      if (existingUser) {
-        console.error("Existing user error");
-        return NextResponse.json({ proceed: false, exist: true });
-      }
-
-      const user = existingUser;
-
-      if (!user.id) {
-        // if new user ...proceed then
-        return NextResponse.json({ success: true, proceed: true, exist: false });
-      }
-
-      
     } catch (error) {
       console.error("OTP verification error:", error);
       return NextResponse.json(
@@ -123,61 +126,46 @@ export async function POST(req: Request) {
   }
 
 
-  if(action === "proceed"){
+  if(action === "reset"){
+     const { data: user, error: userError } = await adminSupabase
+        .from('profiles')
+        .select('id, provider')
+        .eq('email', email)
+        .single()
 
-     const { data: newUser, error: newUserError } = await adminSupabase.auth.admin.createUser({
-        email,
+        console.log(user)
+
+     if (!user) {
+        console.error("Supabase check error:", userError)
+        return NextResponse.json(
+        { success: false, message:  "user email doesn't exist"},
+        { status: 500 })
+      } 
+
+
+     const { error: resetError } = await adminSupabase.auth.admin.updateUserById(user.id, {
         password,
-        email_confirm: true,
-        user_metadata: {
-          full_name: full_name, 
-          avatar_url: avartar_url, 
-          role: role,
-          date_of_birth: date_of_birth, 
-        }
       })
-      if (newUserError) {
-        console.error("createUserError", newUserError)
-        return NextResponse.json({ error: newUserError.message }, { status: 400 })
+
+      if (resetError) {
+        console.error("ResetUserError", resetError)
+        return NextResponse.json({ error: resetError.message }, { status: 400 })
       }
 
-
-      if (newUser) {
-        const user = newUser.user
-        console.log({user})
-        
-        const {error: insertError} = await adminSupabase.from('profiles').insert({
-          id: user.id,
-          name: full_name,
-          role: role,
-          email: user.email,
-          avatar_url: avartar_url,
-          date_of_birth: date_of_birth,
-          provider:"Direct"
-        })
-
-        if (insertError) {
-          console.error("insertError", insertError)
-          return NextResponse.json({ error: insertError.message }, { status: 400 })
-        }
-
         // sign in user
-        const { error: signInerror } = await clientSupabase.auth.signInWithPassword({
-          email,
-          password,
-        })
+      const { error: signInerror } = await clientSupabase.auth.signInWithPassword({
+        email,
+        password,
+      })
 
-        if (signInerror) {
-          console.error("signInUserError", signInerror)
-          return NextResponse.json({ error: signInerror.message }, { status: 400 })
-        }
+      if (signInerror) {
+        console.error("signInUserError", signInerror)
+        return NextResponse.json({ error: signInerror.message }, { status: 400 })
+      }
 
-        const next = nextLinkbyRole(role)
-        
-       return NextResponse.json({success: true, url:next })
-        
+      const next = nextLinkbyRole(role)
+      return NextResponse.json({success: true, url:next })
     }
-  }
 
   return NextResponse.json({ error: "Invalid action" }, { status: 400 })
 }

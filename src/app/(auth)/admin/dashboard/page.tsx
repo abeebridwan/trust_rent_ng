@@ -7,12 +7,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 export default async function AdminDashboard() {
   const supabase = await createClient()
   const {
-    data: { session },
-  } = await supabase.auth.getSession()
+    data: { user },
+  } = await supabase.auth.getUser()
 
-  if (!session) redirect("/login")
-  console.log(session)  
-  const user = session.user
+  if (!user) redirect("/login")
+  console.log(user)  
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">

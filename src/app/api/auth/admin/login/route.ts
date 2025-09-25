@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/utils/supabase/server'
-import { nextLinkbyRole } from '@/utils/roleRoute'
 
 export async function POST(request: NextRequest) {
   try {
@@ -50,7 +49,9 @@ export async function POST(request: NextRequest) {
 
       if (profileError) {
         console.error('Admin profile fetch error:', profileError)
-        // Don't fail login; profile can be null
+        return NextResponse.json(
+        { success: false, message:  "Profile does not exist"},
+        { status: 500 })
       }
 
       const next = '/admin/dashboard'

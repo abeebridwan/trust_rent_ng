@@ -188,6 +188,7 @@ export default function SignupPage() {
       setIsLoading(false);
     }, 2000); */
     console.log("handleVerify", user)
+    setIsLoading(true)
     const enteredOtp = otp.join("");
     console.log("Verifying OTP:", enteredOtp);
     const res = await fetch("/api/auth/auth-otp", {
@@ -196,16 +197,18 @@ export default function SignupPage() {
         body: JSON.stringify({ action: "verify", code: enteredOtp, email: user.email }),
       })
 
-      const newdata = await res.json()
+    const newdata = await res.json()
     console.log({newdata})
     if(newdata.success && newdata.proceed && !newdata.exist){
       toast.success("Email verified successfully!");
       setIsOtpVerified(true);
-        setIsLoading(false);
+      setIsLoading(false);
       return
-    }else if(!newdata.proceed && newdata.exist && newdata.session){
+    }else if(!newdata.proceed && newdata.exist){
       toast.success("Account exist!... redirecting");
       router.push("/login");
+      setIsLoading(false);
+      return
     }
 
     toast.error("Invalid OTP. Please try again.");
