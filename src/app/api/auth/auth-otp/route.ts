@@ -147,7 +147,7 @@ export async function POST(req: Request) {
         return NextResponse.json({ error: "Invalid code" }, { status: 400 });
       }
     
-      const { data: existingUser, error: ExistUserError } = await adminSupabase
+      const { data: existingUser } = await adminSupabase
         .from('profiles')
         .select('*')
         .eq('email', email)

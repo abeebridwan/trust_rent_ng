@@ -1,11 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import Image from "next/image";
 import Logo1 from "@/assets/Logo/Logo-1.png";
-import { useAdminLogin } from "@/app/api/auth";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -26,6 +26,7 @@ type FormData = z.infer<typeof formSchema>;
 
 export default function AdminLoginPage() {
   const router = useRouter()
+  const [isLoading, setIsLoading] = useState(false);
   const { register, handleSubmit, control, formState: { errors } } = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -33,20 +34,9 @@ export default function AdminLoginPage() {
     },
   });
 
-  const { mutate: login, isPending } = useAdminLogin();
-
   const onSubmit = async (formData: FormData) => {
-    /* login(data, {
-      onSuccess: () => {
-        toast.success("Logged in successfully!");
-        router.push("/admin/dashboard");
-      },
-      onError: (error) => {
-        toast.error(error.message);
-      },
-    }); */
-    console.log(formData, "login data")
     try {
+    setIsLoading(true)
     const response = await fetch('/api/auth/admin/login', {
       method: 'POST',
       headers: {
@@ -61,14 +51,16 @@ export default function AdminLoginPage() {
     const data = await response.json()
 
     if (!response.ok) {
+      setIsLoading(false)
       toast.error(data.error);
       return
     }
-
+    setIsLoading(false)
     toast.success("Logged in successfully!");
     router.push(data.url) 
-    router.refresh() // Refresh to update auth state
+    router.refresh() 
     } catch (error) {
+    setIsLoading(false)
     console.error('Login error:', error)
     toast.error('An unexpected error occurred')
   } 
@@ -170,9 +162,9 @@ export default function AdminLoginPage() {
               <Button
                 type="submit"
                 className="w-full h-12 bg-[#0D47A1] mt-4 sm:mt-4 text-white font-semibold text-sm sm:text-base rounded-none shadow-[inset_4px_8px_8px_rgba(255,255,255,0.25),inset_-4px_-8px_8px_rgba(0,0,0,0.25)] hover:bg-[#1565C0] transition-all duration-200"
-                disabled={isPending}
+                disabled={isLoading}
               >
-                {isPending ? "Logging in..." : "Login"}
+                {isLoading ? "Logging in..." : "Login"}
               </Button>
             </form>
           </div>
