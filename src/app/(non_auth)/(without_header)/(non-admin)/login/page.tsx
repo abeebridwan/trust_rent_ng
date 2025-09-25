@@ -50,8 +50,8 @@ export default function LoginPage() {
 
   const { mutate: login, isPending } = useLandlordLogin();
 
-  const onSubmit = (data: FormData) => {
-    login(data, {
+  const onSubmit = async (formData: FormData) => {
+    /* login(data, {
       onSuccess: () => {
         toast.success("Logged in successfully!");
         router.push("/landlord/dashboard");
@@ -59,7 +59,34 @@ export default function LoginPage() {
       onError: (error) => {
         toast.error(error.message);
       },
-    });
+    }); */
+    console.log(formData, "login data")
+     try {
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email : formData.email,
+          password: formData.password,
+        }),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        toast.error(data.error);
+        return
+      }
+
+      toast.success("Logged in successfully!");
+      router.push(data.url) 
+      router.refresh() // Refresh to update auth state
+      } catch (error) {
+      console.error('Login error:', error)
+      toast.error('An unexpected error occurred')
+    } 
   };
 
   const handleGoogleLogin = () => {

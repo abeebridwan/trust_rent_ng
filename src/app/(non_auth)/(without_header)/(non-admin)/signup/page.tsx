@@ -115,7 +115,7 @@ export default function SignupPage() {
     console.log(data, "data submited")
     
       console.log("fetch data")
-      const res = await fetch("/api/auth-otp", {
+      const res = await fetch("/api/auth/auth-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ action: "send", email: data.email }),
@@ -190,7 +190,7 @@ export default function SignupPage() {
     console.log("handleVerify", user)
     const enteredOtp = otp.join("");
     console.log("Verifying OTP:", enteredOtp);
-    const res = await fetch("/api/auth-otp", {
+    const res = await fetch("/api/auth/auth-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ action: "verify", code: enteredOtp, email: user.email }),
@@ -250,7 +250,7 @@ export default function SignupPage() {
         }
       }) */
       console.log("last part ", selectedRole)
-      const res = await fetch("/api/auth-otp", {
+      const res = await fetch("/api/auth/auth-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ action: "proceed", email: user.email, role: selectedRole, 

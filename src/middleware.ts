@@ -33,16 +33,15 @@ export async function middleware(request: NextRequest) {
     } = await supabase.auth.getUser()
     if (error) console.error('Auth error in middleware:', error.message)
 
-    const isAuthRoute =
-      request.nextUrl.pathname.startsWith('/login') ||
-      request.nextUrl.pathname.startsWith('/signup') ||
-      request.nextUrl.pathname.startsWith('/auth') ||
-      request.nextUrl.pathname === '/admin/login'
+    const authRoutes = ['/login', '/signup', '/admin/login']
 
     // 🔒 Protect routes for unauthenticated users
     if (!user) {
       const protectedRoutes = ['/landlord', '/properties', '/admin']
-      if (protectedRoutes.some((path) => request.nextUrl.pathname.startsWith(path))) {
+      if (
+        protectedRoutes.some((path) => request.nextUrl.pathname.startsWith(path)) &&
+        !authRoutes.includes(request.nextUrl.pathname)
+      ) {
         const loginUrl = new URL('/login', request.url)
         loginUrl.searchParams.set('redirectTo', request.nextUrl.pathname)
         return NextResponse.redirect(loginUrl)
@@ -53,23 +52,26 @@ export async function middleware(request: NextRequest) {
     if (user) {
       const role = user.user_metadata?.role || 'tenant' // default fallback
 
-      // Landlord cannot access tenant routes
-      if (role === 'landlord' && request.nextUrl.pathname.startsWith('/properties')) {
-        return NextResponse.redirect(new URL('/landlord/dashboard', request.url))
+      // Skip role checks for auth routes
+      if (!authRoutes.includes(request.nextUrl.pathname)) {
+        // Landlord cannot access tenant routes
+        if (role === 'landlord' && request.nextUrl.pathname.startsWith('/properties')) {
+          return NextResponse.redirect(new URL('/landlord/dashboard', request.url))
+        }
+
+        // Tenant cannot access landlord routes
+        if (role === 'tenant' && request.nextUrl.pathname.startsWith('/landlord')) {
+          return NextResponse.redirect(new URL('/properties?search=all', request.url))
+        }
+
+        // Only admins can access /admin
+        if (role !== 'admin' && request.nextUrl.pathname.startsWith('/admin')) {
+          return NextResponse.redirect(new URL('/', request.url))
+        }
       }
 
-      // Tenant cannot access landlord routes
-      if (role === 'tenant' && request.nextUrl.pathname.startsWith('/landlord')) {
-        return NextResponse.redirect(new URL('/properties?search=all', request.url))
-      }
-
-      // Only admins can access /admin
-      if (role !== 'admin' && request.nextUrl.pathname.startsWith('/admin')) {
-        return NextResponse.redirect(new URL('/', request.url))
-      }
-
-      // Redirect authenticated users away from login/signup
-      if (isAuthRoute) {
+      // Redirect authenticated users away from login/signup/admin login
+      if (authRoutes.includes(request.nextUrl.pathname)) {
         let redirectPath = '/'
         switch (role) {
           case 'landlord':

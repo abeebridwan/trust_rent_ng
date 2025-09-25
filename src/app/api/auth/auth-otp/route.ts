@@ -2,7 +2,7 @@ import { NextResponse } from "next/server"
 import { createClient, createAdminClient } from "@/utils/supabase/server"
 import { Resend } from "resend"
 import crypto from "crypto"
-
+import { nextLinkbyRole } from "@/utils/roleRoute"
 
 const resend = new Resend(process.env.RESEND_API_KEY!)
 
@@ -176,20 +176,3 @@ export async function POST(req: Request) {
   return NextResponse.json({ error: "Invalid action" }, { status: 400 })
 }
 
-
-
-function nextLinkbyRole(role: string){
-  let finalRedirect = '/'
-  switch (role) {
-    case 'landlord':
-      finalRedirect = '/landlord/dashboard'
-      break
-    case 'tenant':
-      finalRedirect = '/properties?search=all'
-      break
-    default:
-      finalRedirect = '/properties?search=all'
-  }
-
-  return finalRedirect
-}
