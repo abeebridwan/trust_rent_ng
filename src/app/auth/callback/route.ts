@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { createClient } from '@/utils/supabase/server'
+import { createClient, createAdminClient } from '@/utils/supabase/server'
 
 export async function GET(request: Request) {
 
@@ -15,25 +15,56 @@ try {
   
   if (code) {
     const supabase = await createClient()
+    const adminSupabase = createAdminClient()
     const {  data: sessionData, error } = await supabase.auth.exchangeCodeForSession(code)
+
+    
 
     if (!error && sessionData) {
       const user = sessionData.user
+
+      // Update auth user metadata with admin client
+      const { data: updatedUserData, error: updateError } = await adminSupabase.auth.admin.updateUserById(user.id, {
+      user_metadata: {
+        ...user.user_metadata, // Keep existing metadata
+        role: role,
+        date_of_birth: "unknown",
+      }
+    })
+
+      if (updateError) {
+        console.error("updateError", updateError)
+        throw new Error("auth user metadata not updated")
+      }
+
+     // ✅ REFRESH THE SESSION with updated metadata
+      const { data: refreshedSession, error: refreshError } = await supabase.auth.refreshSession()
+      
+      if (refreshError) {
+        console.error("Failed to refresh session:", refreshError)
+      } else {
+        console.log("Session refreshed with new metadata:", refreshedSession.user?.user_metadata)
+      }
+
+      // Use the refreshed user data
+      const currentUser = refreshedSession?.user || updatedUserData.user
+
+      
       // Create profile if it doesn't exist
       const { data: existingProfile } = await supabase
         .from('profiles')
         .select('id, role')
-        .eq('id', user.id)
+        .eq('id', currentUser.id)
         .single()
 
       if (!existingProfile) {
         await supabase.from('profiles').insert({
-          id: user.id,
-          name: user.user_metadata.full_name || user.email,
-          role: role,
-          email: user.email,
-          avatar_url: user.user_metadata.avatar_url || null,
-          date_of_birth: null, 
+          id: currentUser.id,
+          name: currentUser.user_metadata.full_name || currentUser.email,
+          role: currentUser.user_metadata.role,
+          email: currentUser.email,
+          avatar_url: currentUser.user_metadata.avatar_url || null,
+          date_of_birth: currentUser.user_metadata.avartar_url || "unknown", 
         })
       }
 
