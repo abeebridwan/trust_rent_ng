@@ -21,7 +21,6 @@ import TenantUnselected from "@/assets/Icons/Tenant Unselected.png";
 import { Eye, EyeOff } from "lucide-react";
 import { useState, useRef } from "react";
 import { useForm, Controller } from "react-hook-form";
-import { useSaveUserData } from "@/app/api/auth";
 import { useStore } from "@/lib/store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -111,8 +110,6 @@ export default function SignupPage() {
   });
 
   const onSubmit = async (data: FormData) => {
-    console.log(data, "data submited")
-    
       console.log("fetch data")
       setIsLoading(true)
       const res = await fetch("/api/auth/auth-otp", {
@@ -175,20 +172,6 @@ export default function SignupPage() {
   };
 
   const handleVerify = async () => {
-    /* setIsLoading(true);
-    const enteredOtp = otp.join("");
-    console.log("Verifying OTP:", enteredOtp);
-    setTimeout(() => {
-      const isSuccess = Math.random() > 0.5;
-      if (isSuccess) {
-        toast.success("Email verified successfully!");
-        setIsOtpVerified(true);
-      } else {
-        toast.error("Invalid OTP. Please try again.");
-      }
-      setIsLoading(false);
-    }, 2000); */
-    console.log("handleVerify", user)
     setIsLoading(true)
     const enteredOtp = otp.join("");
     console.log("Verifying OTP:", enteredOtp);
@@ -211,26 +194,13 @@ export default function SignupPage() {
       setIsLoading(false);
       return
     }
-
     toast.error("Invalid OTP. Please try again.");
     setIsLoading(false);
   };
   
 
   const handleResend = async () => {
-   /*  setIsResending(true);
-    console.log("Resending OTP...");
-    setTimeout(() => {
-      const isSuccess = Math.random() > 0.5;
-      if (isSuccess) {
-        toast.success("OTP resent successfully!");
-      } else {
-        toast.error("Failed to resend OTP. Please try again.");
-      }
-      setIsResending(false);
-    }, 2000); */
-    console.log("fetch data")
-    setIsResending(true)
+     setIsResending(true)
       const res = await fetch("/api/auth/auth-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -249,28 +219,6 @@ export default function SignupPage() {
   };
 
   const handleDirectProceed = async () => {
-   /*  mutate(user, {
-      onSuccess: () => {
-        toast.success("Role selected successfully!");
-        if (selectedRole === "landlord") {
-          router.push("/landlord/dashboard");
-        } else if (selectedRole === "tenant") {
-          router.push("/properties?search=all");
-        }
-      },
-      onError: (error) => {
-        toast.error(error.message);
-      },
-    }); */
-    /* const email = user.email
-    const password = user.password
-    const { data, error } = await supabase.auth.signInWithOtp({
-        email,
-        options: {
-          shouldCreateUser: true
-        }
-      }) */
-      console.log("last part ", selectedRole)
       setIsLoading(true);
       const res = await fetch("/api/auth/auth-otp", {
         method: "POST",
@@ -280,28 +228,16 @@ export default function SignupPage() {
       })
 
       const newdata = await res.json()
-      
-      console.log({newdata})
-      /* if(newdata.success){
-        setUser(data);
-        setUserEmail(data.email);
-        setSignupMethod('direct');
-        setIsSignedUp(true);
-        return
-      } */
       if(newdata.success){
         setIsLoading(false);
         router.push(newdata.url)
         return
       }
-
       if(newdata.error){
         setIsLoading(false);
         window.location.href = "/signup"
       } 
-
       toast.error(newdata.message);
-
   };
 
   const handleGoogleLogin = () => {

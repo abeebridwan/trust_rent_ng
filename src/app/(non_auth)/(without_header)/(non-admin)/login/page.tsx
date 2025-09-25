@@ -20,7 +20,6 @@ import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 
-import { useLandlordLogin } from "@/app/api/auth";
 import { useRouter } from "next/navigation";
 import { toast } from "@/components/ui/sonner";
 
@@ -34,6 +33,8 @@ type FormData = z.infer<typeof formSchema>;
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  
   const router = useRouter();
 
   const {
@@ -48,19 +49,8 @@ export default function LoginPage() {
     },
   });
 
-  const { mutate: login, isPending } = useLandlordLogin();
-
   const onSubmit = async (formData: FormData) => {
-    /* login(data, {
-      onSuccess: () => {
-        toast.success("Logged in successfully!");
-        router.push("/landlord/dashboard");
-      },
-      onError: (error) => {
-        toast.error(error.message);
-      },
-    }); */
-    console.log(formData, "login data")
+    setIsLoading(true)
      try {
       const response = await fetch('/api/auth/login', {
         method: 'POST',
@@ -76,15 +66,18 @@ export default function LoginPage() {
       const data = await response.json()
 
       if (!response.ok) {
+       setIsLoading(false)
         toast.error(data.error);
         return
       }
 
+      setIsLoading(false)
       toast.success("Logged in successfully!");
       router.push(data.url) 
-      router.refresh() // Refresh to update auth state
+      router.refresh()
       } catch (error) {
       console.error('Login error:', error)
+      setIsLoading(false)
       toast.error('An unexpected error occurred')
     } 
   };
@@ -187,10 +180,10 @@ export default function LoginPage() {
           </div>
           <Button
             type="submit"
-            disabled={isPending}
+            disabled={isLoading}
             className="w-full h-12 bg-[#0D47A1] mt-4 sm:mt-4 text-white font-semibold text-sm sm:text-base rounded-none shadow-[inset_4px_8px_8px_rgba(255,255,255,0.25),inset_-4px_-8px_8px_rgba(0,0,0,0.25)] hover:bg-[#1565C0] transition-all duration-200"
           >
-            {isPending ? "Logging in..." : "Login"}
+            {isLoading ? "Logging in..." : "Login"}
           </Button>
         </form>
 
