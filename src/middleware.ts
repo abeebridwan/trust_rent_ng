@@ -66,7 +66,7 @@ export async function middleware(request: NextRequest) {
           redirectPath = '/admin/dashboard'
           break
         default:
-          redirectPath = '/landlord/dashboard' // fallback
+          redirectPath = '/properties?search=all' // fallback
       }
 
       return NextResponse.redirect(new URL(redirectPath, request.url))

@@ -25,7 +25,7 @@ const formSchema = z.object({
 type FormData = z.infer<typeof formSchema>;
 
 export default function AdminLoginPage() {
-  const router = useRouter();
+import { useRouter } from "next/navigation";
   const { register, handleSubmit, control, formState: { errors } } = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {

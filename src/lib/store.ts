@@ -5,6 +5,7 @@ interface User {
   email: string;
   dateOfBirth: string;
   termsAccepted: boolean;
+  password: string;
 }
 
 interface StoreState {

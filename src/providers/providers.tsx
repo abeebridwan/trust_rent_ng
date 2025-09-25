@@ -4,7 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import QueryProvider from "./query-provider";
-import { AuthProvider } from "@/util/supabase/authContext";
+import { AuthProvider } from "@/utils/supabase/authContext";
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
       <AuthProvider>

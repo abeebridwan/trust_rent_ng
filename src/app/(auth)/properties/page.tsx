@@ -1,8 +1,37 @@
+import { createClient } from "@/utils/supabase/server"
+import { redirect } from "next/navigation"
+import SignOutButton from "@/components/common/signOutButton"
+import GohomePage from "@/components/common/goHomepage"
 
-export default function PropertySearchPage() {
+export default async function PropertySearchPage() {
+  const supabase = await createClient()
+  const {
+    data: { session },
+  } = await supabase.auth.getSession()
+
+  if (!session) redirect("/login")
+  console.log(session)  
+  const user = session.user
+
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <h1 className="text-3xl font-bold text-gray-800">Property Search</h1>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+      <h1 className="text-3xl font-bold text-gray-800">Tenant Properties Search Dashboard</h1>
+
+      <div className="mt-6 bg-white p-6 rounded-xl shadow">
+        <p className="text-lg font-semibold">
+          Welcome {user.user_metadata?.full_name || "N/A"}
+        </p>
+        <p className="text-base font-normal">
+          email: {user.email || "N/A"}
+        </p>
+        <p className="text-gray-600 mt-2">
+          Role: {user.user_metadata?.role || "N/A"}
+        </p>
+      </div>
+      <div className="flex gap-4">
+        <GohomePage />
+        <SignOutButton />
+      </div>
     </div>
-  );
+  )
 }

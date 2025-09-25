@@ -111,11 +111,27 @@ export default function SignupPage() {
   },
   });
 
-  const onSubmit = (data: FormData) => {
-    setUser(data);
-    setUserEmail(data.email);
-    setSignupMethod('direct');
-    setIsSignedUp(true);
+  const onSubmit = async (data: FormData) => {
+    console.log(data, "data submited")
+    
+      console.log("fetch data")
+      const res = await fetch("/api/auth-otp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "send", email: data.email }),
+      })
+
+      const newdata = await res.json()
+      console.log({newdata})
+      if(newdata.success){
+        setUser(data);
+        setUserEmail(data.email);
+        setSignupMethod('direct');
+        setIsSignedUp(true);
+        return
+      }
+
+      toast.error(newdata.message);
   };
 
   const handleOtpChange = (index: number, value: string) => {
@@ -157,8 +173,8 @@ export default function SignupPage() {
     }
   };
 
-  const handleVerify = () => {
-    setIsLoading(true);
+  const handleVerify = async () => {
+    /* setIsLoading(true);
     const enteredOtp = otp.join("");
     console.log("Verifying OTP:", enteredOtp);
     setTimeout(() => {
@@ -170,8 +186,32 @@ export default function SignupPage() {
         toast.error("Invalid OTP. Please try again.");
       }
       setIsLoading(false);
-    }, 2000);
+    }, 2000); */
+    console.log("handleVerify", user)
+    const enteredOtp = otp.join("");
+    console.log("Verifying OTP:", enteredOtp);
+    const res = await fetch("/api/auth-otp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "verify", code: enteredOtp, email: user.email }),
+      })
+
+      const newdata = await res.json()
+    console.log({newdata})
+    if(newdata.success && newdata.proceed && !newdata.exist){
+      toast.success("Email verified successfully!");
+      setIsOtpVerified(true);
+        setIsLoading(false);
+      return
+    }else if(!newdata.proceed && newdata.exist && newdata.session){
+      toast.success("Account exist!... redirecting");
+      router.push("/login");
+    }
+
+    toast.error("Invalid OTP. Please try again.");
+    setIsLoading(false);
   };
+  
 
   const handleResend = () => {
     setIsResending(true);
@@ -187,8 +227,8 @@ export default function SignupPage() {
     }, 2000);
   };
 
-  const handleDirectProceed = () => {
-    mutate(user, {
+  const handleDirectProceed = async () => {
+   /*  mutate(user, {
       onSuccess: () => {
         toast.success("Role selected successfully!");
         if (selectedRole === "landlord") {
@@ -200,7 +240,44 @@ export default function SignupPage() {
       onError: (error) => {
         toast.error(error.message);
       },
-    });
+    }); */
+    /* const email = user.email
+    const password = user.password
+    const { data, error } = await supabase.auth.signInWithOtp({
+        email,
+        options: {
+          shouldCreateUser: true
+        }
+      }) */
+      console.log("last part ", selectedRole)
+      const res = await fetch("/api/auth-otp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "proceed", email: user.email, role: selectedRole, 
+          password: user.password, avartar_url: "testing_url", full_name: user.fullName, date_of_birth: user.dateOfBirth }),
+      })
+
+      const newdata = await res.json()
+      
+      console.log({newdata})
+      /* if(newdata.success){
+        setUser(data);
+        setUserEmail(data.email);
+        setSignupMethod('direct');
+        setIsSignedUp(true);
+        return
+      } */
+      if(newdata.success){
+        router.push(newdata.url)
+        return
+      }
+
+      if(newdata.error){
+        window.location.href = "/signup"
+      } 
+
+      toast.error(newdata.message);
+
   };
 
   const handleGoogleLogin = () => {

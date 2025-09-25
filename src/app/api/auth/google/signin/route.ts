@@ -1,4 +1,4 @@
-import { createClient } from '@/util/supabase/server'
+import { createClient } from '@/utils/supabase/server'
 import { NextRequest, NextResponse } from 'next/server'
 
 export const runtime = "nodejs";
