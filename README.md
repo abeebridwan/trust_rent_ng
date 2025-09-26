@@ -39,6 +39,26 @@ Vetarent is Nigeria's only rental platform that verifies both landlords and tena
     └───providers/            # React context providers
 ```
 
+## Pages
+
+This project contains the following pages:
+
+*   `/`
+*   `/about-us`
+*   `/admin/dashboard`
+*   `/admin/login`
+*   `/contact-us`
+*   `/faqs`
+*   `/forgot-password`
+*   `/kyc`
+*   `/kyc/callback`
+*   `/landlord/dashboard`
+*   `/login`
+*   `/privacy-policy`
+*   `/properties`
+*   `/signup`
+*   `/terms-and-conditions`
+
 ### Key Directories
 
 *   `src/app`: Contains the core application logic, including pages and layouts.
