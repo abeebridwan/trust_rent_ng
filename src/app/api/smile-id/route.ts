@@ -1,7 +1,6 @@
 
 import { NextResponse } from "next/server"
 import axios from "axios"
-import crypto from "crypto"
 
 // This is a placeholder for the user ID. In a real application, you would get this from the authenticated user.
 const USER_ID = "12345"
@@ -10,18 +9,6 @@ const USER_ID = "12345"
 const SMILE_ID_PARTNER_ID = process.env.SMILE_ID_PARTNER_ID
 const SMILE_ID_API_KEY = process.env.SMILE_ID_API_KEY
 const SMILE_ID_SID_SERVER = process.env.SMILE_ID_SID_SERVER || "0"
-
-// Function to generate a signature
-const generateSignature = (timestamp: string) => {
-  if (!SMILE_ID_API_KEY) {
-    throw new Error("SMILE_ID_API_KEY is not defined")
-  }
-  const hash = crypto
-    .createHmac("sha256", SMILE_ID_API_KEY)
-    .update(timestamp)
-    .digest("base64")
-  return hash
-}
 
 export async function POST() {
   try {

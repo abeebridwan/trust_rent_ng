@@ -9,6 +9,30 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 
 import Script from "next/script";
 
+interface SmileIDOptions {
+  partnerId: string;
+  token: string;
+  environment: "sandbox" | "production";
+}
+
+interface SmileIDCaptureResult {
+  success: boolean;
+}
+
+interface SmileID {
+  capture(): Promise<SmileIDCaptureResult>;
+}
+
+interface SmileIDConstructor {
+  new (options: SmileIDOptions): SmileID;
+}
+
+declare global {
+  interface Window {
+    SmileID: SmileIDConstructor;
+  }
+}
+
 export default function KycPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -33,8 +57,8 @@ export default function KycPage() {
 
       setProgress(50);
 
-      const smileId = new (window as any).SmileID({
-        partnerId: process.env.NEXT_PUBLIC_SMILE_ID_PARTNER_ID,
+      const smileId = new window.SmileID({
+        partnerId: process.env.NEXT_PUBLIC_SMILE_ID_PARTNER_ID || "",
         token: token,
         environment: process.env.NEXT_PUBLIC_SMILE_ID_ENVIRONMENT === "sandbox" ? "sandbox" : "production",
       });
@@ -47,8 +71,12 @@ export default function KycPage() {
       } else {
         throw new Error("Verification failed");
       }
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("An unknown error occurred");
+      }
     } finally {
       setLoading(false);
     }
