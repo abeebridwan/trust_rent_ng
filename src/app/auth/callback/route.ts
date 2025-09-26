@@ -1,5 +1,9 @@
 import { NextResponse } from 'next/server'
 import { createClient, createAdminClient } from '@/utils/supabase/server'
+import { Resend } from 'resend'
+import { getWelcomeEmailHtml } from '@/utils/email'
+
+const resend = new Resend(process.env.RESEND_API_KEY!)
 
 export async function GET(request: Request) {
 
@@ -71,6 +75,25 @@ try {
             date_of_birth: currentUser.user_metadata.date_of_birth || "unknown",
             provider:"Google"
             })
+
+            // Send welcome email
+          try {
+            await resend.emails.send({
+              from: "merittadmin@meritt.live",
+              to: currentUser.email!,
+              subject: "Welcome to Vetarent!",
+              html: getWelcomeEmailHtml(currentUser.user_metadata.full_name || currentUser.email!),
+              attachments: [
+                {
+                  path: "https://trust-rent-ng.vercel.app/Logo/Logo-2.png",
+                  filename: "Logo-2.png",
+                  contentId: "logo-image",
+                },
+              ],
+            });
+          } catch (emailError) {
+            console.error("Resend email error:", emailError);
+          }
           } else {
               // 🚫 User tried to login but never signed up
               // Delete their auth.users row so it doesn't remain

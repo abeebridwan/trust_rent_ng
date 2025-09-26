@@ -13,7 +13,7 @@ export const getEmailHtml = (otp: string) => {
               <td align="center">
                   <table width="600" border="0" cellspacing="0" cellpadding="0" style="background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); overflow: hidden;">
                       <tr>
-                          <td align="center" style="padding: 40px 20px; background-color: #0D47A1;">
+                          <td align="center" style="padding: 20px; background-color: #0D47A1;">
                               <img src="cid:logo-image" alt="Vetarent Logo" width="200">
                           </td>
                       </tr>
@@ -59,7 +59,7 @@ export const getForgotPasswordEmailHtml = (otp: string) => {
               <td align="center">
                   <table width="600" border="0" cellspacing="0" cellpadding="0" style="background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); overflow: hidden;">
                       <tr>
-                          <td align="center" style="padding: 40px 20px; background-color: #0D47A1;">
+                          <td align="center" style="padding: 20px; background-color: #0D47A1;">
                               <img src="cid:logo-image" alt="Vetarent Logo" width="200">
                           </td>
                       </tr>
@@ -89,3 +89,69 @@ export const getForgotPasswordEmailHtml = (otp: string) => {
   </html>
   `;
 };
+
+
+export const getWelcomeEmailHtml = (name: string) => {
+  return `
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Welcome to Vetarent</title>
+  </head>
+  <body style="font-family: Arial, sans-serif; background-color: #f0f4fe; margin: 0; padding: 30px;">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+              <td align="center">
+                  <table width="600" border="0" cellspacing="0" cellpadding="0" style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 6px 12px rgba(0,0,0,0.08); overflow: hidden;">
+                      
+                      <!-- Header -->
+                      <tr>
+                          <td align="center" style="padding: 30px; background-color: #0D47A1;">
+                              <img src="cid:logo-image" alt="Vetarent Logo" width="180" style="display: block; margin-bottom: 10px;">
+                              <h2 style="color: #ffffff; margin: 0; font-weight: normal;">Your trusted partner for smarter renting and letting.</h2>
+                          </td>
+                      </tr>
+
+                      <!-- Main Content -->
+                      <tr>
+                          <td align="center" style="padding: 40px 30px;">
+                              <h1 style="color: #0D47A1; margin-bottom: 20px;">Welcome to Vetarent, ${name}!</h1>
+                              <p style="color: #444; font-size: 16px; line-height: 1.6; margin-bottom: 25px;">
+                                We're thrilled to have you on board. Vetarent helps tenants and landlords connect seamlessly with smart, modern tools that make renting simple, transparent, and stress-free.
+                              </p>
+                              <p style="color: #444; font-size: 15px; line-height: 1.6; margin-bottom: 35px;">
+                                From managing rental properties to ensuring secure payments and smooth communication, 
+                                Vetarent gives you the confidence and convenience you deserve.
+                              </p>
+
+                              <!-- CTA Button -->
+                              <a href="https://trust-rent-ng.vercel.app/login" 
+                                 style="display: inline-block; padding: 14px 28px; background-color: #0D47A1; color: #ffffff; font-size: 16px; text-decoration: none; border-radius: 6px; font-weight: bold;">
+                                 Get Started
+                              </a>
+                          </td>
+                      </tr>
+
+                      <!-- Footer -->
+                      <tr>
+                          <td align="center" style="padding: 25px; background-color: #f3f6fa; font-size: 12px; color: #888888; line-height: 1.5;">
+                              <p style="margin: 0 0 5px 0;">&copy; ${new Date().getFullYear()} Vetarent. All rights reserved.</p>
+                              <p style="margin: 0;">Vetarent Technologies, Lagos, Nigeria</p>
+                              <p style="margin: 8px 0 0 0;">
+                                <a href="https://vetarent.com" style="color: #0D47A1; text-decoration: none;">Visit our website</a> | 
+                                <a href="mailto:support@vetarent.com" style="color: #0D47A1; text-decoration: none;">Contact Support</a>
+                              </p>
+                          </td>
+                      </tr>
+
+                  </table>
+              </td>
+          </tr>
+      </table>
+  </body>
+  </html>
+  `;
+};
+
