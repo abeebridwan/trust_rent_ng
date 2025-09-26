@@ -3,7 +3,7 @@ import { createClient, createAdminClient } from "@/utils/supabase/server"
 import { Resend } from "resend"
 import crypto from "crypto"
 import { nextLinkbyRole } from "@/utils/roleRoute"
-import { getEmailHtml } from "@/utils/email";
+import { getEmailHtml, getWelcomeEmailHtml } from "@/utils/email";
 
 const resend = new Resend(process.env.RESEND_API_KEY!)
 
@@ -284,6 +284,25 @@ export async function POST(req: Request) {
         if (insertError) {
           console.error("insertError", insertError)
           return NextResponse.json({ error: insertError.message }, { status: 400 })
+        }
+
+        // Send welcome email
+        try {
+          await resend.emails.send({
+            from: "merittadmin@meritt.live",
+            to: email,
+            subject: "Welcome to Vetarent!",
+            html: getWelcomeEmailHtml(full_name || email),
+            attachments: [
+              {
+                path: "https://trust-rent-ng.vercel.app/Logo/Logo-2.png",
+                filename: "Logo-2.png",
+                contentId: "logo-image",
+              },
+            ],
+          });
+        } catch (emailError) {
+          console.error("Resend email error:", emailError);
         }
 
         // sign in user
