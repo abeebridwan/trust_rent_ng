@@ -3,6 +3,7 @@ import { createClient, createAdminClient } from "@/utils/supabase/server"
 import { Resend } from "resend"
 import crypto from "crypto"
 import { nextLinkbyRole } from "@/utils/roleRoute"
+import { getEmailHtml } from "@/utils/email";
 
 const resend = new Resend(process.env.RESEND_API_KEY!)
 
@@ -76,8 +77,15 @@ export async function POST(req: Request) {
       await resend.emails.send({
         from: "merittadmin@meritt.live",
         to: email,
-        subject: "Your login code",
-        html: `<p>Your OTP is <b>${otp}</b>. It expires in 5 minutes.</p>`,
+        subject: "Vetarent Verification Code",
+        html: getEmailHtml(otp),
+        attachments: [
+          {
+            "path": "https://trust-rent-ng.vercel.app/Logo/Logo-2.png",
+            "filename": "Logo-2.png",
+            "contentId": "logo-image",
+          },
+        ],
       })
     } catch (emailError) {
       console.error("Resend email error:", emailError)
@@ -131,8 +139,15 @@ export async function POST(req: Request) {
       await resend.emails.send({
         from: "merittadmin@meritt.live",
         to: email,
-        subject: "Your new login code",
-        html: `<p>Your OTP is <b>${otp}</b>. It expires in 5 minutes.</p>`,
+        subject: "New Vetarent Verification Code",
+        html: getEmailHtml(otp),
+        attachments: [
+          {
+            "path": "https://trust-rent-ng.vercel.app/Logo/Logo-2.png",
+            "filename": "Logo-2.png",
+            "contentId": "logo-image",
+          },
+        ],
       })
     } catch (emailError) {
       console.error("Resend email error:", emailError)
