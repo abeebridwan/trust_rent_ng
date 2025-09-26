@@ -58,7 +58,7 @@ export default function ContactUsPage() {
 
       form.reset();
       setIsSubmitted(true);
-      toast.success("We&apos;ve received your message and will get back to you shortly.");
+      toast.success("Message Received.");
     } catch (error) {
       console.error('Form submission error:', error);
       toast.error('There was an error sending your message. Please try again.');
