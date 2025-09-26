@@ -97,7 +97,7 @@ try {
           }
 
           //refresh data
-          const { data: refreshedSession, error: refreshError } = await supabase.auth.refreshSession()
+          const { error: refreshError } = await supabase.auth.refreshSession()
       
           if (refreshError) {
             console.error("Failed to refresh session:", refreshError)
