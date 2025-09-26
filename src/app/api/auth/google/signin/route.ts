@@ -8,9 +8,11 @@ export async function GET(request: NextRequest) {
     const supabase = await createClient()
     const { searchParams } = new URL(request.url)
     const role = searchParams.get('role') || "tenant"
+    const flow = searchParams.get('flow') || "login"
+
 
     const next = role === 'landlord' ? '/landlord/dashboard' : role === 'tenant'? '/properties?search=all': "";
-    const redirectTo = `${process.env.NEXT_PUBLIC_HOST_URL}/auth/callback?next=${encodeURIComponent(next)}&role=${encodeURIComponent(role)}`
+    const redirectTo = `${process.env.NEXT_PUBLIC_HOST_URL}/auth/callback?next=${encodeURIComponent(next)}&role=${encodeURIComponent(role)}&flow=${encodeURIComponent(flow)}`
     
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'google',

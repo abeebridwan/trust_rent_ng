@@ -8,7 +8,8 @@ try {
   const code = searchParams.get('code')
   let next = searchParams.get('next') ?? '/properties?search=all'
   const role = searchParams.get('role') ?? "tenant"
-  console.log(next, role, "callback")
+  const flow = searchParams.get('flow') ?? "login"
+  console.log(next, role, flow, "callback")
   if (!next.startsWith('/')) {
     next = '/'
   }
@@ -43,7 +44,7 @@ try {
       if (refreshError) {
         console.error("Failed to refresh session:", refreshError)
       } else {
-        console.log("Session refreshed with new metadata:", refreshedSession.user?.user_metadata)
+        //console.log("Session refreshed with new metadata:", refreshedSession.user?.user_metadata)
       }
 
       // Use the refreshed user data
@@ -53,21 +54,57 @@ try {
       // Create profile if it doesn't exist
       const { data: existingProfile } = await supabase
         .from('profiles')
-        .select('id, role')
+        .select('id, role, provider')
         .eq('id', currentUser.id)
         .single()
 
-      if (!existingProfile) {
-        await supabase.from('profiles').insert({
-          id: currentUser.id,
-          name: currentUser.user_metadata.full_name || currentUser.email,
-          role: currentUser.user_metadata.role,
-          email: currentUser.email,
-          avatar_url: currentUser.user_metadata.avatar_url || null,
-          date_of_birth: currentUser.user_metadata.avartar_url || "unknown",
-          provider:"Google"
-        })
-      }
+      // After exchangeCodeForSession
+       if (!existingProfile) {
+        if (flow === "signup") {
+          // ✅ Only create profile in signup flow
+          await supabase.from('profiles').insert({
+            id: currentUser.id,
+            name: currentUser.user_metadata.full_name || currentUser.email,
+            role: currentUser.user_metadata.role,
+            email: currentUser.email,
+            avatar_url: currentUser.user_metadata.avatar_url || null,
+            date_of_birth: currentUser.user_metadata.date_of_birth || "unknown",
+            provider:"Google"
+            })
+          } else {
+              // 🚫 User tried to login but never signed up
+              // Delete their auth.users row so it doesn't remain
+              console.log("user has no account")
+              await adminSupabase.auth.admin.deleteUser(currentUser.id)
+              return NextResponse.redirect(`${origin}/signup?reason=not_registered`)
+          }
+        } else {
+          // Profile exists → check provider mismatch
+          if (existingProfile.provider !== "Google") {
+            
+            console.log('Profile exist and not google')
+             // Update auth user metadata with admin client
+            const { error: updateError } = await adminSupabase.auth.admin.updateUserById(user.id, {
+            user_metadata: {
+              ...user.user_metadata, // Keep existing metadata
+              role: existingProfile.role,
+            }
+          })
+          if (updateError) {
+            console.error("updateMetaError", updateError)
+            throw new Error("auth user metadata for mismatch role not updated")
+          }
+          }
+
+          //refresh data
+          const { data: refreshedSession, error: refreshError } = await supabase.auth.refreshSession()
+      
+          if (refreshError) {
+            console.error("Failed to refresh session:", refreshError)
+          } else {
+            //console.log("Session refreshed with new metadata:", refreshedSession.user?.user_metadata)
+          }
+        }
 
       const forwardedHost = request.headers.get('x-forwarded-host') 
       const isLocalEnv = process.env.NODE_ENV === 'development'

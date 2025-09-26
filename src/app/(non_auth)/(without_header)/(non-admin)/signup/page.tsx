@@ -242,7 +242,7 @@ export default function SignupPage() {
 
   const handleGoogleLogin = () => {
     if (selectedRole) {
-      window.location.href = `/api/auth/google/signin?role=${encodeURIComponent(selectedRole)}`;
+      window.location.href = `/api/auth/google/signin?flow=signup&role=${encodeURIComponent(selectedRole)}`;
     }
   };
 

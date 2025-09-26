@@ -83,7 +83,7 @@ export default function LoginPage() {
   };
 
   const handleGoogleLogin = () => {
-  window.location.href = `/api/auth/google/signin`
+  window.location.href = `/api/auth/google/signin?flow=login`
   }
 
   return (
