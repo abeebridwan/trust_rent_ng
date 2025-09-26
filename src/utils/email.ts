@@ -140,7 +140,7 @@ export const getWelcomeEmailHtml = (name: string) => {
                               <p style="margin: 0 0 5px 0;">&copy; ${new Date().getFullYear()} Vetarent. All rights reserved.</p>
                               <p style="margin: 0;">Vetarent Technologies, Lagos, Nigeria</p>
                               <p style="margin: 8px 0 0 0;">
-                                <a href="https://vetarent.com" style="color: #0D47A1; text-decoration: none;">Visit our website</a> | 
+                                <a href="https://trust-rent-ng.vercel.app" style="color: #0D47A1; text-decoration: none;">Visit our website</a> | 
                                 <a href="mailto:support@vetarent.com" style="color: #0D47A1; text-decoration: none;">Contact Support</a>
                               </p>
                           </td>
@@ -155,3 +155,85 @@ export const getWelcomeEmailHtml = (name: string) => {
   `;
 };
 
+export function getContactFormEmailHtml(
+  name: string,
+  email: string,
+  phone: string,
+  subject: string,
+  message: string
+): string {
+  return `
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Contact Form Submission</title>
+  </head>
+  <body style="font-family: Arial, sans-serif; background-color: #f0f4fe; margin: 0; padding: 30px;">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td align="center">
+          <table width="600" border="0" cellspacing="0" cellpadding="0" 
+                 style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 6px 12px rgba(0,0,0,0.08); overflow: hidden;">
+            
+            <!-- Header -->
+            <tr>
+              <td align="center" style="padding: 25px; background-color: #0D47A1;">
+                <img src="cid:logo-image" alt="Vetarent Logo" width="160" style="display: block; margin-bottom: 10px;">
+                <h2 style="color: #ffffff; margin: 0; font-weight: normal;">New Contact Form Submission</h2>
+              </td>
+            </tr>
+
+            <!-- Main Content -->
+            <tr>
+              <td align="left" style="padding: 40px 30px;">
+                <p style="color: #444; font-size: 16px; margin-bottom: 25px;">
+                  A new message has been submitted via the Vetarent website contact form.
+                </p>
+                
+                <table width="100%" border="0" cellspacing="0" cellpadding="12" style="border-collapse: collapse; font-size: 15px; color: #333;">
+                  <tr style="background-color: #f9f9f9;">
+                    <td style="font-weight: bold; width: 120px;">Name:</td>
+                    <td>${name}</td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight: bold;">Email:</td>
+                    <td><a href="mailto:${email}" style="color: #0D47A1; text-decoration: none;">${email}</a></td>
+                  </tr>
+                  <tr style="background-color: #f9f9f9;">
+                    <td style="font-weight: bold;">Phone:</td>
+                    <td>${phone}</td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight: bold;">Subject:</td>
+                    <td>${subject}</td>
+                  </tr>
+                  <tr style="background-color: #f9f9f9; vertical-align: top;">
+                    <td style="font-weight: bold;">Message:</td>
+                    <td style="white-space: pre-line;">${message}</td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- Footer -->
+            <tr>
+              <td align="center" style="padding: 25px; background-color: #f3f6fa; font-size: 12px; color: #888888; line-height: 1.5;">
+                <p style="margin: 0;">&copy; ${new Date().getFullYear()} Vetarent. All rights reserved.</p>
+                <p style="margin: 5px 0 0 0;">Vetarent Technologies, Lagos, Nigeria</p>
+                <p style="margin: 8px 0 0 0;">
+                  <a href="https://trust-rent-ng.vercel.app" style="color: #0D47A1; text-decoration: none;">Visit our website</a> | 
+                  <a href="mailto:support@vetarent.com" style="color: #0D47A1; text-decoration: none;">Contact Support</a>
+                </p>
+              </td>
+            </tr>
+
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+  </html>
+  `;
+}

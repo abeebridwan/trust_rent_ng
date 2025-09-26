@@ -1,10 +1,9 @@
-"use client";
+'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { create } from 'zustand';
 import {
   Form,
   FormControl,
@@ -13,6 +12,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Button } from "@/components/ui/button";
+import { toast } from '@/components/ui/sonner';
 
 // Zod validation schema
 const contactSchema = z.object({
@@ -25,25 +25,9 @@ const contactSchema = z.object({
 
 type ContactFormData = z.infer<typeof contactSchema>;
 
-interface ContactStore {
-  submissions: ContactFormData[];
-  isSubmitting: boolean;
-  addSubmission: (data: ContactFormData) => void;
-  setSubmitting: (submitting: boolean) => void;
-}
-
-const useContactStore = create<ContactStore>((set) => ({
-  submissions: [],
-  isSubmitting: false,
-  addSubmission: (data) =>
-    set((state) => ({
-      submissions: [...state.submissions, data],
-    })),
-  setSubmitting: (submitting) => set({ isSubmitting: submitting }),
-}));
-
 export default function ContactUsPage() {
-  const { addSubmission, isSubmitting, setSubmitting } = useContactStore();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   
   const form = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
@@ -57,17 +41,48 @@ export default function ContactUsPage() {
   });
 
   const onSubmit = async (data: ContactFormData) => {
-    setSubmitting(true);
+    setIsSubmitting(true);
     
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    
-    addSubmission(data);
-    form.reset();
-    setSubmitting(false);
-    
-    alert('Form submitted successfully!');
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send message');
+      }
+
+      form.reset();
+      toast.success("Message Received")
+      setIsSubmitted(true);
+    } catch (error) {
+      console.error('Form submission error:', error);
+      toast.error('There was an error sending your message. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
+
+  if (isSubmitted) {
+    return (
+      <section className="py-[5rem] md:py-[7rem]">
+        <div className="mx-auto px-4 w-full max-w-4xl text-center space-y-4">
+          <h2 className="text-2xl font-semibold">Thank You!</h2>
+          <p>We've received your message and will get back to you as soon as possible.</p>
+          <Button 
+            onClick={() => setIsSubmitted(false)}
+            className="w-full h-14 md:w-3/5 bg-[#2E7D32] text-white font-semibold text-base rounded-none shadow-[inset_4px_8px_8px_rgba(255,255,255,0.25),inset_-4px_-8px_8px_rgba(0,0,0,0.25)] hover:bg-[#245226] transition-all duration-200"
+          >
+            Send Another Message
+          </Button>
+        </div>
+      </section>
+    );
+  }
 
   return (
    <section className="py-8 md:py-12">
@@ -165,7 +180,7 @@ export default function ContactUsPage() {
 
           <Button
            type="submit"
-            onSubmit={form.handleSubmit(onSubmit)}
+            disabled={isSubmitting}
             className="w-full h-14 md:w-3/5 bg-[#2E7D32] text-white font-semibold text-base rounded-none shadow-[inset_4px_8px_8px_rgba(255,255,255,0.25),inset_-4px_-8px_8px_rgba(0,0,0,0.25)] hover:bg-[#245226] transition-all duration-200">
              {isSubmitting ? 'Submitting...' : 'Submit'}
           </Button>
