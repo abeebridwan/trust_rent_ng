@@ -17,8 +17,33 @@ function hashOtp(otp: string, salt: string) {
 export async function POST(req: Request) {
   const clientSupabase = await createClient()
   const adminSupabase = createAdminClient()
-  const { action, email, code, role, password, full_name, date_of_birth, avartar_url  } = await req.json()
-  console.log(action, email, code, role, password, date_of_birth, avartar_url, "all sender")
+
+  // Detect if request is JSON or FormData
+  const contentType = req.headers.get("content-type") || ""
+
+  let action, email, code, role, password, full_name, date_of_birth, avatarFile
+
+  if (contentType.includes("application/json")) {
+    const body = await req.json()
+    action = body.action
+    email = body.email
+    code = body.code
+    role = body.role
+    password = body.password
+    full_name = body.full_name
+    date_of_birth = body.date_of_birth
+  } else if (contentType.includes("multipart/form-data")) {
+    const formData = await req.formData()
+    action = formData.get("action") as string
+    email = formData.get("email") as string
+    role = formData.get("role") as string
+    password = formData.get("password") as string
+    full_name = formData.get("full_name") as string
+    date_of_birth = formData.get("date_of_birth") as string
+    avatarFile = formData.get("avatar") as File | null
+  }
+  console.log(action, email, code, role, password, date_of_birth, "all sender")
+
 
   if (action === "send") {
     const otp = Math.floor(100000 + Math.random() * 900000).toString()
@@ -186,11 +211,11 @@ export async function POST(req: Request) {
         email_confirm: true,
         user_metadata: {
           full_name: full_name, 
-          avatar_url: avartar_url, 
           role: role,
           date_of_birth: date_of_birth, 
         }
       })
+
       if (newUserError) {
         console.error("createUserError", newUserError)
         return NextResponse.json({ error: newUserError.message }, { status: 400 })
@@ -200,13 +225,43 @@ export async function POST(req: Request) {
       if (newUser) {
         const user = newUser.user
         console.log({user})
-        
+        let avatarPath: string | null = null
+
+        if (avatarFile) {
+          avatarPath = `${user.id}/${full_name}/${Date.now()}-${avatarFile.name}`;
+
+          const { error: uploadError } = await adminSupabase.storage
+            .from("avatars") // 👈 private bucket
+            .upload(avatarPath, avatarFile, {
+              upsert: true,
+              contentType: avatarFile.type,
+            });
+
+          if (uploadError) {
+            console.error("Upload error:", uploadError.message)
+            avatarPath = null
+            throw new Error("Avatar upload failed: " + uploadError.message);
+          }
+        }
+
+        const { error: updateError } = await adminSupabase.auth.admin.updateUserById(user.id, {
+            user_metadata: {
+              ...user.user_metadata, // Keep existing metadata
+              avatar_url: avatarPath,
+            }
+          })
+          
+          if (updateError) {
+            console.error("updateMetaError", updateError)
+            throw new Error("auth user metadata for for avatarPath/avatar_url...  not updated")
+          }
+
         const {error: insertError} = await adminSupabase.from('profiles').insert({
           id: user.id,
           name: full_name,
           role: role,
           email: user.email,
-          avatar_url: avartar_url,
+          avatar_url: avatarPath,
           date_of_birth: date_of_birth,
           provider:"Direct"
         })

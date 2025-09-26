@@ -92,7 +92,7 @@ try {
           })
           if (updateError) {
             console.error("updateMetaError", updateError)
-            throw new Error("auth user metadata for mismatch role not updated")
+            throw new Error("auth user metadata for mismatch... not updated")
           }
           }
 

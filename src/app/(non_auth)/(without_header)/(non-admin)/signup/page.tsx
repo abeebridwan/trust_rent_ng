@@ -57,6 +57,7 @@ export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isSignedUp, setIsSignedUp] = useState(false);
@@ -89,6 +90,7 @@ export default function SignupPage() {
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
+      setSelectedFile(file);
       setSelectedImage(URL.createObjectURL(file));
     }
   };
@@ -220,11 +222,20 @@ export default function SignupPage() {
 
   const handleDirectProceed = async () => {
       setIsLoading(true);
+      const formData = new FormData();
+      formData.append("action", "proceed");
+      formData.append("email", user.email);
+      formData.append("role", selectedRole ?? "");
+      formData.append("password", user.password);
+      formData.append("full_name", user.fullName);
+      formData.append("date_of_birth", user.dateOfBirth);
+
+      if (selectedFile) {
+        formData.append("avatar", selectedFile); 
+      }
       const res = await fetch("/api/auth/auth-otp", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ action: "proceed", email: user.email, role: selectedRole, 
-          password: user.password, avartar_url: "testing_url", full_name: user.fullName, date_of_birth: user.dateOfBirth }),
+        body: formData
       })
 
       const newdata = await res.json()
