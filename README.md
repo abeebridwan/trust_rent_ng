@@ -88,3 +88,4 @@ The PWA configuration is located in `next.config.mjs`. The service worker is loc
 *This section should be updated with information about new features, components, or changes to the project structure.*
 
 - Implemented Progressive Web App (PWA) functionality using `@serwist/next`.
+- Implemented init KYC with Smile ID for user verification.
