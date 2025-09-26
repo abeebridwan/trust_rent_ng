@@ -44,10 +44,10 @@ const Footer = () => {
             <div className="space-y-6">
               <h4 className="text-2xl font-bold">Explore Vetarent</h4>
               <div className="flex flex-col">
-                <Link href="#" className="text-white text-base font-medium hover:text-white/80 transition-colors py-3 w-fit">
+                <Link href="/landlord/dashboard" className="text-white text-base font-medium hover:text-white/80 transition-colors py-3 w-fit">
                   For Landlords
                 </Link>
-                <Link href="#" className="text-white text-base font-medium hover:text-white/80 transition-colors py-3 w-fit">
+                <Link href="/properties?search=all" className="text-white text-base font-medium hover:text-white/80 transition-colors py-3 w-fit">
                   For Tenants
                 </Link>
                 <Link href="/about-us" className="text-white text-base font-medium hover:text-white/80 transition-colors py-3 w-fit">
@@ -134,10 +134,10 @@ const Footer = () => {
             </button>
             {isOpen('explore') && (
               <div className="ml-4 pb-4 space-y-3">
-                <Link href="#" className="block text-white text-base font-medium py-2 w-fit">
+                <Link href="/landlord/dashboard" className="block text-white text-base font-medium py-2 w-fit">
                   For Landlords
                 </Link>
-                <Link href="#" className="block text-white text-base font-medium py-2 w-fit">
+                <Link href="/properties?search=all" className="block text-white text-base font-medium py-2 w-fit">
                   For Tenants
                 </Link>
                 <Link href="/about-us" className="block text-white text-base font-medium py-2 w-fit">

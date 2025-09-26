@@ -48,10 +48,10 @@ const Header = () => {
           <Link href="/" className="text-foreground hover:text-primary whitespace-nowrap">
             Home
           </Link>
-          <Link href="#" className="text-foreground hover:text-primary whitespace-nowrap">
+          <Link href="/landlord/dashboard" className="text-foreground hover:text-primary whitespace-nowrap">
             For Landlords
           </Link>
-          <Link href="#" className="text-foreground hover:text-primary whitespace-nowrap">
+          <Link href="/properties?search=all" className="text-foreground hover:text-primary whitespace-nowrap">
             For Tenants
           </Link>
           <Link href="/about-us" className="text-foreground hover:text-primary whitespace-nowrap">
@@ -92,14 +92,14 @@ const Header = () => {
               Home
             </Link>
             <Link 
-              href="#" 
+              href="/landlord/dashboard" 
               className="text-foreground hover:text-primary text-lg font-normal py-2"
               onClick={closeMenu}
             >
               For Landlords
             </Link>
             <Link 
-              href="#" 
+              href="/properties?search=all" 
               className="text-foreground hover:text-primary text-lg font-normal py-2"
               onClick={closeMenu}
             >
