@@ -57,8 +57,8 @@ export default function ContactUsPage() {
       }
 
       form.reset();
-      toast.success("Message Received")
       setIsSubmitted(true);
+      toast.success("We&apos;ve received your message and will get back to you shortly.");
     } catch (error) {
       console.error('Form submission error:', error);
       toast.error('There was an error sending your message. Please try again.');
@@ -69,10 +69,10 @@ export default function ContactUsPage() {
 
   if (isSubmitted) {
     return (
-      <section className="py-[5rem] md:py-[7rem]">
+      <section className="py-8 md:py-12">
         <div className="mx-auto px-4 w-full max-w-4xl text-center space-y-4">
           <h2 className="text-2xl font-semibold">Thank You!</h2>
-          <p>We've received your message and will get back to you as soon as possible.</p>
+          <p>We&apos;ve received your message and will get back to you as soon as possible.</p>
           <Button 
             onClick={() => setIsSubmitted(false)}
             className="w-full h-14 md:w-3/5 bg-[#2E7D32] text-white font-semibold text-base rounded-none shadow-[inset_4px_8px_8px_rgba(255,255,255,0.25),inset_-4px_-8px_8px_rgba(0,0,0,0.25)] hover:bg-[#245226] transition-all duration-200"
