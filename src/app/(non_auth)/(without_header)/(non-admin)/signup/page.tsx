@@ -131,7 +131,7 @@ export default function SignupPage() {
         return
       }
      setIsLoading(false)
-      toast.error(newdata.message);
+      toast.error(newdata.error);
   };
 
   const handleOtpChange = (index: number, value: string) => {
@@ -217,7 +217,7 @@ export default function SignupPage() {
         return
       }
       setIsResending(false)
-      toast.error(newdata.message);
+      toast.error(newdata.error);
   };
 
   const handleDirectProceed = async () => {
@@ -248,7 +248,7 @@ export default function SignupPage() {
         setIsLoading(false);
         window.location.href = "/signup"
       } 
-      toast.error(newdata.message);
+      toast.error(newdata.error);
   };
 
   const handleGoogleLogin = () => {

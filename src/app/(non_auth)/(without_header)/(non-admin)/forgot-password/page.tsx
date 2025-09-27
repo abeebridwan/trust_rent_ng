@@ -67,7 +67,7 @@ export default function ForgotPasswordPage() {
       return
     }
     setIsLoading(false);
-    toast.error(newdata.message);
+    toast.error(newdata.error);
 };
 
   const handleOtpChange = (index: number, value: string) => {
@@ -152,7 +152,7 @@ export default function ForgotPasswordPage() {
       return
     }
     setIsResending(false);
-    toast.error(newdata.message);
+    toast.error(newdata.error);
   };
 
   const handleResetPassword = async (data: PasswordFormData) => {

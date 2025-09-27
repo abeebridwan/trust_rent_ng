@@ -31,7 +31,7 @@ export async function middleware(request: NextRequest) {
       data: { user },
       error,
     } = await supabase.auth.getUser()
-    if (error) console.error('Auth error in middleware:', error.message)
+    //if (error) console.error('Auth error in middleware:', error.message)
 
     const authRoutes = ['/login', '/signup', '/admin/login']
 
