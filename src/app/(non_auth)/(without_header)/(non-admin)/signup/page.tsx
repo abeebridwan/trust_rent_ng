@@ -184,7 +184,7 @@ export default function SignupPage() {
       })
 
     const newdata = await res.json()
-    console.log({newdata})
+    //console.log({newdata})
     if(newdata.success && newdata.proceed && !newdata.exist){
       toast.success("Email verified successfully!");
       setIsOtpVerified(true);
