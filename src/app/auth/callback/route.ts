@@ -53,6 +53,7 @@ try {
 
       // Use the refreshed user data
       const currentUser = refreshedSession?.user || updatedUserData.user
+      const provider = currentUser.app_metadata.provider === 'google' ? 'Google' : 'Apple'
 
       
       // Create profile if it doesn't exist
@@ -73,7 +74,7 @@ try {
             email: currentUser.email,
             avatar_url: currentUser.user_metadata.avatar_url || null,
             date_of_birth: currentUser.user_metadata.date_of_birth || "unknown",
-            provider:"Google"
+            provider:provider
             })
 
             // Send welcome email
@@ -103,7 +104,7 @@ try {
           }
         } else {
           // Profile exists → check provider mismatch
-          if (existingProfile.provider !== "Google") {
+          if (existingProfile.provider === "Direct") {
             
             console.log('Profile exist and not google')
              // Update auth user metadata with admin client

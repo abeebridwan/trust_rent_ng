@@ -258,11 +258,9 @@ export default function SignupPage() {
     }
   };
 
-  const handleAppleLogin = () => {
+    const handleAppleLogin = () => {
     if (selectedRole) {
-      // Placeholder for Apple login
-      toast.info("Apple login is not yet implemented.");
-      console.log("Apple login with role:", selectedRole);
+      window.location.href = `/api/auth/apple/signin?flow=signup&role=${encodeURIComponent(selectedRole)}`;
     }
   };
 

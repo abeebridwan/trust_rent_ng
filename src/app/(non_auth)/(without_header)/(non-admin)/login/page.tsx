@@ -86,6 +86,10 @@ export default function LoginPage() {
   window.location.href = `/api/auth/google/signin?flow=login`
   }
 
+  const handleAppleLogin = () => {
+  window.location.href = `/api/auth/apple/signin?flow=login`
+  }
+
   return (
     <Card className="z-10 w-full mx-4 sm:mx-0 max-w-sm sm:max-w-md rounded-none flex flex-col justify-center items-center">
       <CardHeader className="flex flex-col justify-center items-center">
@@ -203,6 +207,7 @@ export default function LoginPage() {
             Login with Google
           </Button>
           <Button
+            onClick={handleAppleLogin}
             variant="outline"
             className="w-full h-12 text-sm sm:text-base font-semibold flex items-center justify-center gap-2 py-6 rounded-none border-[1px] border-gray-400 hover:border-vetarent-orange"
           >
