@@ -148,6 +148,7 @@ export default function ForgotPasswordPage() {
     const newdata = await res.json()
     if(newdata.success){
       toast.success("OTP resent successfully!");
+      setOtp(new Array(6).fill(""))
       setIsResending(false)
       return
     }

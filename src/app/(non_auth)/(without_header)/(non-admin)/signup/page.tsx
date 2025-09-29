@@ -213,6 +213,7 @@ export default function SignupPage() {
       console.log({newdata})
       if(newdata.success){
         setIsResending(false)
+        setOtp(new Array(6).fill(""))
         toast.success("OTP resent successfully!");
         return
       }
