@@ -14,7 +14,7 @@ export async function POST(req: Request) {
 
     await resend.emails.send({
       from: "merittadmin@meritt.live",
-      to: ["olumideuae@gmail.com", "support@vetarent.ng", "support@vetarent.com"],
+      to: ["olumideuae@gmail.com", "vetarent@moehly.ng"],
       subject: `New Contact Form Submission: ${subject}`,
       html: getContactFormEmailHtml(name, email, phone, subject, message),
        attachments: [

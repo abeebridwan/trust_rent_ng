@@ -67,7 +67,7 @@ export default function ForgotPasswordPage() {
       return
     }
     setIsLoading(false);
-    toast.error(newdata.error);
+    toast.error(newdata.message);
 };
 
   const handleOtpChange = (index: number, value: string) => {
@@ -204,10 +204,10 @@ export default function ForgotPasswordPage() {
         </div>
         <CardTitle className="text-lg sm:text-2xl font-semibold !-mt-1 tracking-widest">
           {isEmailSubmitted && !isOtpVerified
-            ? "VERIFY YOUR EMAIL ID"
+            ? "VERIFY YOUR EMAIL"
             : isOtpVerified
             ? "RESET PASSWORD"
-            : "Forgot Password"}
+            : "FORGOT PASSWORD"}
         </CardTitle>
       </CardHeader>
       <CardContent className="w-full p-4 sm:px-6 sm:pt-0 sm:pb-6">
@@ -218,7 +218,7 @@ export default function ForgotPasswordPage() {
                 htmlFor="email"
                 className="text-sm sm:text-base text-gray-400"
               >
-                Enter the E-mail your account is registered with
+                Enter the E-Mail your account is registered with
               </label>
               <Input
                 {...register("email")}
@@ -288,6 +288,12 @@ export default function ForgotPasswordPage() {
             onSubmit={handlePasswordSubmit(handleResetPassword)}
             className="grid gap-4"
           >
+            <label
+              htmlFor="otp"
+              className="text-sm sm:text-base text-center text-gray-400"
+            >
+              Please create a new password for your account associated with the email address {userEmail}
+            </label>
             <div className="grid gap-2">
               <div className="relative">
                 <Input

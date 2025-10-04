@@ -51,6 +51,21 @@ export async function POST(req: Request) {
     const hashedEmail = hashOtp(email, salt)
     // Insert hashed OTP into Supabase
     try {
+
+        const { data: existingUser } = await adminSupabase
+        .from('profiles')
+        .select('*')
+        .eq('email', email)
+        .single()
+
+      console.log({existingUser})
+
+      if (existingUser) {
+        console.error("Existing user error");
+        return NextResponse.json({ proceed: false, exist: true });
+      }
+  
+      await adminSupabase.from("otps").delete().eq("email", hashedEmail).eq("used", false);
       const { error } = await adminSupabase.from("otps").insert({
         email: hashedEmail,
         code: hashedOtp,
@@ -65,7 +80,7 @@ export async function POST(req: Request) {
     } catch (dbError) {
       console.error("Database error:", dbError)
       return NextResponse.json(
-        { success: false, message: "Unable to generate OTP. Please try again." },
+        { success: false, proceed: false, exist: false, message: "Unable to generate OTP. Please try again." },
         { status: 500 }
       )
     }
@@ -88,12 +103,12 @@ export async function POST(req: Request) {
     } catch (emailError) {
       console.error("Resend email error:", emailError)
       return NextResponse.json(
-        { success: false, message: "OTP was generated but email could not be sent." },
+        { success: false, proceed: false, exist: false,  message: "OTP was generated but email could not be sent." },
         { status: 500 }
       )
     }
 
-    return NextResponse.json({ success: true })
+    return NextResponse.json({ success: true, proceed: true, exist: false })
   }
 
 
@@ -185,27 +200,8 @@ export async function POST(req: Request) {
         return NextResponse.json({ error: "Invalid code" }, { status: 400 });
       }
     
-      const { data: existingUser } = await adminSupabase
-        .from('profiles')
-        .select('*')
-        .eq('email', email)
-        .single()
-
-      console.log({existingUser})
-
-      if (existingUser) {
-        console.error("Existing user error");
-        return NextResponse.json({ proceed: false, exist: true });
-      }
-
-      const user = existingUser;
-
-      if (!user) {
-        // if new user ...proceed then
-        return NextResponse.json({ success: true, proceed: true, exist: false });
-      }
-
-      
+      return NextResponse.json({ success: true, proceed: true, exist: false });
+          
     } catch (error) {
       console.error("OTP verification error:", error);
       return NextResponse.json(

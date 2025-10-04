@@ -119,16 +119,22 @@ export default function SignupPage() {
 
       const newdata = await res.json()
       console.log({newdata})
-      if(newdata.success){
+      if(newdata.success && newdata.proceed && !newdata.exist){
         setIsLoading(false)
         setUser(data);
         setUserEmail(data.email);
         setSignupMethod('direct');
         setIsSignedUp(true);
         return
+      }else if(!newdata.proceed && newdata.exist){
+        toast.error("Account exist!... redirecting");
+        router.push("/login");
+        setIsLoading(false);
+        return
       }
+
      setIsLoading(false)
-      toast.error(newdata.error);
+     toast.error(newdata.error);
   };
 
   const handleOtpChange = (index: number, value: string) => {
@@ -187,11 +193,6 @@ export default function SignupPage() {
       setIsOtpVerified(true);
       setIsLoading(false);
       return
-    }else if(!newdata.proceed && newdata.exist){
-      toast.success("Account exist!... redirecting");
-      router.push("/login");
-      setIsLoading(false);
-      return
     }
     toast.error("The code you entered is invalid. Please try again.");
     setIsLoading(false);
@@ -215,7 +216,7 @@ export default function SignupPage() {
         return
       }
       setIsResending(false)
-      toast.error(newdata.error);
+      toast.error(newdata.message);
   };
 
   const handleDirectProceed = async () => {
@@ -301,7 +302,7 @@ export default function SignupPage() {
           </Link>
         </div>
         <CardTitle className="text-lg sm:text-2xl font-semibold !-mt-1 tracking-widest">
-          {isSignedUp ? "SELECT YOUR ROLE" : "Create Account"}
+          {isOtpVerified ? "SELECT YOUR ROLE" : isSignedUp ? "VERIFY YOUR EMAIL" : "CREATE ACCOUNT"}
         </CardTitle>
         {!isSignedUp && (
           <div className="flex flex-col items-center gap-2 mt-4">
@@ -416,8 +417,8 @@ export default function SignupPage() {
                   htmlFor="termsAccepted"
                   className="text-xs sm:text-sm text-gray-400 font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 >
-                  <Link href="/terms-and-conditions" className="hover:underline">
-                    I agree with Terms & Condition
+                  <Link href="/terms-and-conditions" className="hover:underline text-vetarent-orange font-semibold">
+                    I agree with the Terms of Use
                   </Link>
                 </Label>
                 {errors.termsAccepted && (

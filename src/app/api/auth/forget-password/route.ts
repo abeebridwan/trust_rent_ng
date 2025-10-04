@@ -40,7 +40,7 @@ export async function POST(req: Request) {
       if (!user) {
         console.error("Supabase check error:", userError)
         return NextResponse.json(
-        { success: false, message:  "user email doesn't exist"},
+        { success: false, message:  "The email you entered does not exist, please try again."},
         { status: 500 })
       } 
 
@@ -50,6 +50,7 @@ export async function POST(req: Request) {
         { status: 500 })
       } 
 
+      await adminSupabase.from("otps").delete().eq("email", hashedEmail).eq("used", false);
       const { error } = await adminSupabase.from("otps").insert({
         email: hashedEmail,
         code: hashedOtp,
