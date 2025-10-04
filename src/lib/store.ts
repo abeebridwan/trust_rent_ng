@@ -3,8 +3,6 @@ import { create } from 'zustand';
 interface User {
   fullName: string;
   email: string;
-  dateOfBirth: string;
-  termsAccepted: boolean;
   password: string;
 }
 

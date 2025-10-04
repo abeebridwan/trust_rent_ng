@@ -33,7 +33,6 @@ try {
       user_metadata: {
         ...user.user_metadata, // Keep existing metadata
         role: role,
-        date_of_birth: "unknown",
       }
     })
 
@@ -73,7 +72,6 @@ try {
             role: currentUser.user_metadata.role,
             email: currentUser.email,
             avatar_url: currentUser.user_metadata.avatar_url || null,
-            date_of_birth: currentUser.user_metadata.date_of_birth || "unknown",
             provider:provider
             })
 

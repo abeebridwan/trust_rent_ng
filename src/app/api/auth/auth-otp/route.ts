@@ -22,7 +22,7 @@ export async function POST(req: Request) {
   // Detect if request is JSON or FormData
   const contentType = req.headers.get("content-type") || ""
 
-  let action, email, code, role, password, full_name, date_of_birth, avatarFile
+  let action, email, code, role, password, full_name,  avatarFile
 
   if (contentType.includes("application/json")) {
     const body = await req.json()
@@ -32,7 +32,6 @@ export async function POST(req: Request) {
     role = body.role
     password = body.password
     full_name = body.full_name
-    date_of_birth = body.date_of_birth
   } else if (contentType.includes("multipart/form-data")) {
     const formData = await req.formData()
     action = formData.get("action") as string
@@ -40,10 +39,9 @@ export async function POST(req: Request) {
     role = formData.get("role") as string
     password = formData.get("password") as string
     full_name = formData.get("full_name") as string
-    date_of_birth = formData.get("date_of_birth") as string
     avatarFile = formData.get("avatar") as File | null
   }
-  console.log(action, email, code, role, password, date_of_birth, "all sender")
+  console.log(action, email, code, role, password,  "all sender")
 
 
   if (action === "send") {
@@ -227,7 +225,6 @@ export async function POST(req: Request) {
         user_metadata: {
           full_name: full_name, 
           role: role,
-          date_of_birth: date_of_birth, 
         }
       })
 
@@ -277,7 +274,6 @@ export async function POST(req: Request) {
           role: role,
           email: user.email,
           avatar_url: avatarPath,
-          date_of_birth: date_of_birth,
           provider:"Direct"
         })
 

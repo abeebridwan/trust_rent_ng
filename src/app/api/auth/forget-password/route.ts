@@ -18,8 +18,8 @@ function hashOtp(otp: string, salt: string) {
 export async function POST(req: Request) {
   const clientSupabase = await createClient()
   const adminSupabase = createAdminClient()
-  const { action, email, code, role, password, full_name, date_of_birth, avartar_url  } = await req.json()
-  console.log(action, email, code, role, password, full_name, date_of_birth, avartar_url, "all sender")
+  const { action, email, code, role, password, full_name, avartar_url  } = await req.json()
+  console.log(action, email, code, role, password, full_name, avartar_url, "all sender")
 
   if (action === "send") {
     const otp = Math.floor(100000 + Math.random() * 900000).toString()

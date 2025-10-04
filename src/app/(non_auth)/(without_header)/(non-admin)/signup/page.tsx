@@ -39,7 +39,6 @@ const formSchema = z
   .object({
     fullName: z.string().min(1, "Full name is required"),
     email: z.string().email("Invalid email address"),
-    dateOfBirth: z.string().min(1, "Date of birth is required"),
     password: z.string().min(6, "Password must be at least 6 characters"),
     confirmPassword: z.string(),
     termsAccepted: z.boolean().refine((val) => val === true, {
@@ -70,8 +69,6 @@ export default function SignupPage() {
   const [selectedRole, setSelectedRole] = useState<"landlord" | "tenant" | null>(
     null
   );
-  const [isDateFocused, setIsDateFocused] = useState(false);
-  const [isDateSelected, setIsDateSelected] = useState(false);
   const [signupMethod, setSignupMethod] = useState<'direct' | 'google' | 'apple' | null>(null);
   const { user, setUser } = useStore();
 
@@ -229,7 +226,6 @@ export default function SignupPage() {
       formData.append("role", selectedRole ?? "");
       formData.append("password", user.password);
       formData.append("full_name", user.fullName);
-      formData.append("date_of_birth", user.dateOfBirth);
 
       if (selectedFile) {
         formData.append("avatar", selectedFile); 
@@ -357,42 +353,7 @@ export default function SignupPage() {
                   <p className="text-red-500 text-xs">{errors.email.message}</p>
                 )}
               </div>
-              <div className="grid gap-2">
-                <div className="relative">
-                  <Controller
-                    name="dateOfBirth"
-                    control={control}
-                    render={({ field }) => (
-                      <>
-                        <Input
-                          {...field}
-                          type="date"
-                          className="peer rounded-none w-full px-4 py-6 border-[1px] border-gray-300 focus:outline-none focus:ring-2 focus:ring-vetarent-blue-500 focus:border-vetarent-blue text-gray-700 placeholder:text-gray-400 placeholder:font-medium placeholder:text-sm"
-                          onFocus={() => setIsDateFocused(true)}
-                          onBlur={() => setIsDateFocused(false)}
-                          onChange={(e) => {
-                            setIsDateSelected(!!e.target.value);
-                            field.onChange(e);
-                          }}
-                        />
-                        <label
-                          className={cn(
-                            "block sm:hidden absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm font-medium pointer-events-none",
-                            (isDateFocused || isDateSelected) && "hidden"
-                          )}
-                        >
-                          Date of Birth
-                        </label>
-                      </>
-                    )}
-                  />
-                </div>
-                {errors.dateOfBirth && (
-                  <p className="text-red-500 text-xs">
-                    {errors.dateOfBirth.message}
-                  </p>
-                )}
-              </div>
+              
               <div className="grid gap-2">
                 <div className="relative">
                   <Input
