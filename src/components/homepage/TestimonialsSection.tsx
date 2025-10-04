@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import Image from "next/image";
@@ -17,38 +17,6 @@ interface Testimonial {
 
 const Testimonials = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const animationRef = useRef<number>(0);
-  const startTimeRef = useRef<number>(performance.now());
-
-  // Clean, optimized animation using CSS transforms
-  useEffect(() => {
-    const animate = (currentTime: number) => {
-      const elapsed = currentTime - startTimeRef.current;
-      
-      // Calculate rotations based on elapsed time (in seconds)
-      const seconds = elapsed / 1000;
-      
-      // Different rotation speeds (degrees per second)
-      const outerRotation = (seconds * 5) % 360; // 5 degrees per second
-      const middleRotation = (-seconds * 8) % 360; // 8 degrees per second (counter-clockwise)
-      const innerRotation = (seconds * 12) % 360; // 12 degrees per second
-      
-      // Apply rotations using CSS custom properties for better performance
-      document.documentElement.style.setProperty('--outer-rotation', `${outerRotation}deg`);
-      document.documentElement.style.setProperty('--middle-rotation', `${middleRotation}deg`);
-      document.documentElement.style.setProperty('--inner-rotation', `${innerRotation}deg`);
-      
-      animationRef.current = requestAnimationFrame(animate);
-    };
-
-    animationRef.current = requestAnimationFrame(animate);
-
-    return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
-    };
-  }, []);
 
   const testimonials: Testimonial[] = [
     {
@@ -161,12 +129,11 @@ const Testimonials = () => {
 
   const AvatarObj = {
     Outer: {
-      // Responsive sizes: base, xs, sm, md
       size: {
-        base: ["37px", "29px", "55px", "29px", "47px", "29px", "56px"], // 50% of original
-        xs: ["44px", "35px", "66px", "35px", "56px", "35px", "66px"], // 60% of original
-        sm: ["59px", "46px", "88px", "46px", "75px", "46px", "89px"], // 80% of original
-        md: ["74px", "58px", "110px", "58px", "94px", "58px", "111px"] // 100% original
+        base: ["37px", "29px", "55px", "29px", "47px", "29px", "56px"],// 50% of original
+        xs: ["44px", "35px", "66px", "35px", "56px", "35px", "66px"],// 60% of original
+        sm: ["59px", "46px", "88px", "46px", "75px", "46px", "89px"],// 80% of original
+        md: ["74px", "58px", "110px", "58px", "94px", "58px", "111px"]// 100% original
       },
       src: [
         "/images/Ellipse 2236-74.png", 
@@ -181,12 +148,11 @@ const Testimonials = () => {
       initials: ["AC", "AD", "US", "FA", "CH", "EF"]
     },
     Middle: {
-      // Responsive sizes: base, xs, sm, md
       size: {
-        base: ["55px", "29px", "56px", "37px", "47px", "29px", "29px"], // 50% of original
-        xs: ["66px", "35px", "66px", "44px", "56px", "35px", "35px"], // 60% of original
-        sm: ["88px", "46px", "89px", "59px", "75px", "46px", "46px"], // 80% of original
-        md: ["110px", "58px", "111px", "74px", "94px", "58px", "58px"] // 100% original
+        base: ["55px", "29px", "56px", "37px", "47px", "29px", "29px"],
+        xs: ["66px", "35px", "66px", "44px", "56px", "35px", "35px"],
+        sm: ["88px", "46px", "89px", "59px", "75px", "46px", "46px"],
+        md: ["110px", "58px", "111px", "74px", "94px", "58px", "58px"]
       },
       src: [
         "/images/Ellipse 2235-110.png", 
@@ -201,12 +167,11 @@ const Testimonials = () => {
       initials: ["US", "FA", "EF", "AC", "CH", "AD", "GH"]
     },
     Inner: {
-      // Responsive sizes: base, xs, sm, md
       size: {
-        base: ["29px", "47px", "37px", "56px", "29px", "55px", "29px"], // 50% of original
-        xs: ["35px", "56px", "44px", "66px", "35px", "66px", "35px"], // 60% of original
-        sm: ["46px", "75px", "59px", "89px", "46px", "88px", "46px"], // 80% of original
-        md: ["58px", "94px", "74px", "111px", "58px", "110px", "58px"] // 100% original
+        base: ["29px", "47px", "37px", "56px", "29px", "55px", "29px"],
+        xs: ["35px", "56px", "44px", "66px", "35px", "66px", "35px"],
+        sm: ["46px", "75px", "59px", "89px", "46px", "88px", "46px"],
+        md: ["58px", "94px", "74px", "111px", "58px", "110px", "58px"]
       },
       src: [
         "/images/Ellipse 2227-58.png",
@@ -222,26 +187,25 @@ const Testimonials = () => {
     }
   };
 
-  // Calculate radius for each breakpoint
   const getRadius = (breakpoint: string, circle: string) => {
     const radiusMap = {
       outer: {
-        base: 312.5, // h-[625px] / 2
-        xs: 392, // h-[784px] / 2
-        sm: 512, // h-[1024px] / 2
-        md: 684.5 // h-[1369px] / 2
+        base: 312.5,
+        xs: 392,
+        sm: 512,
+        md: 684.5
       },
       middle: {
-        base: 264.5, // h-[529px] / 2
-        xs: 326, // h-[652px] / 2
-        sm: 392, // h-[784px] / 2
-        md: 512 // h-[1024px] / 2
+        base: 264.5,
+        xs: 326,
+        sm: 392,
+        md: 512
       },
       inner: {
-        base: 162, // h-[324px] / 2
-        xs: 242, // h-[484px] / 2
-        sm: 326, // h-[652px] / 2
-        md: 392 // h-[784px] / 2
+        base: 162,
+        xs: 242,
+        sm: 326,
+        md: 392
       }
     };
     
@@ -251,16 +215,6 @@ const Testimonials = () => {
   return (
     <section className="bg-vetarent-blue relative overflow-hidden min-h-[800px] sm:min-h-[912px] -mt-20 md:-mt-0 z-0 md:z-auto">
       <style jsx>{`
-        .orbit-outer {
-          animation: rotateClockwise 72s linear infinite;
-        }
-        .orbit-middle {
-          animation: rotateCounterClockwise 45s linear infinite;
-        }
-        .orbit-inner {
-          animation: rotateClockwise 30s linear infinite;
-        }
-        
         @keyframes rotateClockwise {
           from { transform: translate(-50%, -50%) rotate(0deg); }
           to { transform: translate(-50%, -50%) rotate(360deg); }
@@ -271,26 +225,40 @@ const Testimonials = () => {
           to { transform: translate(-50%, -50%) rotate(-360deg); }
         }
         
-        .avatar-item {
+        .orbit-outer {
+          animation: rotateClockwise 72s linear infinite;
           will-change: transform;
+        }
+        
+        .orbit-middle {
+          animation: rotateCounterClockwise 45s linear infinite;
+          will-change: transform;
+        }
+        
+        .orbit-inner {
+          animation: rotateClockwise 30s linear infinite;
+          will-change: transform;
+        }
+        
+        .avatar-item {
+          pointer-events: none;
         }
       `}</style>
       
-      
       <div className="container mx-auto px-4">   
-         {/* Left blur shadow */}
-      <div className="hidden md:block bg-vetarent-blue shadow-[15px_0_100px_150px_rgba(13,71,161,1)] absolute top-0 left-0 h-full w-[1px] pointer-events-none z-10"
-        style={{
-          backdropFilter: "blur(109.4px)",
-        }}
-      ></div>
+        {/* Left blur shadow */}
+        <div className="hidden md:block bg-vetarent-blue shadow-[15px_0_100px_150px_rgba(13,71,161,1)] absolute top-0 left-0 h-full w-[1px] pointer-events-none z-10"
+          style={{
+            backdropFilter: "blur(109.4px)",
+          }}
+        ></div>
 
-      {/* Right blur shadow */}
-       <div className="hidden md:block bg-vetarent-blue shadow-[15px_0_100px_150px_rgba(13,71,161,1)] absolute top-0 right-0 h-full w-[1px] pointer-events-none z-10"
-        style={{
-          backdropFilter: "blur(109.4px)",
-        }}
-      ></div>
+        {/* Right blur shadow */}
+        <div className="hidden md:block bg-vetarent-blue shadow-[15px_0_100px_150px_rgba(13,71,161,1)] absolute top-0 right-0 h-full w-[1px] pointer-events-none z-10"
+          style={{
+            backdropFilter: "blur(109.4px)",
+          }}
+        ></div>
 
         {/* Semicircle Lines Background */}
         <div className="absolute inset-0 pointer-events-none">
@@ -613,7 +581,7 @@ const Testimonials = () => {
                 <div className="flex justify-center items-center space-x-3 mt-6">
                   <button 
                     onClick={prevTestimonial}
-                    className="w-10 h-10 rounded-full bg-transparent border-2 border-vetarent-orange hover:bg-vetarent-orange/20 flex items-center justify-center transition-colors duration-200"
+                    className="w-10 h-10 rounded-full bg-transparent border-2 border-vetarent-orange hover:bg-vetarent-orange/20 flex items-center justify-center transition-colors duration-200 touch-manipulation"
                     aria-label="Previous testimonial"
                   >
                     <ArrowLeft className="w-5 h-5 text-vetarent-orange" />
@@ -621,7 +589,7 @@ const Testimonials = () => {
                   
                   <button 
                     onClick={nextTestimonial}
-                    className="w-10 h-10 rounded-full bg-vetarent-orange hover:bg-vetarent-orange/80 flex items-center justify-center transition-colors duration-200"
+                    className="w-10 h-10 rounded-full bg-vetarent-orange hover:bg-vetarent-orange/80 flex items-center justify-center transition-colors duration-200 touch-manipulation"
                     aria-label="Next testimonial"
                   >
                     <ArrowRight className="w-5 h-5 text-vetarent-blue" />
@@ -655,7 +623,7 @@ const Testimonials = () => {
                 <div className="flex justify-center items-center space-x-3 mt-12">
                   <button 
                     onClick={prevTestimonial}
-                    className="w-16 h-16 rounded-full bg-transparent border-2 border-vetarent-orange hover:bg-vetarent-orange/20 flex items-center justify-center transition-colors duration-200"
+                    className="w-16 h-16 rounded-full bg-transparent border-2 border-vetarent-orange hover:bg-vetarent-orange/20 flex items-center justify-center transition-colors duration-200 touch-manipulation"
                     aria-label="Previous testimonials"
                   >
                     <ArrowLeft className="w-10 h-10 text-vetarent-orange" />
@@ -663,7 +631,7 @@ const Testimonials = () => {
                   
                   <button 
                     onClick={nextTestimonial} 
-                    className="w-16 h-16 rounded-full border-2 border-vetarent-blue bg-vetarent-orange hover:bg-vetarent-orange/80 flex items-center justify-center transition-colors duration-200" 
+                    className="w-16 h-16 rounded-full border-2 border-vetarent-blue bg-vetarent-orange hover:bg-vetarent-orange/80 flex items-center justify-center transition-colors duration-200 touch-manipulation" 
                     aria-label="Next testimonials"
                   >
                     <ArrowRight className="w-10 h-10 text-vetarent-blue" />
