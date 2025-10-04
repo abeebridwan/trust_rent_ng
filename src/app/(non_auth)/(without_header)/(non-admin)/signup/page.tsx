@@ -193,7 +193,7 @@ export default function SignupPage() {
       setIsLoading(false);
       return
     }
-    toast.error("Invalid OTP. Please try again.");
+    toast.error("The code you entered is invalid. Please try again.");
     setIsLoading(false);
   };
   
@@ -335,7 +335,7 @@ export default function SignupPage() {
               <div className="grid gap-2">
                 <Input
                   {...register("fullName")}
-                  placeholder="Full Name"
+                  placeholder="First name, Surname"
                   className="rounded-none w-full px-4 py-6 border-[1px] border-gray-300 focus:outline-none focus:ring-2 focus:ring-vetarent-blue-500 focus:border-vetarent-blue text-gray-700 placeholder:text-gray-400 placeholder:font-medium placeholder:text-sm "
                 />
                 {errors.fullName && (
@@ -474,7 +474,7 @@ export default function SignupPage() {
               htmlFor="otp"
               className="text-sm sm:text-base text-gray-400"
             >
-              Enter the 6-Digit Code sent to your {userEmail}
+              Please enter the 6-digit code that has been sent to your email at {userEmail}
             </label>
             <div className="flex justify-center gap-2 w-full">
               {otp.map((digit, index) => (
