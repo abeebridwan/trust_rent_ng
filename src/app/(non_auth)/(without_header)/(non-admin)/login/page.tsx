@@ -126,7 +126,7 @@ export default function LoginPage() {
             <Input
               {...register("email")}
               type="email"
-              placeholder="E-Mail"
+              placeholder="Email"
               className="rounded-none w-full px-4 py-6 border-[1px] border-gray-300 focus:outline-none focus:ring-2 focus:ring-vetarent-blue-500 focus:border-vetarent-blue text-gray-700 placeholder:text-gray-400 placeholder:font-medium placeholder:text-sm "
             />
             {errors.email && (

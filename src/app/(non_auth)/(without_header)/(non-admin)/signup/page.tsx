@@ -37,7 +37,15 @@ import { cn } from "@/lib/utils";
 
 const formSchema = z
   .object({
-    fullName: z.string().min(1, "Full name is required"),
+    fullName: z.string().min(1, "Full name is required").refine(
+      (name) => {
+        const parts = name.trim().split(/\s+/).filter(Boolean);
+        return parts.length >= 2 && parts.every((part) => part.length >= 3);
+      },
+      {
+        message: "Please enter your full name (first and last name), with each name being at least 3 characters long.",
+      }
+    ),
     email: z.string().email("Invalid email address"),
     password: z.string().min(6, "Password must be at least 6 characters"),
     confirmPassword: z.string(),
@@ -347,7 +355,7 @@ export default function SignupPage() {
                 <Input
                   {...register("email")}
                   type="email"
-                  placeholder="E-Mail"
+                  placeholder="Email"
                   className="rounded-none w-full px-4 py-6 border-[1px] border-gray-300 focus:outline-none focus:ring-2 focus:ring-vetarent-blue-500 focus:border-vetarent-blue text-gray-700 placeholder:text-gray-400 placeholder:font-medium placeholder:text-sm "
                 />
                 {errors.email && (
