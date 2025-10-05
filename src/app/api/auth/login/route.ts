@@ -4,7 +4,7 @@ import { nextLinkbyRole } from "@/utils/roleRoute"
 
 export async function POST(request: NextRequest) {
   try {
-    const { email, password } = await request.json()
+    const { email, password, rememberMe } = await request.json()
 
     // Validate input
     if (!email || !password) {
@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const supabase = await createClient()
+    const supabase = await createClient(rememberMe)
 
     // Sign in the user
     const { data, error } = await supabase.auth.signInWithPassword({
