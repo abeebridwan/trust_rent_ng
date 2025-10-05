@@ -67,7 +67,7 @@ const Footer = () => {
                   Contact Support
                 </Link>
                 <Link href="/terms-and-conditions" className="text-white text-base font-medium hover:text-white/80 transition-colors py-3 w-fit">
-                  Terms & Condition
+                  Terms of Use
                 </Link>
                 <Link href="/privacy-policy" className="text-white text-base font-medium hover:text-white/80 transition-colors py-3 w-fit">
                   Privacy Policy
@@ -169,7 +169,7 @@ const Footer = () => {
                   Contact Support
                 </Link>
                 <Link href="/terms-and-conditions" className="block text-white text-base font-medium py-2 w-fit">
-                  Terms & Condition
+                  Terms of Use
                 </Link>
                 <Link href="/privacy-policy" className="block text-white text-base font-medium py-2 w-fit">
                   Privacy Policy
@@ -268,7 +268,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t-2 border-white/40 pt-4 text-center">
           <p className="text-white text-xs sm:text-sm md:text-base font-medium">
-            © 2025 Vetarent Technologies Ltd. All rights reserved.
+            Vetarent, Copyright © 2025 Unique Moehly Multi Concepts Ltd. All rights reserved.
           </p>
         </div>
       </div>

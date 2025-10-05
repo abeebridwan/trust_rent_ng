@@ -90,7 +90,7 @@ export async function POST(req: Request) {
       await resend.emails.send({
         from: "merittadmin@meritt.live",
         to: email,
-        subject: "Vetarent Verification Code",
+        subject: "[Vetarent] Verification Code",
         html: getEmailHtml(otp),
         attachments: [
           {
@@ -152,7 +152,7 @@ export async function POST(req: Request) {
       await resend.emails.send({
         from: "merittadmin@meritt.live",
         to: email,
-        subject: "New Vetarent Verification Code",
+        subject: "[Vetarent] New Verification Code",
         html: getEmailHtml(otp),
         attachments: [
           {

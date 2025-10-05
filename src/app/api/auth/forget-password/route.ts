@@ -75,7 +75,7 @@ export async function POST(req: Request) {
       await resend.emails.send({
         from: "merittadmin@meritt.live",
         to: email,
-        subject: "Vetarent Password Reset Code",
+        subject: "[Vetarent] Password Reset Code",
         html: getForgotPasswordEmailHtml(otp),
         attachments: [
           {
@@ -158,7 +158,7 @@ export async function POST(req: Request) {
       await resend.emails.send({
         from: "merittadmin@meritt.live",
         to: email,
-        subject: "New Vetarent Password Reset Code",
+        subject: "[Vetarent] New Password Reset Code",
         html: getForgotPasswordEmailHtml(otp),
         attachments: [
           {

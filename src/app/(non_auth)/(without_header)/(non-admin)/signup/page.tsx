@@ -189,7 +189,7 @@ export default function SignupPage() {
     const newdata = await res.json()
     //console.log({newdata})
     if(newdata.success && newdata.proceed && !newdata.exist){
-      toast.success("Email verified successfully!");
+      toast.success("Your email has been successfully verified!");
       setIsOtpVerified(true);
       setIsLoading(false);
       return
@@ -212,7 +212,7 @@ export default function SignupPage() {
       if(newdata.success){
         setIsResending(false)
         setOtp(new Array(6).fill(""))
-        toast.success("OTP resent successfully!");
+        toast.success("The code has been successfully resent.");
         return
       }
       setIsResending(false)
@@ -418,7 +418,7 @@ export default function SignupPage() {
                   className="text-xs sm:text-sm text-gray-400 font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 >
                   <Link href="/terms-and-conditions" className="hover:underline text-vetarent-orange font-semibold">
-                    I agree with the Terms of Use
+                    I agree with the [Terms of Use] and [Privacy Policy]
                   </Link>
                 </Label>
                 {errors.termsAccepted && (

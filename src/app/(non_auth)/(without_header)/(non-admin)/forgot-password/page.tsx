@@ -62,7 +62,7 @@ export default function ForgotPasswordPage() {
     const newdata = await res.json()
     if(newdata.success){
       setIsEmailSubmitted(true);
-      toast.success("Password reset otp code sent!");
+      toast.success("A password reset code has been sent to your email!");
       setIsLoading(false);
       return
     }
@@ -126,7 +126,7 @@ export default function ForgotPasswordPage() {
 
     const newdata = await res.json()
     if(newdata.success && newdata.proceed && !newdata.exist){
-      toast.success("Email verified successfully!");
+      toast.success("Your email has been successfully verified!");
       setIsOtpVerified(true);
       setIsLoading(false);
       return
@@ -147,7 +147,7 @@ export default function ForgotPasswordPage() {
 
     const newdata = await res.json()
     if(newdata.success){
-      toast.success("OTP resent successfully!");
+      toast.success("The code has been successfully resent.");
       setOtp(new Array(6).fill(""))
       setIsResending(false)
       return
@@ -166,7 +166,7 @@ export default function ForgotPasswordPage() {
       const newdata = await res.json()
      
       if(newdata.success){
-        toast.success('password reset');
+        toast.success('Your password has been reset successfully.');
         router.push(newdata.url)
         setIsLoading(false)
         return
