@@ -417,9 +417,9 @@ export default function SignupPage() {
                   htmlFor="termsAccepted"
                   className="text-xs sm:text-sm text-gray-400 font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 >
-                  <Link href="/terms-and-conditions" className="hover:underline text-vetarent-orange font-semibold">
-                    I agree with the [Terms of Use] and [Privacy Policy]
-                  </Link>
+                  <div className="text-gray-400">
+                    I agree with the <Link href="/terms-and-conditions" className="hover:underline text-vetarent-orange font-semibold">[Terms of Use]</Link> and <Link href="/privacy-policy" className="hover:underline text-vetarent-orange font-semibold">[Privacy Policy]</Link>
+                  </div>
                 </Label>
                 {errors.termsAccepted && (
                   <p className="text-red-500 text-xs">{errors.termsAccepted.message}</p>
