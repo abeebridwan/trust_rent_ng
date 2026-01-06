@@ -218,7 +218,7 @@ export default function ForgotPasswordPage() {
                 htmlFor="email"
                 className="text-sm sm:text-base text-gray-400"
               >
-                Enter the E-Mail your account is registered with
+                Please enter the email address associated with your account.
               </label>
               <Input
                 {...register("email")}

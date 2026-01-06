@@ -73,7 +73,7 @@ export default function LoginPage() {
       }
 
       setIsLoading(false)
-      toast.success("Logged in successfully!");
+      toast.success("Successfully logged in!");
       router.push(data.url) 
       router.refresh()
       } catch (error) {
