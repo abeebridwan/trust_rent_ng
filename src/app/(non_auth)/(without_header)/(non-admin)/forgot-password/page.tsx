@@ -138,7 +138,6 @@ export default function ForgotPasswordPage() {
 
   const handleResend = async() => {
     setIsResending(true)
-    toast.success("Password reset otp code resenting...");
     const res = await fetch("/api/auth/forget-password", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
