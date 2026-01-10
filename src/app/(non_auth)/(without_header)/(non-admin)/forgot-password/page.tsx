@@ -138,7 +138,6 @@ export default function ForgotPasswordPage() {
 
   const handleResend = async() => {
     setIsResending(true)
-    toast.success("Password reset otp code resenting...");
     const res = await fetch("/api/auth/forget-password", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -218,7 +217,7 @@ export default function ForgotPasswordPage() {
                 htmlFor="email"
                 className="text-sm sm:text-base text-gray-400"
               >
-                Enter the Email your account is registered with
+                Please enter the email address associated with your account.
               </label>
               <Input
                 {...register("email")}

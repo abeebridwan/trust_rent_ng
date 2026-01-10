@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
     if (error) {
       console.error('Login error:', error)
       return NextResponse.json(
-        { error: error.message },
+        { error: "The login credentials provided are invalid." },
         { status: 400 }
       )
     }
