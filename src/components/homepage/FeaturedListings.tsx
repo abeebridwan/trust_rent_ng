@@ -135,10 +135,28 @@ const FeaturedListings = () => {
           className="w-full h-48 object-cover group-hover/whole:scale-105 transition-transform duration-300"
         />
         <div
-          className="absolute top-3 right-3 z-20 pointer-events-auto group/heart inline-flex items-center justify-center rounded-full p-2 bg-white/90 hover:bg-vetarent-orange transition-colors duration-150 ease-in-out cursor-pointer"
+          className="
+            absolute top-3 right-3 z-20 pointer-events-auto
+            inline-flex items-center justify-center
+            rounded-full p-2
+            bg-white/90
+            hover:bg-vetarent-blue
+            transition-colors duration-150 ease-in-out
+            cursor-pointer
+            group
+          "
         >
-          <Heart className="w-6 h-6 text-vetarent-blue group-hover/heart:text-white transition-colors duration-150" />
-        </div>
+          <Heart
+            className="
+              w-6 h-6
+              text-vetarent-blue
+              group-hover:text-white
+              transition-colors duration-150
+            "
+        />
+      </div>
+
+
       </div>
       
       <div className="p-2 space-y-4 border-2 border-muted-foreground/10 border-t-0 border-b-0 flex-grow flex flex-col justify-between">
