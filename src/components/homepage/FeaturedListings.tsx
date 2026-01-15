@@ -140,7 +140,6 @@ const FeaturedListings = () => {
             inline-flex items-center justify-center
             rounded-full p-2
             bg-white/90
-            hover:bg-vetarent-blue
             transition-colors duration-150 ease-in-out
             cursor-pointer
             group
@@ -150,7 +149,7 @@ const FeaturedListings = () => {
             className="
               w-6 h-6
               text-vetarent-blue
-              group-hover:text-white
+              group-hover:fill-vetarent-blue
               transition-colors duration-150
             "
         />
