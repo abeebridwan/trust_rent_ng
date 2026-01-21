@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const FAQSection = () => {
   const [openItems, setOpenItems] = useState<string[]>([]);
@@ -69,12 +70,14 @@ const FAQSection = () => {
           </div>
 
           <div className="mt-12 hidden md:block">
-            <Button 
-              onClick={handleViewAll}
-              className="bg-[#FF8F00] hover:bg-[#E68000] text-white font-semibold px-16 py-6 rounded-none shadow-[inset_4px_8px_8px_rgba(255,255,255,0.25),inset_-4px_-8px_8px_rgba(0,0,0,0.25)] transition-all duration-200 w-[200px]"
-            >
-              {viewAllClicked ? "Collapse All" : "View All"}
-            </Button>
+            <Link 
+              href="/faqs" >
+              <Button
+                className="bg-[#FF8F00] hover:bg-[#E68000] text-white font-semibold px-16 py-6 rounded-none shadow-[inset_4px_8px_8px_rgba(255,255,255,0.25),inset_-4px_-8px_8px_rgba(0,0,0,0.25)] transition-all duration-200 w-[200px]"
+              >
+              View All
+              </Button>
+            </Link>
           </div>
         </div>
 
@@ -100,12 +103,13 @@ const FAQSection = () => {
           </Accordion>
 
           <div className="mt-12 block md:hidden">
-            <Button 
-              onClick={handleViewAll}
+            <Link href="/faqs" >
+              <Button
               className="bg-[#FF8F00] hover:bg-[#E68000] text-white font-semibold px-4 md:px-16 py-6 rounded-none shadow-[inset_4px_8px_8px_rgba(255,255,255,0.25),inset_-4px_-8px_8px_rgba(0,0,0,0.25)] transition-all duration-200 w-[140px]"
             >
-              {viewAllClicked ? "Collapse All" : "View All"}
-            </Button>
+             View All
+             </Button>
+            </Link>
           </div>
         </div>
       </div>
