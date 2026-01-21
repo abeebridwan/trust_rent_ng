@@ -82,7 +82,7 @@ const FAQSection = () => {
         </div>
 
         <div>
-          <Accordion type="multiple" value={openItems} onValueChange={setOpenItems} className="space-y-4">
+          <Accordion type="single" collapsible className="space-y-4">
             {faqs.map((faq, index) => (
               <AccordionItem 
                 key={index} 
@@ -91,7 +91,6 @@ const FAQSection = () => {
               >
                 <AccordionTrigger 
                   className="text-left font-semibold md:font-bold text-foreground text-[14px] md:text-lg hover:no-underline py-4 md:py-8"
-                  onClick={() => handleAccordionChange(`item-${index}`)}
                 >
                   {faq.question}
                 </AccordionTrigger>
