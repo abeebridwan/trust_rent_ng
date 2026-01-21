@@ -1,76 +1,93 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Logo1 from "@/assets/Logo/Logo-1.png";
 import Link from "next/link";
 
 const Header = () => {
+  const menuRef = useRef<HTMLDivElement | null>(null);
+  const toggleRef = useRef<HTMLButtonElement | null>(null);
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+    setIsMenuOpen((prev) => !prev);
   };
 
   const closeMenu = () => {
     setIsMenuOpen(false);
   };
 
+  useEffect(() => {
+    if (!isMenuOpen) return;
+
+    const handler = (event: PointerEvent) => {
+      const target = event.target as Node;
+
+      // Allow clicks on toggle button
+      if (toggleRef.current?.contains(target)) return;
+
+      // Allow clicks inside menu
+      if (menuRef.current?.contains(target)) return;
+
+      // Everything else closes the menu
+      setIsMenuOpen(false);
+    };
+
+    // CAPTURE PHASE — THIS IS THE KEY
+    document.addEventListener("pointerdown", handler, true);
+
+    return () => {
+      document.removeEventListener("pointerdown", handler, true);
+    };
+  }, [isMenuOpen]);
+
   return (
     <header className="w-full bg-background relative z-50 shadow-[0_2px_12px_rgba(0,0,0,0.25)]">
       <div className="container h-[80px] mx-auto px-4 py-4 flex items-center justify-between">
         <div className="flex items-center overflow-hidden">
-          {/* Desktop Logo */}
           <Link href="/">
-            <Image 
-              src={Logo1} 
-              alt="Vetarent Logo" 
-              width={214.48} 
-              height={71} 
-              className="hidden md:block -ml-[1.125rem]" 
+            <Image
+              src={Logo1}
+              alt="Vetarent Logo"
+              width={214.48}
+              height={71}
+              className="hidden md:block -ml-[1.125rem]"
             />
           </Link>
-          {/* Mobile Logo */}
+
           <Link href="/">
-            <Image 
-              src={Logo1} 
-              alt="Vetarent Logo" 
-              width={111.37} 
-              height={37} 
-              className="block md:hidden" 
+            <Image
+              src={Logo1}
+              alt="Vetarent Logo"
+              width={111.37}
+              height={37}
+              className="block md:hidden"
             />
           </Link>
         </div>
-        
+
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center space-x-[50px] text-lg font-semibold">
-          <Link href="/" className="text-foreground hover:text-primary whitespace-nowrap">
-            Home
-          </Link>
-          <Link href="/landlord/dashboard" className="text-foreground hover:text-primary whitespace-nowrap">
-            For Landlords
-          </Link>
-          <Link href="/properties?search=all" className="text-foreground hover:text-primary whitespace-nowrap">
-            For Tenants
-          </Link>
-          <Link href="/about-us" className="text-foreground hover:text-primary whitespace-nowrap">
-            About Us
-          </Link>
-          <Link href="/contact-us" className="text-foreground hover:text-primary whitespace-nowrap">
-            Contact Us
-          </Link>
+          <Link href="/" className="text-foreground whitespace-nowrap">Home</Link>
+          <Link href="/landlord/dashboard" className="text-foreground whitespace-nowrap">For Landlords</Link>
+          <Link href="/properties?search=all" className="text-foreground whitespace-nowrap">For Tenants</Link>
+          <Link href="/about-us" className="text-foreground whitespace-nowrap">About Us</Link>
+          <Link href="/contact-us" className="text-foreground whitespace-nowrap">Contact Us</Link>
         </nav>
-        
+
         {/* Mobile menu button */}
-        <Button 
-          variant="ghost" 
-          size="sm" 
+        <Button
+          ref={toggleRef}
+          variant="stripe"
+          size="sm"
           className="lg:hidden"
           onClick={toggleMenu}
           aria-label="Toggle mobile menu"
         >
-          <svg className="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             {isMenuOpen ? (
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             ) : (
@@ -79,46 +96,19 @@ const Header = () => {
           </svg>
         </Button>
       </div>
-      
-      {/* Mobile Navigation Menu */}
+
+      {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="lg:hidden bg-background border-t border-border">
+        <div
+          ref={menuRef}
+          className="lg:hidden bg-background border-t border-border"
+        >
           <nav className="container mx-auto px-4 py-4 flex flex-col space-y-4">
-            <Link 
-              href="/" 
-              className="text-foreground hover:text-primary text-lg font-normal py-2"
-              onClick={closeMenu}
-            >
-              Home
-            </Link>
-            <Link 
-              href="/landlord/dashboard" 
-              className="text-foreground hover:text-primary text-lg font-normal py-2"
-              onClick={closeMenu}
-            >
-              For Landlords
-            </Link>
-            <Link 
-              href="/properties?search=all" 
-              className="text-foreground hover:text-primary text-lg font-normal py-2"
-              onClick={closeMenu}
-            >
-              For Tenants
-            </Link>
-            <Link 
-              href="/about-us" 
-              className="text-foreground hover:text-primary text-lg font-normal py-2"
-              onClick={closeMenu}
-            >
-              About Us
-            </Link>
-            <Link 
-              href="/contact-us" 
-              className="text-foreground hover:text-primary text-lg font-normal py-2"
-              onClick={closeMenu}
-            >
-              Contact Us
-            </Link>
+            <Link href="/" className="text-foreground text-lg py-2" onClick={closeMenu}>Home</Link>
+            <Link href="/landlord/dashboard" className="text-foreground text-lg py-2" onClick={closeMenu}>For Landlords</Link>
+            <Link href="/properties?search=all" className="text-foreground text-lg py-2" onClick={closeMenu}>For Tenants</Link>
+            <Link href="/about-us" className="text-foreground text-lg py-2" onClick={closeMenu}>About Us</Link>
+            <Link href="/contact-us" className="text-foreground text-lg py-2" onClick={closeMenu}>Contact Us</Link>
           </nav>
         </div>
       )}
