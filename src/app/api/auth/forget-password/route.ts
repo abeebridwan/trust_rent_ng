@@ -163,8 +163,8 @@ export async function POST(req: Request) {
         attachments: [
           {
             path: "https://trust-rent-ng.vercel.app/Logo/Logo-2.png",
-            filename: "Logo-1.png",
-            contentId: "logo",
+            filename: "Logo-2.png",
+            contentId: "logo-image",
           },
         ],
       })
