@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 export default function TermsAndConditionsPage() {
   return (
     <section className="py-12 md:py-16 px-4">

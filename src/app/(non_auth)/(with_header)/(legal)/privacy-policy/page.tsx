@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function PrivacyPolicyPage() {
   return (
     <section className="py-12 md:py-16 px-4">
@@ -144,7 +146,7 @@ export default function PrivacyPolicyPage() {
           </h2>
           <p className="text-sm md:text-lg">
             If you have questions about this Privacy Policy or your data, please
-            <a href="/" className="text-vetarent-blue"> contact us</a> 
+            <Link href="/" className="text-vetarent-blue"> contact us</Link> 
           </p>
         </div>
 
